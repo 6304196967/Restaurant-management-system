@@ -20,7 +20,8 @@ import { useState } from "react";
     
             if (response.ok) {
                 localStorage.setItem("token", data.token); 
-                localStorage.setItem("email",data.email)  ;             
+                localStorage.setItem("email",data.email);  
+                localStorage.setItem("username",data.username);           
     
                 alert("Login successful");
     

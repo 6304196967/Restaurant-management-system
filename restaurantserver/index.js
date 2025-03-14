@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import UserRouter from './login.js';
 import MenuRouter from './menu.js';
 import spoffersRouter from "./specialoffers.js"
-
+import CartRouter from "./cart.js";
 
 
 import cors from 'cors';
@@ -16,7 +16,7 @@ app.use(cors());
 app.use("/api/user", UserRouter);  
 app.use("/api/menu", MenuRouter);
 app.use("/api/spoffers",spoffersRouter);
-
+app.use("/api/cart", CartRouter);
 
 
 async function main() {

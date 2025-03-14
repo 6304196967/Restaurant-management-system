@@ -12,6 +12,7 @@ function Signup() {
 
   const [formData, setFormData] = useState({
     username: "",
+    phonenumber: "",
     email: "",
     password: "",
     confirmpassword: "",
@@ -36,8 +37,10 @@ function Signup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: formData.username,
+          phonenumber: formData.phonenumber,
           email: formData.email,
           password: formData.password,
+          
         }),
       });
 
@@ -75,7 +78,18 @@ function Signup() {
               required
             />
           </div>
-
+          <div className="form-group">
+            <label htmlFor="phonenumber">Phone number:</label>
+            <input
+              type="text"
+              id="phonenumber"
+              name="phonenumber"
+              value={formData.phonenumber}
+              onChange={handleInputChange}
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
