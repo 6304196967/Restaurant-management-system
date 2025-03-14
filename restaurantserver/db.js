@@ -12,7 +12,8 @@ const MenuSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
     image: { type: String, required: true },
-    description: { type: String },});
+    description: { type: String },
+    type: { type: String, required: true },});
 
 const spoffersSchema = new Schema({
     name: { type: String, required: true },
