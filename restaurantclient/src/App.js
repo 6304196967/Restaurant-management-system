@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import ForgotPassword from "./pages/forgotpass";
+import ConfirmPassword from "./pages/ConfirmPassword"; 
 
 //Admin routes
 import AdminHome from "./pages/admin/admin_home";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />      
         <Route path="/signin" element={<Signin />} />
         <Route path="/forgot-password" element={<ForgotPassword />}/>
+        <Route path="/reset-password/:token" element={<ConfirmPassword />} />
         {/*Admin routes*/}
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/home" element={<AdminHome />} />
