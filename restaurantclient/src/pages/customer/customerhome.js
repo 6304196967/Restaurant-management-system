@@ -13,12 +13,12 @@ const getGreeting = () => {
     }
 };
 
-const AdminHome = () => (
+const CustomerHome = () => (
     <div>
         <h1>{getGreeting()} {username}</h1>
-        <h1>Welcome to the Admin Dashboard</h1>
-        <p>Manage the restaurant operations and view reports!</p>
+        <h1>Welcome to the Restaurant</h1>
+        <p>Explore our menu and place your order!</p>
     </div>
 );
 
-export default AdminHome;
+export default CustomerHome;

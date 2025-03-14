@@ -7,7 +7,7 @@ import Signin from "./pages/signin";
 import ForgotPassword from "./pages/forgotpass";
 import ConfirmPassword from "./pages/ConfirmPassword"; 
 
-//Admin routes
+//Admin imports
 import AdminHome from "./pages/admin/admin_home";
 import AddItem from "./pages/admin/additem";
 import Menu from "./pages/admin/menu";
@@ -15,6 +15,20 @@ import DeleteItem from "./pages/admin/deleteitem";
 import Specialoffers from "./pages/admin/specialoffers";
 import Spadditem from "./pages/admin/addspecialoffer";
 import Spdeleteitem from "./pages/admin/delspecialoffers";
+
+
+
+
+
+//Customer imports
+import CustomerHome from "./pages/customer/customerhome";
+import CMenu from "./pages/customer/menu"; 
+
+
+
+
+
+
 
 function App() {
   return (
@@ -34,6 +48,13 @@ function App() {
         <Route path="/admin/specialoffers" element={<Specialoffers />} />
         <Route path="/admin/specialoffers/additem" element={<Spadditem />} />
         <Route path="/admin/specialoffers/deleteitem" element={<Spdeleteitem />} />
+
+
+
+        {/*Customer routes*/}
+        <Route path="/customer" element={<CustomerHome />} />
+        <Route path="/customer/home" element={<CustomerHome />} />
+        <Route path="/customer/menu" element={<CMenu />} />  
 
       </Routes>
     </Router>
