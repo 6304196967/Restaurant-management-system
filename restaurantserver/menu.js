@@ -4,7 +4,6 @@ import express from 'express';
 import { z } from 'zod';
 import { Menu } from './db.js';
 
-
 dotenv.config();
 
 const MenuRouter = Router();
@@ -17,6 +16,7 @@ MenuRouter.post('/additem', async (req, res) => {
         price: z.number().int(),
         image: z.string(),
         description: z.string(),
+        type: z.string(),  // Added type field
     });
 
     const parsedBody = requiredBody.safeParse(req.body);
@@ -27,13 +27,14 @@ MenuRouter.post('/additem', async (req, res) => {
         });
     }
 
-    const { name, price, image, description } = req.body;
+    const { name, price, image, description, type } = req.body;
     try {
         await Menu.create({
             name,
             price,
             image,
             description,
+            type,  // Added type field
         });
 
         res.status(201).json({ message: 'Menu Item Added Successfully' });
@@ -43,6 +44,7 @@ MenuRouter.post('/additem', async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 MenuRouter.get('/allitems', async (req, res) => {
     try {
         const allMenuItems = await Menu.find();
@@ -52,10 +54,12 @@ MenuRouter.get('/allitems', async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 MenuRouter.delete('/deleteitem', async (req, res) => {
     const requiredBody = z.object({
         name: z.string(),
         price: z.number().int(),
+        type: z.string(),  // Added type field for deletion
     });
 
     const parsedBody = requiredBody.safeParse(req.body);
@@ -66,9 +70,9 @@ MenuRouter.delete('/deleteitem', async (req, res) => {
         });
     }
 
-    const { name, price } = req.body;
+    const { name, price, type } = req.body;
     try {
-        const deletedItem = await Menu.findOneAndDelete({ name, price });
+        const deletedItem = await Menu.findOneAndDelete({ name, price, type });
 
         if (!deletedItem) {
             return res.status(404).json({ message: "Menu item not found" });
@@ -81,4 +85,5 @@ MenuRouter.delete('/deleteitem', async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 export default MenuRouter;
