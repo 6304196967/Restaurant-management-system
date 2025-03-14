@@ -19,6 +19,7 @@ app.use(express.json());
 UserRouter.post('/signup', async (req, res) => {
     const requiredBody = z.object({
         username : z.string(),
+        phonenumber : z.string(),
         email: z.string().min(10).max(100).email(),
         password: z.string().min(5).max(10)
             .regex(/\d/, "Password must contain at least one digit")
@@ -33,7 +34,7 @@ UserRouter.post('/signup', async (req, res) => {
         });
     }
 
-    const { username, email, password} = req.body;
+    const { username,phonenumber, email, password} = req.body;
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -42,6 +43,7 @@ UserRouter.post('/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         await User.create({
             username,
+            phonenumber,
             email,
             password: hashedPassword,
         });
@@ -68,7 +70,7 @@ UserRouter.post('/signin', async (req, res) => {
         }
         
         const token = jwt.sign({ id: user._id.toString()}, JWT_SECRET);
-        res.status(200).json({ token,email });
+        res.status(200).json({ token,email,username :user.username});
     } catch (e) {
         console.error("Signin Error:", e);
         res.status(500).json({ message: "Internal Server Error" });
