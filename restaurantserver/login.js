@@ -100,7 +100,7 @@ UserRouter.post('/forgot-password', async (req, res) => {
 
             to: email,
             subject: 'Password Reset',
-            html: `<p>You requested a password reset. <a href="http://localhost:3001/reset-password?token=${resetToken}">Click here</a> to reset your password. This link is valid for 15 minutes.</p>`
+            html: `<p>You requested a password reset. <a href="http://localhost:3001/reset-password/${resetToken}">Click here</a> to reset your password. This link is valid for 15 minutes.</p>`
         };
 
         await transporter.sendMail(mailOptions);
@@ -114,15 +114,25 @@ UserRouter.post('/forgot-password', async (req, res) => {
 });
 UserRouter.post('/reset-password', async (req, res) => {
     try {
-        const {newPassword } = req.body;
-        const token = localStorage.getItem("token");
-        const decoded = jwt.verify(token, JWT_USER_SECRET);
-        const user = await User.findById(decoded.id);
+        const { token, password } = req.body; // Ensure newPassword is received
+
+        if (!token || !password) {
+            return res.status(400).json({ message: "Token and new password are required" });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const user = await User.findOne({ email: decoded.email });
 
         if (!user) {
             return res.status(400).json({ message: "Invalid or expired token" });
         }
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Ensure newPassword is valid before hashing
+        if (typeof password !== 'string' || password.trim() === "") {
+            return res.status(400).json({ message: "Invalid password input" });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10); // FIX: Ensure newPassword is valid
 
         user.password = hashedPassword;
         await user.save();
