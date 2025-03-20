@@ -50,35 +50,38 @@ export default function MenuItems() {
     };
 
     // Function to handle adding an item to the cart
-    const handleAddToCart = async (item) => {
-        if (!userEmail) {
-            alert("User email not found. Please log in.");
-            return;
+    // Function to handle adding an item to the cart
+const handleAddToCart = async (item) => {
+    if (!userEmail) {
+        alert("User email not found. Please log in.");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:3000/api/cart/additem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: userEmail,
+                name: item.name,
+                price: item.price,
+                quantity: quantities[item.name] || 1, // Get quantity from state
+                image: item.image, // 🆕 Adding the image link to the request
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to add item to cart");
         }
 
-        try {
-            const response = await fetch("http://localhost:3000/api/cart/additem", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: userEmail,
-                    name: item.name,
-                    price: item.price,
-                    quantity: quantities[item.name] || 1, // Get quantity from state
-                }),
-            });
+        alert(`${item.name} (${quantities[item.name]}x) added to cart! 🎉`);
+    } catch (error) {
+        setError(error.message);
+    }
+};
 
-            if (!response.ok) {
-                throw new Error("Failed to add item to cart");
-            }
-
-            alert(`${item.name} (${quantities[item.name]}x) added to cart!`);
-        } catch (error) {
-            setError(error.message);
-        }
-    };
 
     return (
         <div className="menu-container">

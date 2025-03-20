@@ -23,7 +23,7 @@ import Spdeleteitem from "./pages/admin/delspecialoffers";
 //Customer imports
 import CustomerHome from "./pages/customer/customerhome";
 import CMenu from "./pages/customer/menu"; 
-
+import Ccart from "./pages/customer/customercart";
 
 
 
@@ -54,7 +54,8 @@ function App() {
         {/*Customer routes*/}
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
-        <Route path="/customer/menu" element={<CMenu />} />  
+        <Route path="/customer/menu" element={<CMenu />} /> 
+        <Route path="/customer/cart" element={<Ccart />} />
 
       </Routes>
     </Router>
