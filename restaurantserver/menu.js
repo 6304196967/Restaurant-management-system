@@ -46,8 +46,17 @@ MenuRouter.post('/additem', async (req, res) => {
 });
 
 MenuRouter.get('/allitems', async (req, res) => {
+    const { type } = req.query; 
+
     try {
-        const allMenuItems = await Menu.find();
+        let allMenuItems;
+
+        if (type) {
+            allMenuItems = await Menu.find({ type: type });
+        } else {
+            allMenuItems = await Menu.find();
+        }
+
         res.status(200).json(allMenuItems);
     } catch (e) {
         console.error("Menu Fetch Error:", e);
@@ -55,11 +64,12 @@ MenuRouter.get('/allitems', async (req, res) => {
     }
 });
 
+
 MenuRouter.delete('/deleteitem', async (req, res) => {
     const requiredBody = z.object({
         name: z.string(),
         price: z.number().int(),
-        type: z.string(),  // Added type field for deletion
+        type: z.string(),  
     });
 
     const parsedBody = requiredBody.safeParse(req.body);
