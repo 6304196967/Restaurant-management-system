@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Navbar from './navbaradmin';
 const username = localStorage.getItem('username');
 
 const getGreeting = () => {
@@ -15,6 +15,7 @@ const getGreeting = () => {
 
 const AdminHome = () => (
     <div>
+        <Navbar />
         <h1>{getGreeting()} {username}</h1>
         <h1>Welcome to the Admin Dashboard</h1>
         <p>Manage the restaurant operations and view reports!</p>
