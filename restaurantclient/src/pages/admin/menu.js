@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "./navbaradmin";
 import { useNavigate } from "react-router-dom";
 
 export default function MenuItems() {
@@ -31,6 +32,7 @@ export default function MenuItems() {
 
     return (
         <div className="menu-container">
+            <Navbar />
             <h2 className="menu-title">Our Menu</h2>
             <div className="menu-grid">
                 {menuItems.map((item, index) => (

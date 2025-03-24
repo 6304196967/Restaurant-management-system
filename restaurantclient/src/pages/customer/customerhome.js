@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Navbar from "./navbarcustomer";
 const username = localStorage.getItem('username');
 
 const getGreeting = () => {
@@ -15,6 +15,7 @@ const getGreeting = () => {
 
 const CustomerHome = () => (
     <div>
+        <Navbar />
         <h1>{getGreeting()} {username}</h1>
         <h1>Welcome to the Restaurant</h1>
         <p>Explore our menu and place your order!</p>

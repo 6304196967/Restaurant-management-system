@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import UserRouter from './login.js';
 import MenuRouter from './menu.js';
 import CartRouter from "./cart.js";
-
+import orderRouter from "./order.js";
+import feedbackRouter from './feedback.js';
 
 import cors from 'cors';
 
@@ -15,7 +16,8 @@ app.use(cors());
 app.use("/api/user", UserRouter);  
 app.use("/api/menu", MenuRouter);
 app.use("/api/cart", CartRouter);
-
+app.use("/api/order", orderRouter);
+app.use("/api/feedback", feedbackRouter);
 
 async function main() {
     try {

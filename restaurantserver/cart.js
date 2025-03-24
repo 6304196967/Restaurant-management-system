@@ -83,5 +83,95 @@ CartRouter.get('/cartitems', async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+CartRouter.delete("/removeitem", async (req, res) => {
+    const { email, name } = req.query;
+  
+    if (!email || !name) {
+      return res.status(400).json({ message: "Email and item name are required." });
+    }
+  
+    try {
+      // Find the cart by email
+      const cart = await Cart.findOne({ email });
+  
+      if (!cart) {
+        return res.status(404).json({ message: "Cart not found for this user." });
+      }
+  
+      // Filter out the item to be removed
+      const updatedItems = cart.items.filter((item) => item.name !== name);
+  
+      // Check if item exists before trying to remove
+      if (cart.items.length === updatedItems.length) {
+        return res.status(404).json({ message: "Item not found in the cart." });
+      }
+  
+      // Update the cart with the remaining items
+      cart.items = updatedItems;
+  
+      // Recalculate total price after removing the item
+      const newTotalPrice = updatedItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+      cart.totalPrice = newTotalPrice;
+  
+      // Save the updated cart
+      await cart.save();
+  
+      res.status(200).json({
+        message: "Item removed successfully.",
+        cart,
+      });
+    } catch (error) {
+      console.error("Error removing item:", error);
+      res.status(500).json({ message: "Internal server error." });
+    }
+  });
+  CartRouter.post("/removecart", async (req, res) => {
+    const requiredBody = z.object({
+      email: z.string().email(),
+      name: z.string().optional(),
+    });
+  
+    try {
+      // ✅ Validate request body
+      const { email, name } = requiredBody.parse(req.body);
+  
+      // ✅ Check if the user's cart exists
+      let userCart = await Cart.findOne({ email });
+  
+      if (!userCart) {
+        return res.status(404).json({ message: "Cart not found" });
+      }
+  
+      if (name) {
+        // ✅ Remove specific item if name is provided
+        userCart.items = userCart.items.filter((item) => item.name !== name);
+      } else {
+        // ✅ Clear the entire cart if no name is provided
+        userCart.items = [];
+        userCart.totalPrice = 0;
+      }
+  
+      // ✅ Update total price
+      userCart.totalPrice = userCart.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+  
+      // ✅ Save the updated cart
+      await userCart.save();
+  
+      res.status(200).json({
+        message: name ? "Item removed from cart" : "Cart cleared successfully",
+        cart: userCart,
+      });
+    } catch (error) {
+      console.error("Error removing item:", error);
+      res.status(500).json({ message: "Failed to remove item or clear cart" });
+    }
+  });
+  
 
 export default CartRouter;

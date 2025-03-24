@@ -12,9 +12,6 @@ import AdminHome from "./pages/admin/admin_home";
 import AddItem from "./pages/admin/additem";
 import Menu from "./pages/admin/menu";
 import DeleteItem from "./pages/admin/deleteitem";
-import Specialoffers from "./pages/admin/specialoffers";
-import Spadditem from "./pages/admin/addspecialoffer";
-import Spdeleteitem from "./pages/admin/delspecialoffers";
 
 
 
@@ -24,8 +21,7 @@ import Spdeleteitem from "./pages/admin/delspecialoffers";
 import CustomerHome from "./pages/customer/customerhome";
 import CMenu from "./pages/customer/menu"; 
 import Ccart from "./pages/customer/customercart";
-
-
+import Corders from "./pages/customer/myorders";
 
 
 
@@ -45,10 +41,7 @@ function App() {
         <Route path="/admin/menu" element={<Menu />} />
         <Route path="/admin/menu/additem" element={<AddItem />} />
         <Route path="/admin/menu/deleteitem" element={<DeleteItem />} />
-        <Route path="/admin/specialoffers" element={<Specialoffers />} />
-        <Route path="/admin/specialoffers/additem" element={<Spadditem />} />
-        <Route path="/admin/specialoffers/deleteitem" element={<Spdeleteitem />} />
-
+        
 
 
         {/*Customer routes*/}
@@ -56,7 +49,7 @@ function App() {
         <Route path="/customer/home" element={<CustomerHome />} />
         <Route path="/customer/menu" element={<CMenu />} /> 
         <Route path="/customer/cart" element={<Ccart />} />
-
+        <Route path="/customer/myorders" element={<Corders />} />
       </Routes>
     </Router>
   );
