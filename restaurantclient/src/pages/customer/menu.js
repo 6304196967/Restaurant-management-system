@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./navbarcustomer";
-import "../../styles/menuPage.css"
+import "../../styles/menuPage.css";
 
 import { Grid, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
 
@@ -11,13 +11,17 @@ export default function MenuItems() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Get email from localStorage
+  // ✅ Get email and selectedCategory from localStorage
   const userEmail = localStorage.getItem("email");
+  const selectedCategory = localStorage.getItem("selectedCategory");
 
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/menu/allitems");
+        // ✅ Encode category before fetching
+        const response = await fetch(
+          `http://localhost:3000/api/menu/allitems/${encodeURIComponent(selectedCategory)}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch menu items");
         }
@@ -31,7 +35,7 @@ export default function MenuItems() {
     };
 
     fetchMenuItems();
-  }, []);
+  }, [selectedCategory]);
 
   if (loading) return <p style={styles.loading}>Loading menu...</p>;
   if (error) return <p style={styles.error}>Error: {error}</p>;
@@ -69,23 +73,48 @@ export default function MenuItems() {
   };
 
   return (
-    <div className="homepage-container"> 
+    <div className="homepage-container">
       <Navbar />
       <div>
-        <h2>Our Menu 🍔🍕</h2>
+        <h2>
+          {selectedCategory
+            ? `${selectedCategory} Menu 🍔🍕`
+            : "Our Menu 🍔🍕"}
+        </h2>
         <Grid container spacing={3}>
-          {menuItems.map((dish, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card className="food-card">
-                <CardMedia component="img" image={dish.image} alt={dish.name} className="food-image" />
-                <CardContent>
-                  <Typography variant="h6">{dish.name}</Typography>
-                  <Typography variant="body1" className="food-price">₹{dish.price}</Typography>
-                </CardContent>
-                <Button className="order-button" onClick={() => handleAddToCart(dish)}>Add to Cart</Button>
-              </Card>
-            </Grid>
-          ))}
+          {menuItems.length > 0 ? (
+            menuItems.map((dish, index) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <Card className="food-card">
+                  <CardMedia
+                    component="img"
+                    image={dish.image}
+                    alt={dish.name}
+                    className="food-image"
+                  />
+                  <CardContent>
+                    <Typography variant="h6">{dish.name}</Typography>
+                    <Typography variant="body1" className="food-price">
+                      ₹{dish.price}
+                    </Typography>
+                  </CardContent>
+                  <Button
+                    className="order-button"
+                    onClick={() => handleAddToCart(dish)}
+                  >
+                    Add to Cart
+                  </Button>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <Typography
+              variant="h6"
+              style={{ textAlign: "center", marginTop: "20px" }}
+            >
+              No items found for {selectedCategory} 😔
+            </Typography>
+          )}
         </Grid>
       </div>
     </div>
