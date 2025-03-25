@@ -22,6 +22,8 @@ import CustomerHome from "./pages/customer/customerhome";
 import CMenu from "./pages/customer/menu"; 
 import Ccart from "./pages/customer/customercart";
 import Corders from "./pages/customer/myorders";
+import Mcategories from "./pages/customer/Mcategories";
+
 
 
 
@@ -38,13 +40,15 @@ function App() {
         {/*Admin routes*/}
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/home" element={<AdminHome />} />
-        <Route path="/admin/menu" element={<Menu />} />
+        <Route path="/admin/menu/:category" element={<Menu />} />
         <Route path="/admin/menu/additem" element={<AddItem />} />
         <Route path="/admin/menu/deleteitem" element={<DeleteItem />} />
         
 
 
         {/*Customer routes*/}
+        <Route path="/customer/Mcategories" element={<Mcategories />} />
+
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
         <Route path="/customer/menu" element={<CMenu />} /> 

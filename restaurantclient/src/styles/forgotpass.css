@@ -7,7 +7,7 @@
 }
 
 /* Fullscreen container with background */
-body {
+.forgot-password-container {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./navbarcustomer";
+import "../../styles/menuPage.css"
+
+import { Grid, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
 
 export default function MenuItems() {
   const [menuItems, setMenuItems] = useState([]);
@@ -66,30 +69,24 @@ export default function MenuItems() {
   };
 
   return (
-    <div style={styles.menuContainer}>
+    <div className="homepage-container"> 
       <Navbar />
-      <h2 style={styles.menuTitle}>Our Menu 🍔🍕</h2>
-      <div style={styles.menuGrid}>
-        {menuItems.map((item, index) => (
-          <div style={styles.menuCard} key={item.id || index}>
-            <img
-              src={item.image}
-              alt={item.name}
-              style={styles.menuImage}
-            />
-            <h3 style={styles.menuName}>{item.name}</h3>
-            <p style={styles.menuPrice}>₹{item.price}</p>
-            <p style={styles.menuDescription}>{item.description}</p>
-
-            {/* ✅ Add to Cart Button */}
-            <button
-              style={styles.addToCartBtn}
-              onClick={() => handleAddToCart(item)}
-            >
-              Add to Cart 🛒
-            </button>
-          </div>
-        ))}
+      <div>
+        <h2>Our Menu 🍔🍕</h2>
+        <Grid container spacing={3}>
+          {menuItems.map((dish, index) => (
+            <Grid item xs={12} sm={6} md={3} key={index}>
+              <Card className="food-card">
+                <CardMedia component="img" image={dish.image} alt={dish.name} className="food-image" />
+                <CardContent>
+                  <Typography variant="h6">{dish.name}</Typography>
+                  <Typography variant="body1" className="food-price">₹{dish.price}</Typography>
+                </CardContent>
+                <Button className="order-button" onClick={() => handleAddToCart(dish)}>Add to Cart</Button>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </div>
     </div>
   );
@@ -97,68 +94,6 @@ export default function MenuItems() {
 
 // 🎨 Updated Styles
 const styles = {
-  menuContainer: {
-    padding: "20px",
-    backgroundColor: "#f8f9fa",
-    fontFamily: "Arial, sans-serif",
-    textAlign: "center",
-  },
-  menuTitle: {
-    fontSize: "2rem",
-    marginBottom: "20px",
-    color: "#333",
-  },
-  menuGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "20px",
-    justifyContent: "center",
-  },
-  menuCard: {
-    backgroundColor: "#fff",
-    border: "1px solid #ddd",
-    borderRadius: "12px",
-    padding: "15px",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-    transition: "transform 0.2s ease-in-out",
-    cursor: "pointer",
-  },
-  menuCardHover: {
-    transform: "scale(1.05)",
-  },
-  menuImage: {
-    width: "100%",
-    height: "180px",
-    borderRadius: "8px",
-    objectFit: "cover",
-  },
-  menuName: {
-    fontSize: "1.5rem",
-    margin: "10px 0",
-    color: "#333",
-  },
-  menuPrice: {
-    fontSize: "1.25rem",
-    color: "#28a745",
-    marginBottom: "5px",
-  },
-  menuDescription: {
-    fontSize: "0.9rem",
-    color: "#666",
-    marginBottom: "10px",
-  },
-  addToCartBtn: {
-    backgroundColor: "#28a745",
-    color: "#fff",
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    transition: "background-color 0.3s ease",
-  },
-  addToCartBtnHover: {
-    backgroundColor: "#218838",
-  },
   loading: {
     fontSize: "1.5rem",
     color: "#007bff",
@@ -168,4 +103,3 @@ const styles = {
     color: "#dc3545",
   },
 };
-
