@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography, Card, CardMedia, CardContent, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  CardContent,
+  Button,
+  Grid,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import videoBg from "../../assets/food-video.webm";
 import biryaniImg from "../../assets/biryani.webp";
@@ -19,12 +27,16 @@ const categories = [
 const Mccategories = () => {
   const navigate = useNavigate();
   const [trendingDishes, setTrendingDishes] = useState([]);
+  const userEmail = localStorage.getItem("email"); // ✅ Get user email
+  const [error, setError] = useState(null);
 
   // ✅ Fetch trending dishes on page load
   useEffect(() => {
     const fetchTrendingDishes = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/menu/allitems/trending");
+        const response = await fetch(
+          "http://localhost:3000/api/menu/allitems/trending"
+        );
         if (!response.ok) throw new Error("Failed to fetch trending dishes");
 
         const data = await response.json();
@@ -43,6 +55,39 @@ const Mccategories = () => {
     navigate("/customer/menu");
   };
 
+  // ✅ Add to Cart Function
+  const handleAddToCart = async (item) => {
+    if (!userEmail) {
+      alert("User email not found. Please log in.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/api/cart/additem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          name: item.name,
+          price: item.price,
+          quantity: 1, // ✅ Always add 1 item by default
+          image: item.image,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add item to cart");
+      }
+
+      alert(`${item.name} added to cart! 🎉`);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      alert(`Error: ${error.message}`);
+    }
+  };
+
   return (
     <div className="homepage-container">
       <Navbar />
@@ -57,7 +102,10 @@ const Mccategories = () => {
         <Typography variant="h5" className="section-title">
           Categories
         </Typography>
-        <Box className="category-buttons" sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2 }}>
+        <Box
+          className="category-buttons"
+          sx={{ display: "flex", gap: 3, justifyContent: "center", mt: 2 }}
+        >
           {categories.map((category, index) => (
             <Box key={index} sx={{ textAlign: "center" }}>
               <Box
@@ -100,14 +148,26 @@ const Mccategories = () => {
             trendingDishes.map((dish, index) => (
               <Grid item xs={12} sm={6} md={3} key={index}>
                 <Card className="food-card">
-                  <CardMedia component="img" image={dish.image} alt={dish.name} className="food-image" style={{ height: 140 }} />
+                  <CardMedia
+                    component="img"
+                    image={dish.image}
+                    alt={dish.name}
+                    className="food-image"
+                    style={{ height: 140 }}
+                  />
                   <CardContent>
                     <Typography variant="h6">{dish.name}</Typography>
                     <Typography variant="body2" color="textSecondary">
                       ₹{dish.price}
                     </Typography>
                   </CardContent>
-                  <Button variant="contained" color="primary" className="order-button" sx={{ m: 1 }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className="order-button"
+                    sx={{ m: 1 }}
+                    onClick={() => handleAddToCart(dish)} // ✅ Add to cart
+                  >
                     Add to Cart
                   </Button>
                 </Card>
@@ -122,7 +182,10 @@ const Mccategories = () => {
       </Box>
 
       {/* Footer */}
-      <Box className="footer" sx={{ textAlign: "center", py: 3, backgroundColor: "#f8f8f8", mt: 5 }}>
+      <Box
+        className="footer"
+        sx={{ textAlign: "center", py: 3, backgroundColor: "#f8f8f8", mt: 5 }}
+      >
         <Typography variant="body2" color="textSecondary">
           © 2025 Royal Feast. All rights reserved.
         </Typography>
