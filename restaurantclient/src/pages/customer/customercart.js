@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./navbarcustomer";
+import Swal from "sweetalert2";
 
 const CustomerCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -8,11 +9,25 @@ const CustomerCart = () => {
   const [error, setError] = useState(null);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
+  // 📝 Address Form Data
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [altPhoneNumber, setAltPhoneNumber] = useState("");
+  const [houseNo, setHouseNo] = useState("");
+  const [street, setStreet] = useState("");
+  const [landmark, setLandmark] = useState("");
+  const [district, setDistrict] = useState("");
+  const [mandal, setMandal] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [state, setState] = useState("");
+  const [paymentMode, setPaymentMode] = useState("Cash");
+
   useEffect(() => {
     fetchCartItems();
   }, []);
 
-  // ✅ Fetch Cart Items using Params
+  // ✅ Fetch Cart Items
   const fetchCartItems = async () => {
     const email = localStorage.getItem("email");
 
@@ -28,11 +43,10 @@ const CustomerCart = () => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to fetch cart items!!");
+        throw new Error("Failed to fetch cart items!");
       }
 
       const data = await response.json();
-
       if (data.cart && data.cart.items) {
         setCartItems(data.cart.items);
         calculateTotalPrice(data.cart.items);
@@ -47,27 +61,39 @@ const CustomerCart = () => {
     }
   };
 
-  // ✅ Calculate Total Price Dynamically
+  // ✅ Calculate Total Price
   const calculateTotalPrice = (items) => {
     const newTotal = items.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+      (sum, item) => sum + item.price * (item.quantity || 1),
       0
     );
     setTotalPrice(newTotal);
   };
 
-  // ✅ Handle Increase Quantity (Frontend Only)
+  // ✅ Update Cart in Backend
+  const updateCartItem = async (item, quantity) => {
+    const email = localStorage.getItem("email");
+
+    await fetch("http://localhost:3000/api/cart/updatecart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, name: item.name, quantity }),
+    });
+  };
+
+  // ✅ Increase Quantity
   const handleIncreaseQuantity = (item) => {
     const updatedItems = cartItems.map((cartItem) =>
       cartItem.name === item.name
-        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        ? { ...cartItem, quantity: (cartItem.quantity || 1) + 1 }
         : cartItem
     );
     setCartItems(updatedItems);
     calculateTotalPrice(updatedItems);
+    updateCartItem(item, (item.quantity || 1) + 1);
   };
 
-  // ✅ Handle Decrease Quantity (Frontend Only)
+  // ✅ Decrease Quantity
   const handleDecreaseQuantity = (item) => {
     if (item.quantity === 1) return;
 
@@ -78,17 +104,19 @@ const CustomerCart = () => {
     );
     setCartItems(updatedItems);
     calculateTotalPrice(updatedItems);
+    updateCartItem(item, item.quantity - 1);
   };
 
-  // ✅ Remove Item using Params
+  // ✅ Remove Item
   const handleRemoveItem = async (itemName) => {
     const email = localStorage.getItem("email");
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/cart/removeitem?email=${email}&name=${itemName}`,
-        { method: "DELETE" }
-      );
+      const response = await fetch("http://localhost:3000/api/cart/removecart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name: itemName }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to remove item.");
@@ -103,7 +131,7 @@ const CustomerCart = () => {
     }
   };
 
-  // ✅ Handle Place Order using Params
+  // ✅ Place Order with Address
   const handlePlaceOrder = async () => {
     const email = localStorage.getItem("email");
 
@@ -112,45 +140,77 @@ const CustomerCart = () => {
       return;
     }
 
+    // ✅ Sanitize Items
+    const sanitizedItems = cartItems.map(({ _id, ...item }) => ({
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity || 1,
+      image: item.image,
+    }));
+
+    if (
+      !firstName ||
+      !lastName ||
+      !phoneNumber ||
+      !houseNo ||
+      !street ||
+      !district ||
+      !mandal ||
+      !pincode ||
+      !state ||
+      !paymentMode
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
     try {
       const orderResponse = await fetch(
-        "http://localhost:3000/api/order/additem", // ✅ Correct URL (No query params for POST)
+        "http://localhost:3000/api/order/additem",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email, // ✅ Send email inside the body
-            items: cartItems, // ✅ Updated quantities in order schema
-            totalPrice: totalPrice,
+            email,
+            items: sanitizedItems,
+            totalPrice,
+            customerDetails: {
+              firstName,
+              lastName,
+              phoneNumber,
+              altPhoneNumber,
+              houseNo,
+              street,
+              landmark,
+              district,
+              mandal,
+              pincode: String(pincode),
+              state,
+            },
+            paymentMode,
           }),
         }
       );
-      
 
       if (!orderResponse.ok) {
         throw new Error("Failed to place order.");
       }
 
-      alert("Order placed successfully! 🎉");
+      // ✅ Clear Cart After Order
+      await fetch("http://localhost:3000/api/cart/removecart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
-      // ✅ Clear Cart API Call using Params
-      const clearCartResponse = await fetch(
-        `http://localhost:3000/api/cart/removecart`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }), // ✅ Only email is required to clear the cart
-        }
-      );
-      
-
-      if (!clearCartResponse.ok) {
-        throw new Error("Failed to clear cart after order.");
-      }
+      Swal.fire({
+        title: "Success!",
+        text: "Order placed successfully 🎉",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
 
       setOrderPlaced(true);
       setCartItems([]);
@@ -165,13 +225,13 @@ const CustomerCart = () => {
     <div style={styles.cartContainer}>
       <Navbar />
       <h1 style={styles.cartTitle}>Customer Cart 🛒</h1>
+
       {cartItems.length === 0 ? (
         <p style={styles.emptyCart}>Your cart is empty.</p>
       ) : (
         <div style={styles.cartItems}>
           {cartItems.map((item, index) => (
             <div key={index} style={styles.cartItem}>
-              {/* ✅ Display the item image */}
               <img
                 src={item.image}
                 alt={item.name}
@@ -181,14 +241,13 @@ const CustomerCart = () => {
                 <strong>{item.name}</strong> <br />
                 Price: ₹{item.price} <br />
                 <div style={styles.quantityControls}>
-                  {/* ➕ Increase and ➖ Decrease Buttons */}
                   <button
                     onClick={() => handleDecreaseQuantity(item)}
                     style={styles.qtyBtn}
                   >
                     ➖
                   </button>
-                  <span style={styles.qtyValue}>{item.quantity}</span>
+                  <span style={styles.qtyValue}>{item.quantity || 1}</span>
                   <button
                     onClick={() => handleIncreaseQuantity(item)}
                     style={styles.qtyBtn}
@@ -196,9 +255,8 @@ const CustomerCart = () => {
                     ➕
                   </button>
                 </div>
-                <strong>Total: ₹{item.price * item.quantity}</strong>
+                <strong>Total: ₹{item.price * (item.quantity || 1)}</strong>
               </div>
-              {/* ❌ Remove Button */}
               <button
                 onClick={() => handleRemoveItem(item.name)}
                 style={styles.removeBtn}
@@ -207,17 +265,103 @@ const CustomerCart = () => {
               </button>
             </div>
           ))}
+        </div>
+      )}
 
-          {/* ✅ Display total price */}
-          <div style={styles.cartTotal}>
-            <h2>Total Price: ₹{totalPrice}</h2>
-          </div>
+      {/* 📝 Shipping Details - Show Only If Cart Has Items */}
+      {cartItems.length > 0 && (
+        <div style={styles.orderForm}>
+          <h3>Shipping Details 📦</h3>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Alternate Phone Number (Optional)"
+            value={altPhoneNumber}
+            onChange={(e) => setAltPhoneNumber(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="House/Flat No."
+            value={houseNo}
+            onChange={(e) => setHouseNo(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Street/Locality"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Landmark (Optional)"
+            value={landmark}
+            onChange={(e) => setLandmark(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="District"
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Mandal"
+            value={mandal}
+            onChange={(e) => setMandal(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="Pincode"
+            value={pincode}
+            onChange={(e) => setPincode(e.target.value)}
+            style={styles.inputField}
+          />
+          <input
+            type="text"
+            placeholder="State"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            style={styles.inputField}
+          />
+          <select
+            value={paymentMode}
+            onChange={(e) => setPaymentMode(e.target.value)}
+            style={styles.inputField}
+          >
+            <option value="Cash">Cash on Delivery</option>
+            <option value="Online" disabled>Online Payment .. Will be coming soon</option>
+          </select>
 
-          {/* ✅ Place Order Button */}
           <button
             style={styles.placeOrderBtn}
             onClick={handlePlaceOrder}
-            disabled={orderPlaced}
+            disabled={orderPlaced || cartItems.length === 0}
           >
             {orderPlaced ? "Order Placed ✅" : "Place Order 🛒"}
           </button>
@@ -227,68 +371,73 @@ const CustomerCart = () => {
   );
 };
 
-// 🎨 Inline CSS styles
+// 🎨 CSS Styles
 const styles = {
   cartContainer: {
     padding: "20px",
     backgroundColor: "#f8f9fa",
     fontFamily: "Arial, sans-serif",
+    minHeight: "100vh",
   },
   cartTitle: {
-    fontSize: "2rem",
+    fontSize: "2.5rem",
     textAlign: "center",
-    marginBottom: "20px",
+    marginBottom: "25px",
     color: "#333",
+    fontWeight: "bold",
+    textShadow: "1px 1px 2px rgba(0,0,0,0.2)",
   },
   emptyCart: {
-    fontSize: "1.2rem",
-    color: "#555",
+    fontSize: "1.4rem",
+    color: "#888",
     textAlign: "center",
     marginTop: "50px",
   },
   cartItems: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
     gap: "20px",
-    justifyContent: "center",
     marginTop: "20px",
+    padding: "0 10px",
   },
   cartItem: {
     backgroundColor: "#fff",
+    padding: "15px",
     border: "1px solid #ddd",
     borderRadius: "12px",
-    padding: "15px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+    transition: "transform 0.3s, box-shadow 0.3s",
     display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
     gap: "15px",
   },
   cartItemImage: {
-    width: "100px",
-    height: "100px",
-    borderRadius: "8px",
+    width: "90px",
+    height: "90px",
+    borderRadius: "12px",
     objectFit: "cover",
+    border: "1px solid #ddd",
+    transition: "transform 0.3s",
   },
   cartItemDetails: {
-    fontSize: "1rem",
-    color: "#333",
-  },
-  quantityControls: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    marginTop: "5px",
+    flex: 1,
+    fontSize: "1.1rem",
+    color: "#444",
   },
   qtyBtn: {
-    padding: "5px 10px",
+    padding: "8px 12px",
     border: "1px solid #ccc",
-    borderRadius: "6px",
+    borderRadius: "8px",
     backgroundColor: "#f0f0f0",
     cursor: "pointer",
+    fontSize: "1rem",
+    transition: "background-color 0.3s",
   },
   qtyValue: {
     fontSize: "1.2rem",
     fontWeight: "bold",
+    margin: "0 10px",
   },
   removeBtn: {
     backgroundColor: "#dc3545",
@@ -297,23 +446,39 @@ const styles = {
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
+    fontSize: "0.9rem",
+    transition: "background-color 0.3s, transform 0.2s",
   },
-  cartTotal: {
-    marginTop: "20px",
-    textAlign: "right",
-    padding: "10px",
-    borderTop: "2px solid #ddd",
+  orderForm: {
+    marginTop: "30px",
+    padding: "25px",
+    backgroundColor: "#fff",
+    borderRadius: "12px",
+    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+    maxWidth: "700px",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  inputField: {
+    width: "100%",
+    padding: "12px",
+    marginBottom: "12px",
+    borderRadius: "8px",
+    border: "1px solid #ccc",
+    fontSize: "1rem",
+    transition: "border-color 0.3s, box-shadow 0.3s",
   },
   placeOrderBtn: {
     backgroundColor: "#28a745",
     color: "#fff",
-    padding: "12px 20px",
+    padding: "14px 24px",
     border: "none",
     borderRadius: "8px",
-    fontSize: "1rem",
+    fontSize: "1.2rem",
     cursor: "pointer",
     marginTop: "20px",
+    width: "100%",
+    transition: "background-color 0.3s, transform 0.2s",
   },
 };
-
 export default CustomerCart;
