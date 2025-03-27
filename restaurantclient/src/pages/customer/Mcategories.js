@@ -10,20 +10,21 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import videoBg from "../../assets/food-video.webm";
-import biryaniImg from "../../assets/biryani.webp";
-import pizzaImg from "../../assets/biryani.webp";
-import burgerImg from "../../assets/biryani.webp";
-import iceCreamImg from "../../assets/biryani.webp";
 import Navbar from "./navbarcustomer.js";
 
 // ✅ Define categories with correct images
 const categories = [
-  { name: "Burger", img: burgerImg },
-  { name: "Pizza", img: pizzaImg },
-  { name: "Biryani", img: biryaniImg },
-  { name: "icecream", img: iceCreamImg },
+  { name: "Burger", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_640.jpg" }, // 🍔 Burger Image
+  { name: "Pizza", img: "https://cdn.pixabay.com/photo/2017/01/22/19/20/pizza-2000615_640.jpg" }, // 🍕 Pizza Image
+  { name: "Biryani", img: "https://th.bing.com/th/id/OIP.xrIs5Skr4mPMOVMNoj70nAHaFj?w=288&h=216&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍛 Biryani Image
+  { name: "icecream", img: "https://th.bing.com/th/id/OIP.imiAt4k41HAzdEjIWkpaYgHaEw?w=312&h=200&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍨 Ice Cream Image
+  { name: "Pasta", img: "https://th.bing.com/th/id/OIP.RwG17bros5shJNe1ZQ9LOAHaJ4?w=216&h=288&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍝 Pasta Image
+  { name: "Desserts", img: "https://th.bing.com/th/id/OIP.8FNfrOp6PoTS41no5ReAWgHaJQ?w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍰 Desserts Image
+  { name: "Drinks", img: "https://th.bing.com/th/id/OIP.HDSdTrfcqOYYOhZLiHyagQHaFw?w=283&h=220&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍹 Drinks Image
+  { name: "Shawarma", img: "https://th.bing.com/th/id/OIP.MQ-mvnxUoPrGfmOEXcdLmwHaF7?w=279&h=223&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🌯 Shawarma Image
+  { name: "Starters", img: "https://www.bing.com/th/id/OIP.H4Lab9Knu-DZIGDj2Um0-wHaFe?w=140&h=103&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍤 Starters Image
+  { name: "Curries", img: "https://th.bing.com/th/id/OIP.qPkNRPChXAkWrIB2TqokLwHaHa?w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.8&pid=3.1&rm=2" }, // 🍲 Curries Image
 ];
-
 const Mccategories = () => {
   const navigate = useNavigate();
   const [trendingDishes, setTrendingDishes] = useState([]);

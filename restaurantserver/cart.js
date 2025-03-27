@@ -135,34 +135,28 @@ CartRouter.delete("/removeitem", async (req, res) => {
     });
   
     try {
-      // ✅ Validate request body
       const { email, name } = requiredBody.parse(req.body);
   
-      // ✅ Check if the user's cart exists
       let userCart = await Cart.findOne({ email });
-  
       if (!userCart) {
         return res.status(404).json({ message: "Cart not found" });
       }
   
       if (name) {
-        // ✅ Remove specific item if name is provided
+        // Remove specific item
         userCart.items = userCart.items.filter((item) => item.name !== name);
       } else {
-        // ✅ Clear the entire cart if no name is provided
+        // Clear cart
         userCart.items = [];
         userCart.totalPrice = 0;
       }
   
-      // ✅ Update total price
       userCart.totalPrice = userCart.items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
       );
   
-      // ✅ Save the updated cart
       await userCart.save();
-  
       res.status(200).json({
         message: name ? "Item removed from cart" : "Cart cleared successfully",
         cart: userCart,
@@ -173,5 +167,4 @@ CartRouter.delete("/removeitem", async (req, res) => {
     }
   });
   
-
 export default CartRouter;
