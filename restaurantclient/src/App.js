@@ -23,7 +23,7 @@ import CMenu from "./pages/customer/menu";
 import Ccart from "./pages/customer/customercart";
 import Corders from "./pages/customer/myorders";
 import Mcategories from "./pages/customer/Mcategories";
-
+import Profile from "./pages/customer/profile";
 
 
 
@@ -54,6 +54,7 @@ function App() {
         <Route path="/customer/menu" element={<CMenu />} /> 
         <Route path="/customer/cart" element={<Ccart />} />
         <Route path="/customer/myorders" element={<Corders />} />
+        <Route path="/customer/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./navbarcustomer";
+import Swal from "sweetalert2";
 import "../../styles/menuPage.css";
-
-import { Grid, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import {
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+} from "@mui/material";
 
 export default function MenuItems() {
   const [menuItems, setMenuItems] = useState([]);
@@ -20,7 +27,9 @@ export default function MenuItems() {
       try {
         // ✅ Encode category before fetching
         const response = await fetch(
-          `http://localhost:3000/api/menu/allitems/${encodeURIComponent(selectedCategory)}`
+          `http://localhost:3000/api/menu/allitems/${encodeURIComponent(
+            selectedCategory
+          )}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch menu items");
@@ -29,21 +38,63 @@ export default function MenuItems() {
         setMenuItems(data);
       } catch (error) {
         setError(error.message);
+        Swal.fire({
+          title: "Error! ❌",
+          text: error.message || "Failed to load menu items.",
+          icon: "error",
+          confirmButtonText: "Retry",
+          confirmButtonColor: "#e74c3c",
+        }).then(() => {
+          navigate("/customer/mcategories"); // Redirect to categories if error
+        });
       } finally {
         setLoading(false);
       }
     };
 
     fetchMenuItems();
-  }, [selectedCategory]);
+  }, [selectedCategory, navigate]);
 
-  if (loading) return <p style={styles.loading}>Loading menu...</p>;
-  if (error) return <p style={styles.error}>Error: {error}</p>;
+  useEffect(() => {
+    if (!loading && menuItems.length === 0) {
+      Swal.fire({
+        title: "No Items Found! 😔",
+        text: `Sorry, no items available for ${selectedCategory}.`,
+        icon: "info",
+        confirmButtonText: "Go Back",
+        confirmButtonColor: "#3498db",
+      }).then(() => {
+        navigate("/customer/mcategories");
+      });
+    }
+  }, [menuItems, loading, navigate]);
+
+  if (loading) {
+    return (
+      <p style={styles.loading}>
+        🍔 Loading menu... Please wait a moment! 🍕
+      </p>
+    );
+  }
+  if (error) {
+    return (
+      <p style={styles.error}>
+        ❌ Error: {error} <br />
+        Please try again.
+      </p>
+    );
+  }
 
   // ✅ Function to handle adding an item to the cart
   const handleAddToCart = async (item) => {
     if (!userEmail) {
-      alert("User email not found. Please log in.");
+      Swal.fire({
+        title: "Error! ❌",
+        text: "User email not found. Please log in.",
+        icon: "error",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#e74c3c",
+      });
       return;
     }
 
@@ -66,9 +117,21 @@ export default function MenuItems() {
         throw new Error("Failed to add item to cart");
       }
 
-      alert(`${item.name} added to cart! 🎉`);
+      Swal.fire({
+        title: "Success! 🎉",
+        text: `${item.name} added to cart! 🛒`,
+        icon: "success",
+        confirmButtonText: "Awesome!",
+        confirmButtonColor: "#4CAF50",
+      });
     } catch (error) {
-      setError(error.message);
+      Swal.fire({
+        title: "Error! ❌",
+        text: error.message || "Failed to add item to cart",
+        icon: "error",
+        confirmButtonText: "Try Again",
+        confirmButtonColor: "#e74c3c",
+      });
     }
   };
 
@@ -76,9 +139,9 @@ export default function MenuItems() {
     <div className="homepage-container">
       <Navbar />
       <div>
-        <h2>
+        <h2 style={styles.menuTitle}>
           {selectedCategory
-            ? `${selectedCategory} Menu 🍔🍕`
+            ? `${selectedCategory.toUpperCase()} Menu 🍔🍕`
             : "Our Menu 🍔🍕"}
         </h2>
         <Grid container spacing={3}>
@@ -102,7 +165,7 @@ export default function MenuItems() {
                     className="order-button"
                     onClick={() => handleAddToCart(dish)}
                   >
-                    Add to Cart
+                    Add to Cart 🛒
                   </Button>
                 </Card>
               </Grid>
@@ -112,7 +175,7 @@ export default function MenuItems() {
               variant="h6"
               style={{ textAlign: "center", marginTop: "20px" }}
             >
-              No items found for {selectedCategory} 😔
+              No items found for {selectedCategory.toUpperCase()} 😔
             </Typography>
           )}
         </Grid>
@@ -126,9 +189,19 @@ const styles = {
   loading: {
     fontSize: "1.5rem",
     color: "#007bff",
+    textAlign: "center",
+    marginTop: "50px",
   },
   error: {
     fontSize: "1.5rem",
     color: "#dc3545",
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  menuTitle: {
+    fontSize: "2rem",
+    textAlign: "center",
+    margin: "20px 0",
+    color: "#2c3e50",
   },
 };
