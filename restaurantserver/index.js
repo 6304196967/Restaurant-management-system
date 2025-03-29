@@ -5,6 +5,8 @@ import MenuRouter from './menu.js';
 import CartRouter from "./cart.js";
 import orderRouter from "./order.js";
 import feedbackRouter from './feedback.js';
+import CategoryRouter from './category.js';
+
 
 import cors from 'cors';
 
@@ -18,6 +20,7 @@ app.use("/api/menu", MenuRouter);
 app.use("/api/cart", CartRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/feedback", feedbackRouter);
+app.use("/api/category", CategoryRouter);
 
 async function main() {
     try {

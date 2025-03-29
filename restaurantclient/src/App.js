@@ -12,7 +12,7 @@ import AdminHome from "./pages/admin/admin_home";
 import AddItem from "./pages/admin/additem";
 import Menu from "./pages/admin/menu";
 import DeleteItem from "./pages/admin/deleteitem";
-
+import Menuu from "./pages/admin/menuu";
 
 
 
@@ -40,17 +40,19 @@ function App() {
         {/*Admin routes*/}
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/home" element={<AdminHome />} />
-        <Route path="/admin/menu/:category" element={<Menu />} />
+        <Route path="/admin/Mcategories" element={<Menu />} />
+        <Route path="/admin/menu" element={<Menuu />} /> 
         <Route path="/admin/menu/additem" element={<AddItem />} />
         <Route path="/admin/menu/deleteitem" element={<DeleteItem />} />
         
 
 
         {/*Customer routes*/}
-        <Route path="/customer/Mcategories" element={<Mcategories />} />
+        
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
+        <Route path="/customer/Mcategories" element={<Mcategories />} />
         <Route path="/customer/menu" element={<CMenu />} /> 
         <Route path="/customer/cart" element={<Ccart />} />
         <Route path="/customer/myorders" element={<Corders />} />

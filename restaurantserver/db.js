@@ -75,7 +75,10 @@ const FeedbackSchema = new Schema({
     rating: { type: Number, required: true, min: 1, max: 5 },
     itemName: { type: String, required: true },
 }); 
-    
+const Categoryschema=new Schema({
+    name: { type: String, required: true },
+    img: { type: String, required: true },
+});
     
 
 const User = mongoose.model('User', UserSchema);
@@ -83,7 +86,7 @@ const Menu = mongoose.model('Menu', MenuSchema);
 const Cart = mongoose.model("Cart", CartSchema);
 const order = mongoose.model("order",orderSchema);
 const Feedback = mongoose.model("feedback", FeedbackSchema);
-
+const Category = mongoose.model("Category", Categoryschema);
 
 
 
@@ -93,5 +96,6 @@ export {
     Cart,
     order,
     Feedback,
+    Category,
 }
 
