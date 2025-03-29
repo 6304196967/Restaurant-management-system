@@ -146,5 +146,99 @@ UserRouter.post('/reset-password', async (req, res) => {
         res.status(500).json({ message: "Invalid or expired token" });
     }
 });
+// ✅ Get User Details by Email
+UserRouter.post("/getdetails", async (req, res) => {
+    const { email } = req.body;
+  
+    if (!email) {
+      return res.status(400).json({ message: "Email not provided" });
+    }
+  
+    try {
+      const user = await User.findOne({ email });
+      if (user) {
+        res.status(200).json({
+          name: user.username,
+          email: user.email,
+          contact: user.phonenumber,
+          profilePic: user.profilePic,
+        });
+        
+      } else {
+        res.status(404).json({ message: "User not found!" });
+      }
+    } catch (e) {
+      console.error("Get Details Error:", e);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+  
 
+// ✅ Update User Profile
+// ✅ Update User Profile
+UserRouter.post("/updatedetails", async (req, res) => {
+    const { email, name, contact, profilePic } = req.body;
+  
+    if (!email) {
+      return res.status(400).json({ message: "Email not provided" });
+    }
+  
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+  
+      // Update fields if provided
+      user.username = name || user.username;
+      user.phonenumber = contact || user.phonenumber;
+      user.profilePic = profilePic || user.profilePic;
+  
+      await user.save();
+      res.status(200).json({ message: "Profile updated successfully!" });
+    } catch (e) {
+      console.error("Update Details Error:", e);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+  
+  import multer from "multer";
+
+  // ✅ Configure Multer for File Upload
+  const storage = multer.memoryStorage();
+  const upload = multer({ storage: storage });
+  
+  // ✅ Upload Profile Pic Route
+  UserRouter.post("/uploadpic", upload.single("profilePic"), async (req, res) => {
+    const { email } = req.body;
+  
+    // ✅ Check if Email and File are Provided
+    if (!email || !req.file) {
+      return res.status(400).json({ message: "Email or file not provided" });
+    }
+  
+    try {
+      // ✅ Find the User by Email
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: "User not found!" });
+      }
+  
+      // ✅ Convert Image to Base64 for MongoDB
+      const profilePic = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+  
+      // ✅ Override Previous Image with New One
+      user.profilePic = profilePic; // Automatically replaces the old pic
+      await user.save();
+  
+      res.status(200).json({
+        message: "Profile picture updated successfully! 🎉",
+        profilePic,
+      });
+    } catch (e) {
+      console.error("Profile Pic Upload Error:", e);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  });
+  
 export default UserRouter;

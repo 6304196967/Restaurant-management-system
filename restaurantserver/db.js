@@ -7,6 +7,8 @@ const UserSchema = new Schema({
     phonenumber : String,
     email : {type: String, required :true, unique : true},
     password : String,
+    profilePic: { type: String, default: "https://via.placeholder.com/150" },
+
 });
 
 const MenuSchema = new Schema({
