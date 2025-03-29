@@ -50,7 +50,7 @@ MenuRouter.get("/allitems/:category", async (req, res) => {
       const allMenuItems = await Menu.find({ type: category });
   
       if (allMenuItems.length === 0) {
-        return res.status(404).json({
+        return res.status(200).json({
           message: `No items found for category: ${category}`,
         });
       }
@@ -73,36 +73,21 @@ MenuRouter.get("/allitems/trending", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
-// ✅ Delete Item Route
-MenuRouter.delete("/deleteitem", async (req, res) => {
-  const requiredBody = z.object({
-    name: z.string(),
-    price: z.number().int(),
-    type: z.string(),
-    description: z.string(),
-  });
-
-  const parsedBody = requiredBody.safeParse(req.body);
-  if (!parsedBody.success) {
-    return res.status(400).json({
-      message: "Invalid input data",
-      errors: parsedBody.error.errors,
-    });
-  }
-
-  const { name, price, type, description } = req.body;
-  try {
-    const deletedItem = await Menu.findOneAndDelete({ name, price, type, description });
-    if (!deletedItem) {
-      return res.status(404).json({ message: "Menu item not found" });
+MenuRouter.delete(
+  "/deleteitem/:id",
+  async (req, res) => {
+    const { id } = req.params;
+    try {
+      const deletedItem = await Menu.findByIdAndDelete(id);
+      if (!deletedItem) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+      res.status(200).json({ message: "Item deleted successfully!" });
+    } catch (e) {
+      console.error("Error deleting item:", e);
+      res.status(500).json({ message: "Internal Server Error" });
     }
-
-    res.status(200).json({ message: "Menu Item Deleted Successfully" });
-  } catch (e) {
-    console.error("Menu Delete Error:", e);
-    res.status(500).json({ message: "Internal Server Error" });
   }
-});
+);
 
 export default MenuRouter;
