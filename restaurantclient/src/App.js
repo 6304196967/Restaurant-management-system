@@ -49,7 +49,7 @@ function App() {
 
         {/*Customer routes*/}
         
-
+        
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
         <Route path="/customer/Mcategories" element={<Mcategories />} />
