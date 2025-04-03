@@ -48,7 +48,7 @@ const fetchMenuItems = async () => {
         confirmButtonText: "Retry",
         confirmButtonColor: "#e74c3c",
       }).then(() => {
-        navigate("/admin/mcategories");
+        navigate("/Restaurant-management-system/admin/mcategories");
       });
     } finally {
       setLoading(false);

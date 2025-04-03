@@ -7,7 +7,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="logo">Royal Feast</div>
       <ul className="nav-links">
-        <li><Link to="/signup">Signup</Link></li>
+        <li><Link to="/Restaurant-management-system/signup">Signup</Link></li>
       </ul>
     </nav>
   );

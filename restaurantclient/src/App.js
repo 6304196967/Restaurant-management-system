@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Signup from "./pages/signup";
@@ -14,9 +13,6 @@ import Menu from "./pages/admin/menu";
 import DeleteItem from "./pages/admin/deleteitem";
 import Menuu from "./pages/admin/menuu";
 
-
-
-
 //Customer imports
 import CustomerHome from "./pages/customer/customerhome";
 import CMenu from "./pages/customer/menu"; 
@@ -25,9 +21,6 @@ import Corders from "./pages/customer/myorders";
 import Mcategories from "./pages/customer/Mcategories";
 import Profile from "./pages/customer/profile";
 
-
-
-
 function App() {
   return (
     <Router>
@@ -35,25 +28,21 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />      
         <Route path="/signin" element={<Signin />} />
-        <Route path="/forgot-password" element={<ForgotPassword />}/>
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ConfirmPassword />} />
-        {/*Admin routes*/}
+
+        {/* Admin routes */}
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/home" element={<AdminHome />} />
         <Route path="/admin/Mcategories" element={<Menu />} />
-        <Route path="/admin/menu" element={<Menuu />} /> 
+        <Route path="/admin/menu" element={<Menuu />} />
         <Route path="/admin/menu/additem" element={<AddItem />} />
         <Route path="/admin/menu/deleteitem" element={<DeleteItem />} />
-        
 
-
-        {/*Customer routes*/}
-        
-        
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
         <Route path="/customer/Mcategories" element={<Mcategories />} />
-        <Route path="/customer/menu" element={<CMenu />} /> 
+        <Route path="/customer/menu" element={<CMenu />} />
         <Route path="/customer/cart" element={<Ccart />} />
         <Route path="/customer/myorders" element={<Corders />} />
         <Route path="/customer/profile" element={<Profile />} />
@@ -62,4 +51,3 @@ function App() {
   );
 }
 export default App;
-

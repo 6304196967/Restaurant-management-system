@@ -7,7 +7,7 @@ function Signup() {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/");
+    navigate("/Restaurant-management-system/");
   };
 
   const [formData, setFormData] = useState({
@@ -48,7 +48,7 @@ function Signup() {
         const userData = await response.json(); 
       
         alert("Signup successful");
-        navigate("/");
+        navigate("/Restaurant-management-system/");
       } else if (response.status === 400) {
         const errorData = await response.json();
         alert(errorData.message || "User already exists");
@@ -136,7 +136,7 @@ function Signup() {
         </form>
         <p className="login-prompt">
           Already have an account?
-          <Link to="/signin" className="login-link">
+          <Link to="/Restaurant-management-system/signin" className="login-link">
             Log in
           </Link>
         </p>

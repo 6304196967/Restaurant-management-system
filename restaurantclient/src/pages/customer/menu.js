@@ -45,7 +45,7 @@ export default function MenuItems() {
           confirmButtonText: "Retry",
           confirmButtonColor: "#e74c3c",
         }).then(() => {
-          navigate("/customer/mcategories"); // Redirect to categories if error
+          navigate("/Restaurant-management-system/customer/mcategories"); // Redirect to categories if error
         });
       } finally {
         setLoading(false);
@@ -64,7 +64,7 @@ export default function MenuItems() {
         confirmButtonText: "Go Back",
         confirmButtonColor: "#3498db",
       }).then(() => {
-        navigate("/customer/mcategories");
+        navigate("Restaurant-management-system/customer/mcategories");
       });
     }
   }, [menuItems, loading, navigate]);

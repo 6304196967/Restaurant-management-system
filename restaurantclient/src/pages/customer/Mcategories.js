@@ -73,7 +73,7 @@ const Mccategories = () => {
   // ✅ Store category in localStorage and navigate to menu
   const handleCategoryClick = (categoryName) => {
     localStorage.setItem("selectedCategory", categoryName);
-    navigate("/customer/menu");
+    navigate("/Restaurant-management-system/customer/menu");
   };
 
   // ✅ Add to Cart Function with SweetAlert
