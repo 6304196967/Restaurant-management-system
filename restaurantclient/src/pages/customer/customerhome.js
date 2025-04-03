@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './customerhome.css';
-import Navbar from '../Navbar';
+import Navbar from './navbarcustomer';
 const CustomerHome = () => {
     return (
         <div className="customer-home">
