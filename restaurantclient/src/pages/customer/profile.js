@@ -32,7 +32,7 @@ const Profile = () => {
         text: "Please login again.",
         timer: 2000,
       });
-      window.location.href = "/signin"; // Redirect if no email found
+      window.location.href = "/Restaurant-management-system/signin"; // Redirect if no email found
       return;
     }
 
@@ -139,7 +139,7 @@ const Profile = () => {
     // ✅ Save profile details
     try {
       const response = await fetch(
-        "hhttps://restaurant-management-backend-1.onrender.com/api/user/updatedetails",
+        "https://restaurant-management-backend-1.onrender.com/api/user/updatedetails",
         {
           method: "POST",
           headers: {
@@ -194,7 +194,7 @@ const Profile = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    window.location.href = "/signin"; // Redirect to login page
+    window.location.href = "/Restaurant-management-system/signin"; // Redirect to login page
   };
 
   return (

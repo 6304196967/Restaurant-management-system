@@ -6,7 +6,7 @@ import "../styles/Home.css"; // Import Home.css for styling
 function Home() {
   const navigate = useNavigate(); 
   const handleExploreMenu = () => {
-    navigate("/signin"); 
+    navigate("/Restaurant-management-system/signin"); 
   };
   return (
     <div className="home">

@@ -93,7 +93,7 @@ const ForgotPassword = () => {
         </form>
 
         {/* Back to login link */}
-        <Link to="/" className="back-to-login-button">
+        <Link to="/Restaurant-management-system/" className="back-to-login-button">
           Back to Login
         </Link>
       </div>
