@@ -5,29 +5,33 @@ import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(""); // Dynamic message after sending link
+  const [message, setMessage] = useState(""); // Status message
+  const [buttonText, setButtonText] = useState("Send Reset link");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [countdown, setCountdown] = useState(0); // Timer countdown
 
   const navigate = useNavigate();
 
-  // Timer logic to enable button after 1 minute
+  // Timer logic to enable button after 60 seconds
   useEffect(() => {
-    let timer;
     if (countdown > 0) {
-      timer = setInterval(() => {
+      const timer = setInterval(() => {
         setCountdown((prev) => prev - 1);
       }, 1000);
+      return () => clearInterval(timer);
     } else {
       setIsButtonDisabled(false);
-      setMessage("");
-      clearInterval(timer);
+      setButtonText("Send Reset link");
     }
-    return () => clearInterval(timer);
   }, [countdown]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Change button to "Sending OTP..."
+    setButtonText("Sending Reset link...");
+    setIsButtonDisabled(true);
+
     try {
       const response = await fetch(
         "http://localhost:3000/api/user/forgot-password",
@@ -39,19 +43,21 @@ const ForgotPassword = () => {
       );
 
       if (response.ok) {
-        setMessage("Reset link sent! You can request again in 60 seconds.");
-        setIsButtonDisabled(true);
+        setButtonText("Reset link sent");
         setCountdown(60); // Start the 60-second timer
       } else {
         const errorData = await response.json();
-        setMessage(errorData.message || "Failed to send reset link.");
+        setMessage(errorData.message || "Failed to send OTP.");
+        setButtonText("Send Reset link"); // Reset button
+        setIsButtonDisabled(false);
       }
     } catch (error) {
       console.error("Error:", error);
       setMessage("Network error occurred.");
+      setButtonText("Send Reset link"); // Reset button
+      setIsButtonDisabled(false);
     }
   };
-
 
   return (
     <div className="forgot-password-container">
@@ -80,15 +86,9 @@ const ForgotPassword = () => {
             />
           </div>
 
-          {/* Button with dynamic state and countdown */}
-          <button
-            type="submit"
-            className="submit-button"
-            disabled={isButtonDisabled}
-          >
-            {isButtonDisabled
-              ? `Resend in ${countdown}s`
-              : "Send Reset Link"}
+          {/* Dynamic OTP Button */}
+          <button type="submit" className="submit-button" disabled={isButtonDisabled}>
+            {countdown > 0 ? `Reset link Sent (${countdown}s)` : buttonText}
           </button>
         </form>
 
