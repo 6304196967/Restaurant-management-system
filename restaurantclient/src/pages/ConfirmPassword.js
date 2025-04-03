@@ -25,7 +25,7 @@ const ConfirmPassword = () => {
 
       if (response.ok) {
         alert("Password successfully updated!");
-        navigate("/Restaurant-management-system/");
+        navigate("/");
       } else {
         const errorData = await response.json();
         alert(errorData.message || "Failed to reset password.");

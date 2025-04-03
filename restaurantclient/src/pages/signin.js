@@ -26,10 +26,10 @@ import { useState } from "react";
                 alert("Login successful");
     
                 if (data.email === "admin@gmail.com") {
-                    navigate("/Restaurant-management-system/admin");
+                    navigate("/admin");
                 } 
                 else {
-                    navigate("/Restaurant-management-system/customer");}
+                    navigate("/customer");}
             } else {
                 alert(data.message || "Login failed");
             }
@@ -78,14 +78,14 @@ import { useState } from "react";
               >
                 Login
               </button>
-              <Link className="login-forgot-password" to="/Restaurant-management-system/forgot-password">
+              <Link className="login-forgot-password" to="/forgot-password">
                 Forgot Password?
               </Link>
             </div>
             <div className="login-signup-container">
               <p className="login-signup-text">
                 Don't have an account?
-                <Link to="/Restaurant-management-system/signup" className="login-signup-button">
+                <Link to="/signup" className="login-signup-button">
                   Sign up
                 </Link>
               </p>

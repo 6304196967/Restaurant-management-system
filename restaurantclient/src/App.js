@@ -8,9 +8,7 @@ import ConfirmPassword from "./pages/ConfirmPassword";
 
 //Admin imports
 import AdminHome from "./pages/admin/admin_home";
-import AddItem from "./pages/admin/additem";
 import Menu from "./pages/admin/menu";
-import DeleteItem from "./pages/admin/deleteitem";
 import Menuu from "./pages/admin/menuu";
 
 //Customer imports
@@ -36,8 +34,6 @@ function App() {
         <Route path="/admin/home" element={<AdminHome />} />
         <Route path="/admin/Mcategories" element={<Menu />} />
         <Route path="/admin/menu" element={<Menuu />} />
-        <Route path="/admin/menu/additem" element={<AddItem />} />
-        <Route path="/admin/menu/deleteitem" element={<DeleteItem />} />
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
