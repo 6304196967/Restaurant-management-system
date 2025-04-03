@@ -27,9 +27,9 @@ useEffect(() => {
       cancelButtonColor: "#2ecc71",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "/Restaurant-management-system/customer/mcategories";
+        window.location.href = "/customer/mcategories";
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = "/Restaurant-management-system/customer/home";
+        window.location.href = "/customer/home";
       }
     });
   }

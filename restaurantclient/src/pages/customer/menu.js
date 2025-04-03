@@ -45,7 +45,7 @@ export default function MenuItems() {
           confirmButtonText: "Retry",
           confirmButtonColor: "#e74c3c",
         }).then(() => {
-          navigate("/Restaurant-management-system/customer/mcategories"); // Redirect to categories if error
+          navigate("/customer/mcategories"); // Redirect to categories if error
         });
       } finally {
         setLoading(false);
