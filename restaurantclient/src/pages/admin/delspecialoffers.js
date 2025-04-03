@@ -11,7 +11,7 @@ export default function DeleteItem() {
         const requestData = { name, price: parseInt(price) }; // Convert price to integer
 
         try {
-            const response = await fetch("http://localhost:3000/api/spoffers/deleteitem", {
+            const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/spoffers/deleteitem", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

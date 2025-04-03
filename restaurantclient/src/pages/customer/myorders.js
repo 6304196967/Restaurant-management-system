@@ -15,7 +15,7 @@ const MyOrders = () => {
       try {
         const email = localStorage.getItem("email");
         const response = await fetch(
-          `http://localhost:3000/api/order/allorders?email=${email}`
+          `https://restaurant-management-backend-1.onrender.com/api/order/allorders?email=${email}`
         );
 
         if (!response.ok) {
@@ -44,7 +44,7 @@ const MyOrders = () => {
       for (const order of orders) {
         for (const item of order.items) {
           const response = await fetch(
-            `http://localhost:3000/api/feedback/getfeedbacks?email=${email}&orderId=${order._id}&itemName=${item.name}`
+            `https://restaurant-management-backend-1.onrender.com/api/feedback/getfeedbacks?email=${email}&orderId=${order._id}&itemName=${item.name}`
           );
 
           if (response.ok) {
@@ -81,7 +81,7 @@ const MyOrders = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/feedback/addfeedback`,
+        `https://restaurant-management-backend-1.onrender.com/api/feedback/addfeedback`,
         {
           method: "POST",
           headers: {
@@ -134,7 +134,7 @@ const MyOrders = () => {
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/order/cancel/${orderId}`,
+          `https://restaurant-management-backend-1.onrender.com/api/order/cancel/${orderId}`,
           {
             method: "PUT",
             headers: {
@@ -185,7 +185,7 @@ const MyOrders = () => {
 
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:3000/api/feedback/deletefeedback?email=${email}&orderId=${orderId}&itemName=${itemName}`,
+          `https://restaurant-management-backend-1.onrender.com/api/feedback/deletefeedback?email=${email}&orderId=${orderId}&itemName=${itemName}`,
           {
             method: "DELETE",
           }

@@ -24,7 +24,7 @@ const Mccategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/category/getcategories");
+        const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/category/getcategories");
         if (!response.ok) throw new Error("Failed to fetch categories");
 
         const data = await response.json();
@@ -49,7 +49,7 @@ const Mccategories = () => {
     const fetchTrendingDishes = async () => {
       try {
         const response = await fetch(
-          "http://localhost:3000/api/menu/allitems/trending"
+          "https://restaurant-management-backend-1.onrender.com/api/menu/allitems/trending"
         );
         if (!response.ok) throw new Error("Failed to fetch trending dishes");
 
@@ -90,7 +90,7 @@ const Mccategories = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/cart/additem", {
+      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/additem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

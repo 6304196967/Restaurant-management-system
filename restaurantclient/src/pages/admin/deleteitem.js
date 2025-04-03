@@ -22,7 +22,7 @@ export default function DeleteItem() {
         };
 
         try {
-            const response = await fetch("http://localhost:3000/api/menu/deleteitem", {
+            const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/menu/deleteitem", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

@@ -27,7 +27,7 @@ export default function MenuItems() {
       try {
         // ✅ Encode category before fetching
         const response = await fetch(
-          `http://localhost:3000/api/menu/allitems/${encodeURIComponent(
+          `https://restaurant-management-backend-1.onrender.com/api/menu/allitems/${encodeURIComponent(
             selectedCategory
           )}`
         );
@@ -99,7 +99,7 @@ export default function MenuItems() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/cart/additem", {
+      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/additem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
