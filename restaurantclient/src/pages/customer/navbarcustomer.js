@@ -55,28 +55,28 @@ function Navbar() {
           Royal Feast
         </Typography>
         <Box className="nav-links1" sx={{ marginLeft: "auto", display: "flex", gap: "20px" }}>
-          <Link to="/Restaurant-management-system/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
             Home
           </Link>
-          <Link to="/Restaurant-management-system/customer/Mcategories" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/customer/Mcategories" style={{ textDecoration: "none", color: "inherit" }}>
             Menu
           </Link>
-          <Link to="/Restaurant-management-system/customer/cart" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/customer/cart" style={{ textDecoration: "none", color: "inherit" }}>
             Cart
           </Link>
-          <Link to="/Restaurant-management-system/customer/about" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/customer/about" style={{ textDecoration: "none", color: "inherit" }}>
             About Us
           </Link>
-          <Link to="/Restaurant-management-system/customer/myorders" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/customer/myorders" style={{ textDecoration: "none", color: "inherit" }}>
             Orders
           </Link>
-          <Link to="/Restaurant-management-system/customer/reservation" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/customer/reservation" style={{ textDecoration: "none", color: "inherit" }}>
             Reservation
           </Link>
         </Box>
 
         {/* ✅ Show Avatar if Profile Pic Available, Else Show Default Icon */}
-        <Link to="/Restaurant-management-system/customer/profile" style={{ color: "inherit" }}>
+        <Link to="/customer/profile" style={{ color: "inherit" }}>
           <IconButton className="icon-button">
             {profilePic ? (
               <Avatar
