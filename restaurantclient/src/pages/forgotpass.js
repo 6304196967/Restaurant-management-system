@@ -34,7 +34,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/user/forgot-password",
+        "https://restaurant-management-backend-1.onrender.com/api/user/forgot-password",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

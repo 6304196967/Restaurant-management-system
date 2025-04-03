@@ -30,7 +30,7 @@ const fetchMenuItems = async () => {
         ? encodeURIComponent(selectedCategory)
         : "all";
       const response = await fetch(
-        `http://localhost:3000/api/menu/allitems/${categoryToFetch}`
+        `https://restaurant-management-backend-1.onrender.com/api/menu/allitems/${categoryToFetch}`
       );
   
       if (!response.ok) {
@@ -64,7 +64,7 @@ useEffect(() => {
   const handleRemoveFromMenu = async (itemId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/menu/deleteitem/${itemId}`,
+        `https://restaurant-management-backend-1.onrender.com/api/menu/deleteitem/${itemId}`,
         {
           method: "DELETE",
         }
@@ -132,7 +132,7 @@ const handleAddItem = async () => {
   
     // ✅ Add item with selectedCategory
     try {
-      const response = await fetch("http://localhost:3000/api/menu/additem", {
+      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/menu/additem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

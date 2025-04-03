@@ -20,7 +20,7 @@ const Mccategories = () => {
   // ✅ Fetch Categories from Backend
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/category/getcategories");
+      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/category/getcategories");
       if (!response.ok) throw new Error("Failed to fetch categories");
       const data = await response.json();
       setCategories(data);
@@ -61,7 +61,7 @@ const Mccategories = () => {
 
     if (formValues) {
       try {
-        const response = await fetch("http://localhost:3000/api/category/addcategory", {
+        const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/category/addcategory", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const Mccategories = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:3000/api/category/deletecategory/${categoryName}`, {
+          const response = await fetch(`https://restaurant-management-backend-1.onrender.com/api/category/deletecategory/${categoryName}`, {
             method: "DELETE",
           });
 

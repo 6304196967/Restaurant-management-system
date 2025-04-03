@@ -45,7 +45,7 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cart/cartitems?email=${email}`
+        `https://restaurant-management-backend-1.onrender.com/api/cart/cartitems?email=${email}`
       );
 
       if (!response.ok) {
@@ -80,7 +80,7 @@ useEffect(() => {
   const updateCartItem = async (item, quantity) => {
     const email = localStorage.getItem("email");
 
-    await fetch("http://localhost:3000/api/cart/updatecart", {
+    await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/updatecart", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, name: item.name, quantity }),
@@ -118,7 +118,7 @@ useEffect(() => {
     const email = localStorage.getItem("email");
 
     try {
-      const response = await fetch("http://localhost:3000/api/cart/removecart", {
+      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/removecart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, name: itemName }),
@@ -295,7 +295,7 @@ const handleBuyNow = async () => {
     }));
 
     try {
-      const orderResponse = await fetch("http://localhost:3000/api/order/additem", {
+      const orderResponse = await fetch("https://restaurant-management-backend-1.onrender.com/api/order/additem", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -312,7 +312,7 @@ const handleBuyNow = async () => {
       }
 
       // ✅ Clear Cart After Order
-      await fetch("http://localhost:3000/api/cart/removecart", {
+      await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/removecart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

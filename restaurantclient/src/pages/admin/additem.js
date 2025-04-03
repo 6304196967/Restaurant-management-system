@@ -21,7 +21,7 @@ export default function AddItem() {
         };
     
         try {
-            const response = await fetch("http://localhost:3000/api/menu/additem", {
+            const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/menu/additem", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json", 
