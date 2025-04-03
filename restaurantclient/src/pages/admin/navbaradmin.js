@@ -55,15 +55,15 @@ function Navbar() {
           Royal Feast
         </Typography>
         <Box className="nav-links1" sx={{ marginLeft: "auto", display: "flex", gap: "20px" }}>
-        <Link to="/Restaurant-management-system/admin/home">Home</Link>
-        <Link to="/Restaurant-management-system/admin/Mcategories">Menu</Link>
-        <Link to="/Restaurant-management-system/admin/orders">Orders</Link>
-        <Link to="/Restaurant-management-system/admin/feedbacks">Feedbacks</Link>
-        <Link to="/Restaurant-management-system/admin/reservations">Reservations</Link>
+        <Link to="/admin/home">Home</Link>
+        <Link to="/admin/Mcategories">Menu</Link>
+        <Link to="/admin/orders">Orders</Link>
+        <Link to="/admin/feedbacks">Feedbacks</Link>
+        <Link to="/admin/reservations">Reservations</Link>
         </Box>
 
         {/* ✅ Show Avatar if Profile Pic Available, Else Show Default Icon */}
-        <Link to="/Restaurant-management-system/customer/profile" style={{ color: "inherit" }}>
+        <Link to="/customer/profile" style={{ color: "inherit" }}>
           <IconButton className="icon-button">
             {profilePic ? (
               <Avatar
