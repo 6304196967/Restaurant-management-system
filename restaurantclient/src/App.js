@@ -39,7 +39,6 @@ function App() {
         <Route path="/admin/menu/additem" element={<AddItem />} />
         <Route path="/admin/menu/deleteitem" element={<DeleteItem />} />
 
-        {/* Customer routes */}
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
         <Route path="/customer/Mcategories" element={<Mcategories />} />
