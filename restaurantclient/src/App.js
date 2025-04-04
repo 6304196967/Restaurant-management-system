@@ -21,7 +21,7 @@ import Profile from "./pages/customer/profile";
 
 function App() {
   return (
-    <Router basename="/Resetaurant-Management-System">
+    <Router basename="/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />      
