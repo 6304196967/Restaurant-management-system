@@ -55,7 +55,7 @@ function Navbar() {
           Royal Feast
         </Typography>
         <Box className="nav-links1" sx={{ marginLeft: "auto", display: "flex", gap: "20px" }}>
-          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to="/customer/home" style={{ textDecoration: "none", color: "inherit" }}>
             Home
           </Link>
           <Link to="/customer/Mcategories" style={{ textDecoration: "none", color: "inherit" }}>

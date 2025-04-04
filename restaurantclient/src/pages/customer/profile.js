@@ -32,7 +32,7 @@ const Profile = () => {
         text: "Please login again.",
         timer: 2000,
       });
-      window.location.href = "/signin"; // Redirect if no email found
+      window.location.href = "/Restaurant-management-system/#/signin"; // Redirect if no email found
       return;
     }
 
@@ -194,7 +194,7 @@ const Profile = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    window.location.href = "/signin"; // Redirect to login page
+    window.location.href = "/Restaurant-management-system"; // Redirect to login page
   };
 
   return (
