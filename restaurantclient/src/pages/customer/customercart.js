@@ -13,27 +13,6 @@ const CustomerCart = () => {
   useEffect(() => {
     fetchCartItems();
   }, []);
-// ✅ Show Alert if Cart is Empty
-useEffect(() => {
-  if (!loading && cartItems.length === 0) {
-    Swal.fire({
-      title: "Your Cart is Empty! 🛒",
-      text: "Would you like to explore the menu or go back to home?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Go to Menu 🍔",
-      cancelButtonText: "Back to Home 🏡",
-      confirmButtonColor: "#3498db",
-      cancelButtonColor: "#2ecc71",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "/customer/mcategories";
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = "/customer/home";
-      }
-    });
-  }
-}, [cartItems, loading]);
 
   // ✅ Fetch Cart Items
   const fetchCartItems = async () => {
@@ -421,7 +400,7 @@ const handleBuyNow = async () => {
             <p>Looks like you haven't added anything to your cart yet</p>
             <div className="empty-cart-actions">
               <motion.a 
-                href="/customer/mcategories" 
+                href="/Restaurant-management-system/#/customer/mcategories" 
                 className="btn-primary"
                 whileHover={{ 
                   y: -2,
@@ -432,7 +411,7 @@ const handleBuyNow = async () => {
                 Browse Menu
               </motion.a>
               <motion.a 
-                href="/customer/home" 
+                href="/Restaurant-management-system/#/customer/myorders" 
                 className="btn-secondary"
                 whileHover={{ 
                   y: -2,
@@ -440,8 +419,8 @@ const handleBuyNow = async () => {
                 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Back to Home
-              </motion.a>
+                Go To Orders
+            </motion.a>
             </div>
           </motion.div>
         ) : (
@@ -615,7 +594,7 @@ const handleBuyNow = async () => {
               
               <div className="continue-shopping">
                 <motion.a 
-                  href="/customer/mcategories"
+                  href="/Restaurant-management-system/#/customer/mcategories"
                   whileHover={{ 
                     color: "#ff5200",
                     x: -3
