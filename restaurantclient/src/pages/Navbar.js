@@ -4,9 +4,9 @@ import "../styles/Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar">
-      <div className="logo">Royal Feast</div>
-      <ul className="nav-links">
+    <nav className="navbar1">
+      <div className="logo1">Royal Feast</div>
+      <ul className="nav-links1">
         <li><Link to="/signup">Signup</Link></li>
       </ul>
     </nav>
