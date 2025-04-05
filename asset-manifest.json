@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Restaurant-management-system/static/css/main.5788c78b.css",
-    "main.js": "/Restaurant-management-system/static/js/main.f9bcf2e4.js",
+    "main.js": "/Restaurant-management-system/static/js/main.b51985d6.js",
     "static/media/food-video.webm": "/Restaurant-management-system/static/media/food-video.c0859d96ef7186ca5511.webm",
     "static/media/Home.jpg": "/Restaurant-management-system/static/media/Home.ae88a0704b6edbb258b4.jpg",
     "static/media/bg.jpg": "/Restaurant-management-system/static/media/bg.516df559b36bebec7c63.jpg",
     "index.html": "/Restaurant-management-system/index.html",
     "main.5788c78b.css.map": "/Restaurant-management-system/static/css/main.5788c78b.css.map",
-    "main.f9bcf2e4.js.map": "/Restaurant-management-system/static/js/main.f9bcf2e4.js.map"
+    "main.b51985d6.js.map": "/Restaurant-management-system/static/js/main.b51985d6.js.map"
   },
   "entrypoints": [
     "static/css/main.5788c78b.css",
-    "static/js/main.f9bcf2e4.js"
+    "static/js/main.b51985d6.js"
   ]
 }
