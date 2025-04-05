@@ -73,6 +73,25 @@
   align-items: center;
   margin-top: 15px;
 }
+.login-button {
+  background-color: #ff7a5c;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: #ff5c3d;
+}
+
+.login-button.loading {
+  background-color: #999;
+  cursor: not-allowed;
+}
 
 .login-button {
   width: 100%;

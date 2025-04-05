@@ -246,27 +246,3 @@ body { overflow-x: hidden; }
   background-color: #ff944d !important;
 }
 
-.footer {
-  background: #ffffff;
-  padding: 40px;
-  text-align: center;
-  color: #fc8019;
-  font-family: "Bebas Neue", sans-serif;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  font-size: 16px;
-}
-
-.footer-links a {
-  color: #fc8019;
-  text-decoration: none;
-}
-
-.footer-links a:hover {
-  color: #ff944d;
-}

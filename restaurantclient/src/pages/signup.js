@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/signup.css";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import "../styles/signup.css";
 
 function Signup() {
   const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    navigate("/");
-  };
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -27,37 +25,44 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmpassword) {
-      alert("Passwords do not match");
+      Swal.fire("Error", "Passwords do not match", "error");
       return;
     }
+
+    setIsSigningUp(true);
+
     try {
-      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/user/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: formData.username,
-          phonenumber: formData.phonenumber,
-          email: formData.email,
-          password: formData.password,
-          
-        }),
-      });
+      const response = await fetch(
+        "https://restaurant-management-backend-1.onrender.com/api/user/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: formData.username,
+            phonenumber: formData.phonenumber,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       if (response.ok) {
-        const userData = await response.json(); 
-      
-        alert("Signup successful");
+        const userData = await response.json();
+        await Swal.fire("Signup Successful", "Welcome to Royal Feast!", "success");
         navigate("/");
       } else if (response.status === 400) {
         const errorData = await response.json();
-        alert(errorData.message || "User already exists");
+        Swal.fire("Oops!", errorData.message || "User already exists", "warning");
       } else {
-        alert("Signup failed");
+        Swal.fire("Signup Failed", "Something went wrong!", "error");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Network error occurred");
+      Swal.fire("Network Error", "Please try again later", "error");
+    } finally {
+      setIsSigningUp(false);
     }
   };
 
@@ -129,9 +134,12 @@ function Signup() {
             />
           </div>
 
-        
-          <button className="signup-button" type="submit">
-            Sign Up
+          <button
+            className={`signup-button ${isSigningUp ? "loading" : ""}`}
+            type="submit"
+            disabled={isSigningUp}
+          >
+            {isSigningUp ? "Signing up..." : "Sign Up"}
           </button>
         </form>
         <p className="login-prompt">

@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/forgotpass.css";
-import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(""); // Status message
+  const [message, setMessage] = useState("");
   const [buttonText, setButtonText] = useState("Send Reset link");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [countdown, setCountdown] = useState(0); // Timer countdown
+  const [countdown, setCountdown] = useState(0);
 
   const navigate = useNavigate();
 
-  // Timer logic to enable button after 60 seconds
   useEffect(() => {
     if (countdown > 0) {
       const timer = setInterval(() => {
@@ -27,8 +25,14 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Change button to "Sending OTP..."
+
+    const button = document.querySelector(".submit-button");
+    button.classList.add("pulse-animation");
+
+    setTimeout(() => {
+      button.classList.remove("pulse-animation");
+    }, 600); // animation duration
+
     setButtonText("Sending Reset link...");
     setIsButtonDisabled(true);
 
@@ -44,17 +48,17 @@ const ForgotPassword = () => {
 
       if (response.ok) {
         setButtonText("Reset link sent");
-        setCountdown(60); // Start the 60-second timer
+        setCountdown(60);
       } else {
         const errorData = await response.json();
-        setMessage(errorData.message || "Failed to send OTP.");
-        setButtonText("Send Reset link"); // Reset button
+        setMessage(errorData.message || "Failed to send reset link.");
+        setButtonText("Send Reset link");
         setIsButtonDisabled(false);
       }
     } catch (error) {
       console.error("Error:", error);
       setMessage("Network error occurred.");
-      setButtonText("Send Reset link"); // Reset button
+      setButtonText("Send Reset link");
       setIsButtonDisabled(false);
     }
   };
@@ -67,14 +71,11 @@ const ForgotPassword = () => {
           Enter your email to receive a reset link.
         </p>
 
-        {/* Show success or error message dynamically */}
         {message && <p className="status-message">{message}</p>}
 
         <form onSubmit={handleSubmit} className="forgot-password-form">
           <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              Email Address
-            </label>
+            <label htmlFor="email" className="form-label">Email Address</label>
             <input
               type="email"
               id="email"
@@ -86,16 +87,12 @@ const ForgotPassword = () => {
             />
           </div>
 
-          {/* Dynamic OTP Button */}
           <button type="submit" className="submit-button" disabled={isButtonDisabled}>
             {countdown > 0 ? `Reset link Sent (${countdown}s)` : buttonText}
           </button>
         </form>
 
-        {/* Back to login link */}
-        <Link to="/" className="back-to-login-button">
-          Back to Login
-        </Link>
+        <Link to="/" className="back-to-login-button">Back to Login</Link>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../../styles/categories.css"; // ✅ CSS file for styling
 import {
   Box,
   Typography,
@@ -134,9 +135,9 @@ const Mccategories = () => {
     <div className="homepage-container">
       <Navbar />
       {/* Hero Section */}
-      <Box className="hero">
-        <video src={videoBg} autoPlay loop muted className="hero-video"></video>
-        <Box className="hero-text">Welcome to Admin Panel! 🛠️</Box>
+      <Box className="hero1">
+        <video src={videoBg} autoPlay loop muted className="hero-video1"></video>
+        <Box className="hero-text1">Welcome to Admin Panel! 🛠️</Box>
       </Box>
 
       {/* Categories Section */}

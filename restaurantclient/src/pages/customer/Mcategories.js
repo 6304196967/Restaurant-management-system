@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../../styles/categories.css"; // ✅ CSS file for styling
 import {
   Box,
   Typography,

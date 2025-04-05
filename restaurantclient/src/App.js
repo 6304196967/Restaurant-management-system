@@ -10,7 +10,8 @@ import ConfirmPassword from "./pages/ConfirmPassword";
 import AdminHome from "./pages/admin/admin_home";
 import Menu from "./pages/admin/menu";
 import Menuu from "./pages/admin/menuu";
-import Orders from "./pages/admin/orders";  
+import Orders from "./pages/admin/orders"; 
+import Feedback from "./pages/admin/feedbacks"; 
 
 //Customer imports
 import CustomerHome from "./pages/customer/customerhome";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/admin/menu" element={<Menuu />} />
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/profile" element={<Profile />} />
+        <Route path="/admin/feedbacks" element={<Feedback />} />
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
