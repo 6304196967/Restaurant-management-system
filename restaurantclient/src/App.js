@@ -36,6 +36,7 @@ function App() {
         <Route path="/admin/Mcategories" element={<Menu />} />
         <Route path="/admin/menu" element={<Menuu />} />
         <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/profile" element={<Profile />} />
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
