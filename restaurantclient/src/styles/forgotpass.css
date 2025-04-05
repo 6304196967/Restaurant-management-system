@@ -22,6 +22,95 @@
   align-items: center;
   width: 100%;
 }
+.forgot-password-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f6f8;
+}
+
+.forgot-password-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+.forgot-password-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.forgot-password-description {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.back-to-login-button {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.status-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.pulse-animation {
+  animation: pulse 0.6s ease;
+}
 
 /* Forgot password card */
 .forgot-password-card {
