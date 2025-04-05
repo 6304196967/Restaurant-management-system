@@ -1,0 +1,287 @@
+/* Base Styles */
+.specials-section {
+  padding: 6rem 2rem;
+  position: relative;
+  background-color: #fff9f5;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #222;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff5200, #ff9766);
+}
+
+.section-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.title-decoration {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255,220,204,0.3) 0%, rgba(255,220,204,0) 70%);
+  z-index: -1;
+}
+
+.special-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.special-card.hovered {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 82, 0, 0.15);
+}
+
+.special-image {
+  position: relative;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.special-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.special-card.hovered .special-image img {
+  transform: scale(1.03);
+}
+
+.special-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #ff5200;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 82, 0, 0.3);
+  z-index: 2;
+}
+
+.special-content {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.special-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #222;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.special-description {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.price-countdown-container {
+  margin-bottom: 2rem;
+}
+
+.special-price {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.original-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.discounted-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #ff5200;
+  font-weight: 700;
+}
+
+.countdown {
+  margin-top: 2rem;
+}
+
+.countdown-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-value {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  background: linear-gradient(135deg, #ff5200, #ff7533);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 60px;
+  text-align: center;
+}
+
+.countdown-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.3rem;
+}
+
+.countdown-separator {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff9766;
+  margin-top: -10px;
+}
+
+.order-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ff5200, #ff7533);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 117, 51, 0.3);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.order-button svg {
+  transition: transform 0.3s ease;
+}
+
+.order-button:hover {
+  background: linear-gradient(135deg, #ff4200, #ff6520);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 117, 51, 0.4);
+}
+
+.order-button:hover svg {
+  transform: translateX(5px);
+}
+
+.background-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 186, 153, 0.1) 0%, transparent 30%),
+              radial-gradient(circle at 80% 70%, rgba(255, 220, 204, 0.1) 0%, transparent 30%);
+  z-index: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .special-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .special-image {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .specials-section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .special-content {
+    padding: 1.5rem;
+  }
+  
+  .special-content h3 {
+    font-size: 1.7rem;
+  }
+  
+  .countdown-value {
+    font-size: 1.5rem;
+    width: 50px;
+  }
+}

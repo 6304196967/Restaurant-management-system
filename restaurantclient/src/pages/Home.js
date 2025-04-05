@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../pages/Navbar"; // Import Navbar
+
+
 import "../styles/Home.css"; // Import Home.css for styling
 
 function Home() {
@@ -22,6 +24,7 @@ function Home() {
         <button className="explore-btn" onClick={handleExploreMenu}>Sign In</button>
       </div>
     </div>
+     
   );
 }
 

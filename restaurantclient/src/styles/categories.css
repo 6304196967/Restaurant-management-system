@@ -65,7 +65,7 @@ body { overflow-x: hidden; }
   color: #ff944d;
 }
 
-.hero {
+.hero1 {
     position: relative;
     width: 100%;
     height: 500px; /* Full viewport height for a better effect */
@@ -75,7 +75,7 @@ body { overflow-x: hidden; }
     justify-content: center;
   }
   
-  .hero-video {
+  .hero-video1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -86,7 +86,7 @@ body { overflow-x: hidden; }
     z-index: 0; /* Moves the video behind the text */
   }
   
-  .hero-text {
+  .hero-text1 {
     position: absolute;
     top: 50%;
     left: 50%;

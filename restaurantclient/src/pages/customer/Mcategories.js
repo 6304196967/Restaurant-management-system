@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import videoBg from "../../assets/food-video.webm";
 import Navbar from "./navbarcustomer.js";
+import Footer from '../customer/Footer';
 
 const Mccategories = () => {
   const navigate = useNavigate();
@@ -131,9 +132,9 @@ const Mccategories = () => {
     <div className="homepage-container">
       <Navbar />
       {/* Hero Section */}
-      <Box className="hero">
-        <video src={videoBg} autoPlay loop muted className="hero-video"></video>
-        <Box className="hero-text">Welcome to Menu! </Box>
+      <Box className="hero1">
+        <video src={videoBg} autoPlay loop muted className="hero-video1"></video>
+        <Box className="hero-text1">Welcome to Menu! </Box>
       </Box>
 
       {/* Categories Section */}
@@ -227,14 +228,10 @@ const Mccategories = () => {
       </Box>
 
       {/* Footer */}
-      <Box
-        className="footer"
-        sx={{ textAlign: "center", py: 3, backgroundColor: "#f8f8f8", mt: 5 }}
-      >
-        <Typography variant="body2" color="textSecondary">
-          © 2025 Royal Feast. All rights reserved.
-        </Typography>
-      </Box>
+       <div>
+        <Footer />
+        </div>
+       
     </div>
   );
 };
