@@ -75,7 +75,7 @@ function Navbar({ cartItemCount = 0 }) {
   const handleLogout = () => {
     localStorage.removeItem("email");
     localStorage.removeItem("token");
-    window.location.href = "/customer/login";
+    window.location.href = "/Restaurant-management-system/#/signin";
   };
 
   const navLinks = [
@@ -197,10 +197,10 @@ function Navbar({ cartItemCount = 0 }) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <MenuItem onClick={() => window.location.href = "/customer/profile"}>
+            <MenuItem onClick={() => window.location.href = "/Restaurant-management-system/#/customer/profile"}>
               <Avatar src={profilePic} /> Profile
             </MenuItem>
-            <MenuItem onClick={() => window.location.href = "/customer/settings"}>
+            <MenuItem onClick={() => window.location.href = "/Restaurant-management-system/#/customer/settings"}>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>

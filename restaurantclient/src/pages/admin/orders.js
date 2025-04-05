@@ -70,7 +70,7 @@ const AdminOrders = () => {
       ) : (
         orders.map((order) => (
           <div key={order._id} style={styles.card}>
-            <h3>🧾 Order ID: {order.customerDetails.firstName} {order.customerDetails.lastName}</h3>
+            <h3>Customer Name:{order.customerDetails.firstName} {order.customerDetails.lastName}</h3>
             <p><strong>Status:</strong> {order.status}</p>
             <p><strong>Total Price:</strong> ₹{order.totalPrice}</p>
             <p><strong>Ordered On:</strong> {new Date(order.orderDate).toLocaleString()}</p>
