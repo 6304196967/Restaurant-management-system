@@ -10,6 +10,7 @@ import ConfirmPassword from "./pages/ConfirmPassword";
 import AdminHome from "./pages/admin/admin_home";
 import Menu from "./pages/admin/menu";
 import Menuu from "./pages/admin/menuu";
+import Orders from "./pages/admin/orders";  
 
 //Customer imports
 import CustomerHome from "./pages/customer/customerhome";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/admin/home" element={<AdminHome />} />
         <Route path="/admin/Mcategories" element={<Menu />} />
         <Route path="/admin/menu" element={<Menuu />} />
+        <Route path="/admin/orders" element={<Orders />} />
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
