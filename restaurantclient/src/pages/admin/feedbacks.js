@@ -12,7 +12,7 @@ function FeedbackList() {
       return;
     }
   
-    fetch(`http://localhost:3000/api/feedback/admin/feedbacks?email=${encodeURIComponent(adminEmail)}`)
+    fetch(`https://restaurant-management-backend-1.onrender.com/api/feedback/admin/feedbacks?email=${encodeURIComponent(adminEmail)}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched Feedbacks:", data);
