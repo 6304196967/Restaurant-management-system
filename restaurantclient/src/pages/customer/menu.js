@@ -10,6 +10,7 @@ import {
   CardContent,
   Typography,
   Button,
+  Rating,
 } from "@mui/material";
 
 export default function MenuItems() {
@@ -18,24 +19,36 @@ export default function MenuItems() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // ✅ Get email and selectedCategory from localStorage
   const userEmail = localStorage.getItem("email");
   const selectedCategory = localStorage.getItem("selectedCategory");
 
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        // ✅ Encode category before fetching
         const response = await fetch(
-          `https://restaurant-management-backend-1.onrender.com/api/menu/allitems/${encodeURIComponent(
+          `http://localhost:3000/api/menu/allitems/${encodeURIComponent(
             selectedCategory
           )}`
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch menu items");
-        }
+        if (!response.ok) throw new Error("Failed to fetch menu items");
         const data = await response.json();
-        setMenuItems(data);
+
+        const itemsWithRatings = await Promise.all(
+          data.map(async (item) => {
+            const res = await fetch(
+              `http://localhost:3000/api/feedback/item/${encodeURIComponent(item.name)}`
+            );
+
+            if (res.ok) {
+              const result = await res.json();
+              return { ...item, averageRating: result.averageRating || 0 };
+            } else {
+              return { ...item, averageRating: 0 };
+            }
+          })
+        );
+
+        setMenuItems(itemsWithRatings);
       } catch (error) {
         setError(error.message);
         Swal.fire({
@@ -45,7 +58,7 @@ export default function MenuItems() {
           confirmButtonText: "Retry",
           confirmButtonColor: "#e74c3c",
         }).then(() => {
-          navigate("/customer/mcategories"); // Redirect to categories if error
+          navigate("/customer/mcategories");
         });
       } finally {
         setLoading(false);
@@ -64,28 +77,11 @@ export default function MenuItems() {
         confirmButtonText: "Go Back",
         confirmButtonColor: "#3498db",
       }).then(() => {
-        navigate("Restaurant-management-system/customer/mcategories");
+        navigate("/customer/mcategories");
       });
     }
   }, [menuItems, loading, navigate]);
 
-  if (loading) {
-    return (
-      <p style={styles.loading}>
-        🍔 Loading menu... Please wait a moment! 🍕
-      </p>
-    );
-  }
-  if (error) {
-    return (
-      <p style={styles.error}>
-        ❌ Error: {error} <br />
-        Please try again.
-      </p>
-    );
-  }
-
-  // ✅ Function to handle adding an item to the cart
   const handleAddToCart = async (item) => {
     if (!userEmail) {
       Swal.fire({
@@ -99,7 +95,7 @@ export default function MenuItems() {
     }
 
     try {
-      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/additem", {
+      const response = await fetch("http://localhost:3000/api/cart/additem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,14 +104,12 @@ export default function MenuItems() {
           email: userEmail,
           name: item.name,
           price: item.price,
-          quantity: 1, // ✅ Always add 1 item by default
+          quantity: 1,
           image: item.image,
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to add item to cart");
-      }
+      if (!response.ok) throw new Error("Failed to add item to cart");
 
       Swal.fire({
         title: "Success! 🎉",
@@ -135,56 +129,115 @@ export default function MenuItems() {
     }
   };
 
+  const handleViewReviews = async (itemName) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/feedback/item/${encodeURIComponent(itemName)}`
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch feedbacks");
+
+      const { reviews, averageRating } = await response.json();
+
+      const feedbackHtml = reviews.length
+  ? reviews
+      .map(
+        (fb) =>
+          `<p><strong>${fb.username || "Anonymous"}</strong>: ⭐${fb.rating}/5<br/>"${fb.feedback}"</p><hr/>`
+      )
+      .join("")
+  : "<p>No reviews yet! Be the first to add some love ❤️</p>";
+
+
+      Swal.fire({
+        title: `${itemName} - Reviews ⭐${averageRating}/5`,
+        html: feedbackHtml,
+        width: 600,
+        confirmButtonText: "Close",
+        confirmButtonColor: "#3498db",
+      });
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: error.message || "Could not load reviews",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  if (loading) {
+    return (
+      <p style={styles.loading}>
+        🍔 Loading menu... Please wait a moment! 🍕
+      </p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p style={styles.error}>
+        ❌ Error: {error} <br />
+        Please try again.
+      </p>
+    );
+  }
+
   return (
     <div className="homepage-container">
       <Navbar />
-      <div>
-        <h2 style={styles.menuTitle}>
-          {selectedCategory
-            ? `${selectedCategory.toUpperCase()} Menu 🍔🍕`
-            : "Our Menu 🍔🍕"}
-        </h2>
-        <Grid container spacing={3}>
-          {menuItems.length > 0 ? (
-            menuItems.map((dish, index) => (
-              <Grid item xs={12} sm={6} md={3} key={index}>
-                <Card className="food-card">
-                  <CardMedia
-                    component="img"
-                    image={dish.image}
-                    alt={dish.name}
-                    className="food-image"
-                  />
-                  <CardContent>
-                    <Typography variant="h6">{dish.name}</Typography>
-                    <Typography variant="body1" className="food-price">
-                      ₹{dish.price}
-                    </Typography>
-                  </CardContent>
-                  <Button
-                    className="order-button"
-                    onClick={() => handleAddToCart(dish)}
-                  >
-                    Add to Cart 🛒
-                  </Button>
-                </Card>
-              </Grid>
-            ))
-          ) : (
-            <Typography
-              variant="h6"
-              style={{ textAlign: "center", marginTop: "20px" }}
-            >
-              No items found for {selectedCategory.toUpperCase()} 😔
-            </Typography>
-          )}
-        </Grid>
-      </div>
+      <h2 style={styles.menuTitle}>
+        {selectedCategory
+          ? `${selectedCategory.toUpperCase()} Menu 🍔🍕`
+          : "Our Menu 🍔🍕"}
+      </h2>
+      <Grid container spacing={3}>
+        {menuItems.map((dish, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Card className="food-card animated-card">
+              <CardMedia
+                component="img"
+                image={dish.image}
+                alt={dish.name}
+                className="food-image"
+              />
+              <CardContent>
+                <Typography variant="h6">{dish.name}</Typography>
+                <Typography variant="body1" className="food-price">
+                  ₹{dish.price}
+                </Typography>
+                <Rating
+                  value={dish.averageRating}
+                  precision={0.5}
+                  readOnly
+                  style={{ marginTop: "8px" }}
+                />
+              </CardContent>
+              <Button
+                className="order-button"
+                onClick={() => handleAddToCart(dish)}
+              >
+                Add to Cart 🛒
+              </Button>
+              <Button
+                className="order-button"
+                style={{
+                  backgroundColor: "#f39c12",
+                  color: "#fff",
+                  marginTop: "8px",
+                }}
+                onClick={() => handleViewReviews(dish.name)}
+              >
+                Reviews 💬
+              </Button>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }
 
-// 🎨 Updated Styles
 const styles = {
   loading: {
     fontSize: "1.5rem",
