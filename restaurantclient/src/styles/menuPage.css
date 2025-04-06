@@ -18,6 +18,28 @@ body { overflow-x: hidden; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+.animated-card {
+  transition: transform 0.3s ease;
+}
+.animated-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.food-image {
+  height: 180px;
+  object-fit: cover;
+}
+.order-button {
+  width: 90%;
+  margin: 0 auto 8px;
+  display: block;
+  background-color: #2ecc71;
+  color: white;
+  font-weight: bold;
+}
+.order-button:hover {
+  background-color: #27ae60;
+}
 
 .menu-title {
   font-family: "Lilita One", sans-serif;
