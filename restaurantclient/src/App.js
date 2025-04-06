@@ -12,7 +12,7 @@ import Menu from "./pages/admin/menu";
 import Menuu from "./pages/admin/menuu";
 import Orders from "./pages/admin/orders"; 
 import Feedback from "./pages/admin/feedbacks"; 
-
+import Aprofile from "./pages/admin/adminprofile";
 //Customer imports
 import CustomerHome from "./pages/customer/customerhome";
 import CMenu from "./pages/customer/menu"; 
@@ -37,7 +37,7 @@ function App() {
         <Route path="/admin/Mcategories" element={<Menu />} />
         <Route path="/admin/menu" element={<Menuu />} />
         <Route path="/admin/orders" element={<Orders />} />
-        <Route path="/admin/profile" element={<Profile />} />
+        <Route path="/admin/profile" element={<Aprofile />} />
         <Route path="/admin/feedbacks" element={<Feedback />} />
 
         <Route path="/customer" element={<CustomerHome />} />
