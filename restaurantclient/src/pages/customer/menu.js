@@ -26,7 +26,7 @@ export default function MenuItems() {
     const fetchMenuItems = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/menu/allitems/${encodeURIComponent(
+          `https://restaurant-management-backend-1.onrender.com/api/menu/allitems/${encodeURIComponent(
             selectedCategory
           )}`
         );
@@ -36,7 +36,7 @@ export default function MenuItems() {
         const itemsWithRatings = await Promise.all(
           data.map(async (item) => {
             const res = await fetch(
-              `http://localhost:3000/api/feedback/item/${encodeURIComponent(item.name)}`
+              `https://restaurant-management-backend-1.onrender.com/api/feedback/item/${encodeURIComponent(item.name)}`
             );
 
             if (res.ok) {
@@ -95,7 +95,7 @@ export default function MenuItems() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/cart/additem", {
+      const response = await fetch("https://restaurant-management-backend-1.onrender.com/api/cart/additem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,7 +132,7 @@ export default function MenuItems() {
   const handleViewReviews = async (itemName) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/feedback/item/${encodeURIComponent(itemName)}`
+        `https://restaurant-management-backend-1.onrender.com/api/feedback/item/${encodeURIComponent(itemName)}`
       );
 
       if (!response.ok) throw new Error("Failed to fetch feedbacks");
