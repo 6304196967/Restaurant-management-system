@@ -13,6 +13,8 @@ import Menuu from "./pages/admin/menuu";
 import Orders from "./pages/admin/orders"; 
 import Feedback from "./pages/admin/feedbacks"; 
 import Aprofile from "./pages/admin/adminprofile";
+
+
 //Customer imports
 import CustomerHome from "./pages/customer/customerhome";
 import CMenu from "./pages/customer/menu"; 
@@ -20,6 +22,8 @@ import Ccart from "./pages/customer/customercart";
 import Corders from "./pages/customer/myorders";
 import Mcategories from "./pages/customer/Mcategories";
 import Profile from "./pages/customer/profile";
+import Aboutpage from "./pages/customer/aboutpage";
+
 
 function App() {
   return (
@@ -47,6 +51,7 @@ function App() {
         <Route path="/customer/cart" element={<Ccart />} />
         <Route path="/customer/myorders" element={<Corders />} />
         <Route path="/customer/profile" element={<Profile />} />
+        <Route path="/customer/about" element={<Aboutpage/>}/>
       </Routes>
     </Router>
   );
