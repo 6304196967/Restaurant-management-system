@@ -178,7 +178,7 @@ const handleAddItem = async () => {
     return (
       <div className="loading-container">
         <div className="spinner"></div>
-        <p className="loading-text">🍔 Loading menu... Please wait! 🍕</p>
+        <p className="loading-text">Loading menu... Please wait! </p>
       </div>
     );
   }
@@ -194,11 +194,11 @@ const handleAddItem = async () => {
   return (
     <div className="homepage-container">
       <Navbar />
-      <div>
+      <div className="menu-container1">
         <h2 style={styles.menuTitle}>
           {selectedCategory
-            ? `${selectedCategory.toUpperCase()} Menu 🍔🍕`
-            : "Our Menu 🍔🍕"}
+            ? `${selectedCategory.toUpperCase()} Menu `
+            : "Our Menu "}
         </h2>
         <Grid container spacing={3} justifyContent="flex-start">
           {/* ✅ Menu Items Section */}
