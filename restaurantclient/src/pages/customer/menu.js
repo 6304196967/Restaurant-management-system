@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./navbarcustomer";
 import Swal from "sweetalert2";
 import "../../styles/menuPage.css";
+import LoadingSpinner from "./RoyalFeastLoader.jsx";
 import {
   Grid,
   Card,
@@ -64,7 +65,7 @@ export default function MenuItems() {
         setLoading(false);
       }
     };
-
+    
     fetchMenuItems();
   }, [selectedCategory, navigate]);
 
@@ -80,6 +81,7 @@ export default function MenuItems() {
         navigate("/customer/mcategories");
       });
     }
+    
   }, [menuItems, loading, navigate]);
 
   const handleAddToCart = async (item) => {
@@ -168,9 +170,7 @@ export default function MenuItems() {
 
   if (loading) {
     return (
-      <p style={styles.loading}>
-        🍔 Loading menu... Please wait a moment! 🍕
-      </p>
+      <LoadingSpinner />
     );
   }
 
@@ -184,7 +184,7 @@ export default function MenuItems() {
   }
 
   return (
-    <div className="homepage-container">
+    <div className="homepage-container1">
       <Navbar />
       <h2 style={styles.menuTitle}>
         {selectedCategory

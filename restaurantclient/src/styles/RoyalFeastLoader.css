@@ -1,0 +1,231 @@
+/* Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Lilita+One&family=Londrina+Outline&display=swap');
+
+.royal-feast-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Luxury Background */
+.luxury-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg, 
+    #ffffff 0%, 
+    #fff5ed 50%, 
+    #ffebdc 100%  /* Swiggy-themed off-whites */
+  );
+  z-index: -1;
+}
+
+.luxury-background::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 70% 30%,
+    rgba(252, 128, 25, 0.1) 0%,  /* Swiggy orange */
+    transparent 40%
+  );
+  animation: light-move 15s infinite alternate;
+}
+
+/* Title Animation */
+.title-animation {
+  position: relative;
+  margin-bottom: 60px;
+  text-align: center;
+  perspective: 1000px;
+}
+
+.royal-text, .feast-text {
+  
+  font-family: "Lilita One";
+  font-size: 4.4rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(235, 187, 148, 0.5); /* Swiggy orange */
+}
+
+.royal-text {
+  color: #fc8019; /* Swiggy orange */
+  animation: text-float 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.feast-text {
+  color: #ff9933; /* Lighter Swiggy orange */
+  animation: text-float 4s ease-in-out infinite reverse;
+  margin-top: -10px;
+}
+
+.title-decoration {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #fc8019, /* Swiggy orange */
+    #ff9933, /* Lighter orange */
+    #fc8019,
+    transparent
+  );
+  animation: line-pulse 3s ease-in-out infinite;
+}
+
+/* Progress Elements */
+.progress-container {
+  width: 300px;
+  margin-bottom: 40px;
+}
+
+.progress-track {
+  height: 5px;
+  background: rgba(252, 128, 25, 0.2); /* Swiggy orange faded */
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #fc8019, /* Swiggy orange */
+    #ff9933  /* Lighter orange */
+  );
+  position: relative;
+  transition: width 0.2s ease-out;
+}
+
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.3),
+    rgba(255,255,255,0)
+  );
+  animation: progress-shine 2s infinite;
+}
+
+.progress-percent {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #ff9933; /* Lighter Swiggy orange */
+  font-weight: 300;
+}
+
+/* Phase Indicator */
+.phase-indicator {
+  color: rgba(252, 128, 25, 0.8); /* Swiggy orange */
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-gold, .floating-silver, .floating-gem {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0.5px);
+  opacity: 0.8;
+}
+
+.floating-gold {
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #f7ba7e, #eea061); /* Swiggy oranges */
+  box-shadow: 0 0 10px #ff9933;
+  animation: float-up 8s infinite linear;
+  left: 20%;
+  top: 100%;
+}
+
+.floating-silver {
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffffff, #e0e0e0); /* White gradient */
+  box-shadow: 0 0 8px #ffffff;
+  animation: float-up 10s infinite linear 2s;
+  left: 50%;
+  top: 100%;
+}
+
+.floating-gem {
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #ff6b35, #fc8019); /* Complementary oranges */
+  box-shadow: 0 0 12px #ff6b35;
+  animation: float-up 12s infinite linear 4s;
+  left: 80%;
+  top: 100%;
+}
+
+/* Animations */
+@keyframes text-float {
+  0%, 100% { 
+    transform: translateY(0) rotateX(0deg);
+    text-shadow: 0 5px 15px rgba(252, 128, 25, 0.5); /* Swiggy orange */
+  }
+  50% { 
+    transform: translateY(-10px) rotateX(5deg);
+    text-shadow: 0 15px 30px rgba(252, 128, 25, 0.8); /* Swiggy orange */
+  }
+}
+
+@keyframes line-pulse {
+  0%, 100% { 
+    opacity: 0.8; 
+    width: 200px; 
+  }
+  50% { 
+    opacity: 1; 
+    width: 250px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      #fc8019, /* Swiggy orange */
+      #ff9933, /* Lighter orange */
+      #fc8019,
+      transparent
+    );
+  }
+}
+
+/* Rest of your animations remain unchanged, only color references updated */
