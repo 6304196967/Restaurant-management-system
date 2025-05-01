@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, Grid, Card, CardContent, Avatar, Divider, IconButton } from '@mui/material';
 import { Restaurant, Group, Assessment, Inventory, Schedule, Facebook, Twitter, Instagram, LinkedIn, Email, Phone, LocationOn, Copyright } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import Navbar from "../customer/navbarcustomer";
 // Custom orange palette
 const orangePalette = {
   light: '#FFB74D',
@@ -34,6 +34,7 @@ const staggerContainer = {
 const AboutPage = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
+      <div><Navbar /></div>
       {/* Hero Section */}
       <Box 
         textAlign="center" 
@@ -43,6 +44,7 @@ const AboutPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
+        
         <Typography 
           variant="h2" 
           component={motion.h1}
