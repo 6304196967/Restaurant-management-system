@@ -1,16 +1,20 @@
 {
   "files": {
-    "main.css": "/Restaurant-management-system/static/css/main.6912b367.css",
-    "main.js": "/Restaurant-management-system/static/js/main.a1ff83a0.js",
+    "main.css": "/Restaurant-management-system/static/css/main.56b48d9b.css",
+    "main.js": "/Restaurant-management-system/static/js/main.798e0347.js",
     "static/media/food-video.webm": "/Restaurant-management-system/static/media/food-video.c0859d96ef7186ca5511.webm",
     "static/media/Home.jpg": "/Restaurant-management-system/static/media/Home.ae88a0704b6edbb258b4.jpg",
     "static/media/bg.jpg": "/Restaurant-management-system/static/media/bg.516df559b36bebec7c63.jpg",
+    "static/media/restaurant-interior.jpeg": "/Restaurant-management-system/static/media/restaurant-interior.94f7982357a2e4721437.jpeg",
+    "static/media/garden-table.jpeg": "/Restaurant-management-system/static/media/garden-table.93688e66b8c7f276ed7d.jpeg",
+    "static/media/family-hall.jpeg": "/Restaurant-management-system/static/media/family-hall.8a5127cea8b3055e57e4.jpeg",
+    "static/media/window-table.jpeg": "/Restaurant-management-system/static/media/window-table.c1c178a9fa83846a8eb1.jpeg",
     "index.html": "/Restaurant-management-system/index.html",
-    "main.6912b367.css.map": "/Restaurant-management-system/static/css/main.6912b367.css.map",
-    "main.a1ff83a0.js.map": "/Restaurant-management-system/static/js/main.a1ff83a0.js.map"
+    "main.56b48d9b.css.map": "/Restaurant-management-system/static/css/main.56b48d9b.css.map",
+    "main.798e0347.js.map": "/Restaurant-management-system/static/js/main.798e0347.js.map"
   },
   "entrypoints": [
-    "static/css/main.6912b367.css",
-    "static/js/main.a1ff83a0.js"
+    "static/css/main.56b48d9b.css",
+    "static/js/main.798e0347.js"
   ]
 }
