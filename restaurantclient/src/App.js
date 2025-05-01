@@ -22,6 +22,7 @@ import Ccart from "./pages/customer/customercart";
 import Corders from "./pages/customer/myorders";
 import Mcategories from "./pages/customer/Mcategories";
 import Profile from "./pages/customer/profile";
+import Reservation from "./pages/customer/Reservation";
 import Aboutpage from "./pages/customer/aboutpage";
 
 
@@ -51,6 +52,7 @@ function App() {
         <Route path="/customer/cart" element={<Ccart />} />
         <Route path="/customer/myorders" element={<Corders />} />
         <Route path="/customer/profile" element={<Profile />} />
+        <Route path="/customer/Reservation" element={<Reservation />} />
         <Route path="/customer/about" element={<Aboutpage/>}/>
       </Routes>
     </Router>
