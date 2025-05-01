@@ -5,7 +5,7 @@ import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import ForgotPassword from "./pages/forgotpass";
 import ConfirmPassword from "./pages/ConfirmPassword"; 
-
+import Errorpage from "./pages/errorpage";
 //Admin imports
 import AdminHome from "./pages/admin/admin_home";
 import Menu from "./pages/admin/menu";
@@ -30,6 +30,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="*" element={<Errorpage />} />
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />      
         <Route path="/signin" element={<Signin />} />
@@ -54,6 +55,7 @@ function App() {
         <Route path="/customer/profile" element={<Profile />} />
         <Route path="/customer/Reservation" element={<Reservation />} />
         <Route path="/customer/about" element={<Aboutpage/>}/>
+
       </Routes>
     </Router>
   );
