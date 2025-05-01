@@ -43,16 +43,22 @@ const Specials = () => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div className="special-image">
-            <img 
-              src="https://images.unsplash.com/photo-1600320641095-b5a7f5d2d434?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-              alt="Chef's Special" 
-              loading="lazy" 
-            />
+          <img 
+             src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2024/11/15/8e2663d7-8c42-4f31-bd7d-96aefe058851_156138.jpg" 
+             alt="Chef's Special" 
+             loading="lazy"
+             style={{
+               width: '400px',       // Set your desired width
+               height: 'auto',       // Maintain aspect ratio
+               borderRadius: '8px',  // Optional: Add rounded corners
+               objectFit: 'cover'    // Ensures image covers the space nicely
+             }}
+/>
             <div className="special-badge">Chef's Crown Pick</div>
           </div>
           
           <div className="special-content">
-            <h3>Truffle Infused Golden Risotto</h3>
+            <h3>The Good Bowl</h3>
             <p className="special-description">
               Creamy Arborio rice cooked to perfection with wild mushrooms, white truffle oil, 
               and aged Parmesan, finished with edible gold leaf and a drizzle of truffle butter.
@@ -60,8 +66,8 @@ const Specials = () => {
             
             <div className="price-countdown-container">
               <div className="special-price">
-                <span className="original-price">$32</span>
-                <span className="discounted-price">$28</span>
+                <span className="original-price">₹320</span>
+                <span className="discounted-price">₹280</span>
               </div>
               
               <div className="countdown">
@@ -85,8 +91,10 @@ const Specials = () => {
               </div>
             </div>
             
-            <button className="order-button">
-              <span>Order Now</span>
+            <button className="order-button"  onClick={() => {
+                  window.location.href = '.#/customer/Mcategories';
+            }}>
+              <span>GO TO MENU</span>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

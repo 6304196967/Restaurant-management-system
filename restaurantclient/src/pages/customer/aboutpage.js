@@ -3,6 +3,7 @@ import { Box, Typography, Container, Grid, Card, CardContent, Avatar, Divider, I
 import { Restaurant, Group, Assessment, Inventory, Schedule, Facebook, Twitter, Instagram, LinkedIn, Email, Phone, LocationOn, Copyright } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from "../customer/navbarcustomer";
+import Footer from "../customer/Footer"
 // Custom orange palette
 const orangePalette = {
   light: '#FFB74D',
@@ -33,6 +34,7 @@ const staggerContainer = {
 
 const AboutPage = () => {
   return (
+    <div>
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <div><Navbar /></div>
       {/* Hero Section */}
@@ -50,6 +52,7 @@ const AboutPage = () => {
           component={motion.h1}
           gutterBottom 
           sx={{ 
+            marginTop: 10,
             fontWeight: 800, 
             color: orangePalette.dark,
             letterSpacing: 1,
@@ -536,117 +539,10 @@ const AboutPage = () => {
       </Box>
 
       {/* Footer */}
-      <Box 
-        component={motion.footer}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        sx={{
-          bgcolor: '#1A1A1A',
-          color: 'white',
-          borderRadius: 3,
-          overflow: 'hidden'
-        }}
-      >
-        <Container maxWidth="lg">
-          <Grid container spacing={4} sx={{ py: 5 }}>
-            {/* Logo and About */}
-            <Grid item xs={12} md={4}>
-              <Typography variant="h5" sx={{ color: orangePalette.main, fontWeight: 700, mb: 2 }}>
-                ROYAL FEAST
-              </Typography>
-              <Typography variant="body2" sx={{ mb: 3, color: 'rgba(255,255,255,0.7)' }}>
-                The ultimate restaurant management solution designed to streamline operations and enhance customer experience.
-              </Typography>
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <IconButton sx={{ color: orangePalette.light }}>
-                  <Facebook />
-                </IconButton>
-                <IconButton sx={{ color: orangePalette.light }}>
-                  <Twitter />
-                </IconButton>
-                <IconButton sx={{ color: orangePalette.light }}>
-                  <Instagram />
-                </IconButton>
-                <IconButton sx={{ color: orangePalette.light }}>
-                  <LinkedIn />
-                </IconButton>
-              </Box>
-            </Grid>
-
-            {/* Quick Links */}
-            <Grid item xs={12} sm={6} md={4}>
-              <Typography variant="h6" sx={{ color: orangePalette.main, fontWeight: 600, mb: 2 }}>
-                Quick Links
-              </Typography>
-              <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-                {['Home', 'About', 'Features', 'Pricing', 'Demo', 'Support'].map((link) => (
-                  <Box 
-                    component="li" 
-                    key={link} 
-                    sx={{ 
-                      mb: 1.5, 
-                      transition: 'all 0.2s',
-                      '&:hover': { pl: 1, color: orangePalette.light },
-                      display: 'flex',
-                      alignItems: 'center'
-                    }}
-                  >
-                    <Box 
-                      component="span" 
-                      sx={{ 
-                        width: 6, 
-                        height: 6, 
-                        bgcolor: orangePalette.main, 
-                        mr: 1.5, 
-                        borderRadius: '50%' 
-                      }} 
-                    />
-                    {link}
-                  </Box>
-                ))}
-              </Box>
-            </Grid>
-
-            {/* Contact Info */}
-            <Grid item xs={12} sm={6} md={4}>
-              <Typography variant="h6" sx={{ color: orangePalette.main, fontWeight: 600, mb: 2 }}>
-                Contact Information
-              </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <LocationOn sx={{ color: orangePalette.light }} />
-                  <Typography variant="body2">
-                    123 Restaurant Lane, Foodie City, FC 12345
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Phone sx={{ color: orangePalette.light }} />
-                  <Typography variant="body2">
-                    (555) 123-4567
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Email sx={{ color: orangePalette.light }} />
-                  <Typography variant="body2">
-                    contact@royalfeast.com
-                  </Typography>
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-
-          {/* Copyright */}
-          <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
-          <Box sx={{ py: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Copyright sx={{ mr: 1, fontSize: 'small', color: 'rgba(255,255,255,0.5)' }} />
-            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.5)' }}>
-              {new Date().getFullYear()} Royal Feast. All Rights Reserved.
-            </Typography>
-          </Box>
-        </Container>
-      </Box>
+      
     </Container>
+      <div> <Footer /> </div>
+    </div>
   );
 };
 

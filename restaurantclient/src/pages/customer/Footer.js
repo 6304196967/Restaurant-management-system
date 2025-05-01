@@ -86,22 +86,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="footer-bottom">
-          <div className="newsletter">
-            <h5>Subscribe to Our Newsletter</h5>
-            <form className="newsletter-form">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                required 
-              />
-              <button type="submit" className="btn btn-small">
-              <FontAwesomeIcon icon="paper-plane" />
-              </button>
-            </form>
-          </div>
-          
-          <div className="copyright">
+      <div className="copyright">
             <p>&copy; {currentYear} Gourmet House. All rights reserved.</p>
             <div className="legal-links">
               <Link to="/privacy">Privacy Policy</Link>
@@ -109,7 +94,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+      
     </footer>
   );
 };
