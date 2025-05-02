@@ -3,6 +3,7 @@ import { Box, Typography, Container, Grid, Card, CardContent, Avatar, Divider, I
 import { Restaurant, Group, Assessment, Inventory, Schedule, Facebook, Twitter, Instagram, LinkedIn, Email, Phone, LocationOn, Copyright } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from "../customer/navbarcustomer";
+import Footer from "../customer/Footer";
 
 // Background images
 const heroBgImage = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80';
@@ -86,8 +87,6 @@ const AboutPage = () => {
       <Container maxWidth="lg" sx={{ py: 6 }}>
         {/* Hero Section with Parallax Effect */}
         <Box 
-          textAlign="center" 
-          mb={12}
           sx={{
             position: 'relative',
             overflow: 'hidden',
@@ -98,7 +97,8 @@ const AboutPage = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             color: 'white',
-            boxShadow: theme.shadows[10]
+            boxShadow: theme.shadows[10],
+            mb: 12
           }}
           component={motion.div}
           initial={{ opacity: 0, y: -50 }}
@@ -972,6 +972,7 @@ const AboutPage = () => {
           </Box>
         </Box>
       </Container>
+      <Footer />
     </Box>
   );
 };

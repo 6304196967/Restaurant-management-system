@@ -39,7 +39,7 @@ const Footer = () => {
             <ul>
               <li><Link to="/customer/home">Home</Link></li>
               <li><Link to="/customer/Mcategories">Menu</Link></li>
-              <li><Link to="/customer/reservations">Reservations</Link></li>
+              <li><Link to="/customer/reservation">Reservations</Link></li>
               <li><Link to="/customer/about">About Us</Link></li>
               <li><Link to="/contact">Contact</Link></li>
               <li><Link to="/gallery">Gallery</Link></li>
@@ -86,22 +86,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="footer-bottom">
-          <div className="newsletter">
-            <h5>Subscribe to Our Newsletter</h5>
-            <form className="newsletter-form">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                required 
-              />
-              <button type="submit" className="btn btn-small">
-              <FontAwesomeIcon icon="paper-plane" />
-              </button>
-            </form>
-          </div>
-          
-          <div className="copyright">
+      <div className="copyright">
             <p>&copy; {currentYear} Gourmet House. All rights reserved.</p>
             <div className="legal-links">
               <Link to="/privacy">Privacy Policy</Link>
@@ -109,7 +94,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+      
     </footer>
   );
 };

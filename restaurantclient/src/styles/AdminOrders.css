@@ -1,0 +1,572 @@
+/* AdminOrders.css */
+
+.admin-orders-container {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .orders-content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .orders-header {
+    margin-bottom: 2rem;
+    padding-top: 4rem;
+  }
+  
+  .orders-header h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .orders-header p {
+    color: #7f8c8d;
+    font-size: 1rem;
+  }
+  
+  .orders-controls {
+    margin-bottom: 2rem;
+  }
+  
+  .search-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-box input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-width: 300px;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  
+  .search-box input:focus {
+    outline: none;
+    border-color: #ff9800;
+    box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+  }
+  
+  .filter-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .filter-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-select .filter-icon {
+    position: absolute;
+    left: 12px;
+    color: #7f8c8d;
+  }
+  
+  .filter-select select {
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 0.9rem;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .filter-select select:focus {
+    outline: none;
+    border-color: #ff9800;
+    box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.2);
+  }
+  
+  .refresh-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+  
+  .refresh-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .refresh-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .orders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .order-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .order-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-header {
+    padding: 1.25rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .order-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+  }
+  
+  .order-id {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-top: 0.25rem;
+  }
+  
+  .order-meta {
+    text-align: right;
+  }
+  
+  .order-date {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .order-summary {
+    padding: 1.25rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .order-items-preview {
+    margin-bottom: 1rem;
+  }
+  
+  .order-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .order-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #eee;
+  }
+  
+  .more-items {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  
+  .order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #eee;
+  }
+  
+  .total-amount {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+  }
+  
+  .order-actions {
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .action-btn svg {
+    font-size: 1rem;
+  }
+  
+  .confirm-btn {
+    background-color: #e3f2fd;
+    color: #2196f3;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #bbdefb;
+  }
+  
+  .reject-btn {
+    background-color: #ffebee;
+    color: #f44336;
+  }
+  
+  .reject-btn:hover {
+    background-color: #ffcdd2;
+  }
+  
+  .deliver-btn {
+    background-color: #e8f5e9;
+    color: #4caf50;
+  }
+  
+  .deliver-btn:hover {
+    background-color: #c8e6c9;
+  }
+  
+  .details-btn {
+    background-color: #fff3e0;
+    color: #ff9800;
+  }
+  
+  .details-btn:hover {
+    background-color: #ffe0b2;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+  }
+  
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ff9800;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  .no-orders {
+    text-align: center;
+    padding: 4rem;
+  }
+  
+  .no-orders img {
+    max-width: 200px;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+  
+  .no-orders h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .no-orders p {
+    color: #7f8c8d;
+  }
+  
+  /* SweetAlert custom styles */
+  .order-details-popup {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .order-details-popup .swal2-title {
+    color: #2c3e50;
+  }
+  
+  .order-details-container {
+    text-align: left;
+  }
+  
+  .order-details-container h3 {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+  
+  .customer-section, 
+  .address-section, 
+  .payment-section, 
+  .items-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .items-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  .items-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .items-list img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #eee;
+  }
+  
+  @media (max-width: 768px) {
+    .orders-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .search-filter-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .search-box input {
+      min-width: 100%;
+    }
+    
+    .filter-controls {
+      justify-content: space-between;
+    }
+  }
+  /* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+  }
+  
+  .modal-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: modalFadeIn 0.3s ease-out;
+  }
+  
+  .confirm-modal-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: modalFadeIn 0.3s ease-out;
+  }
+  
+  @keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+  }
+  
+  .modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .modal-close-btn:hover {
+    color: #e74c3c;
+  }
+  
+  .modal-content {
+    padding: 1.5rem;
+  }
+  
+  .order-details-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .order-details-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .order-items-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 0.5rem;
+  }
+  
+  .order-item-detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  .order-item-detail:last-child {
+    border-bottom: none;
+  }
+  
+  .order-item-detail img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #eee;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .modal-close-button,
+  .modal-cancel-button {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .modal-close-button:hover,
+  .modal-cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .modal-confirm-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff9800;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .modal-confirm-button:hover {
+    background-color: #f57c00;
+  }
+  
+  /* Responsive modal */
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 95%;
+      max-height: 70vh;
+      padding-top: 3rem;
+    }
+    
+    .confirm-modal-container {
+      width: 95%;
+    }
+    
+    .modal-footer {
+      flex-direction: column;
+    }
+    
+    .modal-footer button {
+      width: 100%;
+    }
+  }
