@@ -83,7 +83,7 @@ function Navbar({ cartItemCount = 0 }) {
     { path: "/admin/Mcategories", label: "Menu", icon: <Restaurant /> },
     { path: "/admin/orders", label: "Orders", icon: <Receipt /> },
     {path:"/admin/feedbacks", label: "Feedbacks", icon: <Info />},
-    { path: "/admin/reservation", label: "Reservation", icon: <CalendarMonth /> },
+    { path: "/admin/adminreservation", label: "Reservation", icon: <CalendarMonth /> },
   ];
 
   return (

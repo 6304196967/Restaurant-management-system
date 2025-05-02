@@ -273,7 +273,7 @@ const MyOrders = () => {
       padding: "20px",
       fontFamily: "'Poppins', sans-serif",
       backgroundColor: "#f4f4f9",
-      minHeight: "100vh",
+      minHeight: "800vh",
     },
     header: {
       fontSize: "28px",
