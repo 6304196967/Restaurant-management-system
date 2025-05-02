@@ -13,6 +13,7 @@ import Menuu from "./pages/admin/menuu";
 import Orders from "./pages/admin/orders"; 
 import Feedback from "./pages/admin/feedbacks"; 
 import Aprofile from "./pages/admin/adminprofile";
+import AReservation from "./pages/admin/adminreservation"
 
 
 //Customer imports
@@ -45,6 +46,8 @@ function App() {
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/profile" element={<Aprofile />} />
         <Route path="/admin/feedbacks" element={<Feedback />} />
+        <Route path="/admin/adminreservation" element={<AReservation />} />
+
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
