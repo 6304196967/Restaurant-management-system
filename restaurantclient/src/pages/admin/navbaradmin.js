@@ -25,7 +25,7 @@ import {
   Settings,
   AccountCircle
 } from "@mui/icons-material";
-import "../../styles/navbaradmin";
+import "../../styles/navbar.css"; // Adjust the path as necessary
 
 function Navbar({ cartItemCount = 0 }) {
   const [profilePic, setProfilePic] = useState("");
