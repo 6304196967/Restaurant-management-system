@@ -201,12 +201,7 @@ function Navbar({ cartItemCount = 0 }) {
             <MenuItem onClick={() => window.location.href = "/Restaurant-management-system/#/admin/profile"}>
               <Avatar src={profilePic} /> Profile
             </MenuItem>
-            <MenuItem onClick={() => window.location.href = "/Restaurant-management-system/#/admin/settings"}>
-              <ListItemIcon>
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              Settings
-            </MenuItem>
+            
             <Divider />
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
