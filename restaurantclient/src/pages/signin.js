@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import "../styles/signin.css";
 
-export default function LoginPage() {
+function LoginComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
@@ -35,12 +37,7 @@ export default function LoginPage() {
         localStorage.setItem("username", data.username);
 
         await Swal.fire("Login Successful!", `Welcome, ${data.username}!`, "success");
-
-        if (data.email === "admin@gmail.com") {
-          navigate("/admin");
-        } else {
-          navigate("/customer");
-        }
+        navigate(data.email === "admin@gmail.com" ? "/admin" : "/customer");
       } else {
         Swal.fire("Login Failed", data.message || "Invalid credentials", "error");
       }
@@ -50,6 +47,49 @@ export default function LoginPage() {
     } finally {
       setIsLoggingIn(false);
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const decoded = jwtDecode(credentialResponse.credential);
+      const { email, name, picture } = decoded;
+
+      const response = await fetch(
+        "https://restaurant-management-backend-1.onrender.com/api/user/google-auth",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            email, 
+            username: name,
+            profileImage: picture 
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("username", data.username);
+        if (data.profileImage) {
+          localStorage.setItem("profileImage", data.profileImage);
+        }
+
+        await Swal.fire("Login Successful!", `Welcome, ${data.username}!`, "success");
+        navigate(data.email === "admin@gmail.com" ? "/admin" : "/customer");
+      } else {
+        Swal.fire("Auth Failed", data.message || "Unable to login with Google", "error");
+      }
+    } catch (error) {
+      console.error("Google Auth Error:", error);
+      Swal.fire("Error", "Google authentication failed", "error");
+    }
+  };
+
+  const handleGoogleError = () => {
+    Swal.fire("Google Login Failed", "Please try again later", "error");
   };
 
   return (
@@ -95,6 +135,21 @@ export default function LoginPage() {
           </Link>
         </div>
 
+        <div className="login-divider">
+          <span>OR</span>
+        </div>
+
+        <div className="google-login-container">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            shape="pill"
+            theme="filled_blue"
+            size="large"
+            text="continue_with"
+          />
+        </div>
+
         <div className="login-signup-container">
           <p className="login-signup-text">
             Don't have an account?
@@ -105,5 +160,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+<GoogleOAuthProvider clientId="816512365935-polso7se6f664o3qo2qpsav145uo0p13.apps.googleusercontent.com">
+        <LoginComponent />
+    </GoogleOAuthProvider>
   );
 }
