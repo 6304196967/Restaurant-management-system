@@ -18,7 +18,7 @@ function Navbar() {
   return (
     <AppBar
       position="fixed"
-      className={`navbar ${scrolled ? "scrolled" : ""}`}
+      className={`navbar1 ${scrolled ? "scrolled" : ""}`}
       sx={{
         background: "transparent",
         boxShadow: "none",

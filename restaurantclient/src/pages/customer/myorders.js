@@ -1,6 +1,377 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./navbarcustomer";
 import Swal from "sweetalert2";
+import RoyalFeastLoader from "./RoyalFeastLoader";
+import { keyframes } from "@emotion/react";
+import styled from "@emotion/styled";
+
+// 🎨 Keyframe animations
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const pulse = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+`;
+
+const bounce = keyframes`
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+`;
+
+// 🍔 Styled components with Swiggy theme
+const Container = styled.div`
+  background-color: #ffdccc;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+`;
+
+const Header = styled.h1`
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 2rem 0 3rem;
+  text-align: center;
+  color: #282c3f;
+  position: relative;
+  margin-top: 5rem;
+  animation: ${fadeIn} 0.6s ease-out;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #fc8019, #ff4f64);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+    animation: ${pulse} 2s infinite;
+  }
+`;
+
+const OrderList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+`;
+
+const OrderItem = styled.li`
+  position: relative;
+  border: 1px solid #e9e9eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #fff;
+  box-shadow: 0 1px 10px rgba(40, 44, 63, 0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: ${fadeIn} 0.4s ease-out;
+  animation-fill-mode: both;
+  animation-delay: ${props => props.index * 0.1}s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(40, 44, 63, 0.15);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+    background: ${props => 
+      props.status === "Pending" ? "#ffa700" :
+      props.status === "Delivered" ? "#60b246" :
+      props.status === "Cancelled" ? "#ff4f64" : "#5d8ed5"};
+  }
+`;
+
+const OrderDate = styled.span`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.85rem;
+  color: #93959f;
+  font-weight: 500;
+`;
+
+const StatusBadge = styled.span`
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  width: fit-content;
+  text-transform: capitalize;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: ${props => 
+    props.status === "Pending" ? "#ffa700" :
+    props.status === "Delivered" ? "#60b246" :
+    props.status === "Cancelled" ? "#ff4f64" : "#5d8ed5"};
+  animation: ${pulse} 2s infinite;
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  width: 100%;
+  border-bottom: 1px dashed #e9e9eb;
+  transition: all 0.3s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    transform: translateX(5px);
+  }
+`;
+
+const ItemImage = styled.img`
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #f2f2f2;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const ItemInfo = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+`;
+
+const ItemName = styled.p`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #282c3f;
+  margin: 0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #fc8019;
+  }
+`;
+
+const ItemPrice = styled.p`
+  font-size: 0.95rem;
+  color: #7e808c;
+  margin: 0;
+`;
+
+const ReviewSection = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  border-left: 3px solid #fc8019;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: inset 0 0 0 2px rgba(252, 128, 25, 0.2);
+  }
+`;
+
+const ReviewTitle = styled.h4`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #282c3f;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: "✍️";
+    font-size: 1.2rem;
+  }
+`;
+
+const ReviewInput = styled.textarea`
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #d4d5d9;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 80px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:focus {
+    outline: none;
+    border-color: #fc8019;
+    box-shadow: 0 0 0 3px rgba(252, 128, 25, 0.2);
+    transform: translateY(-2px);
+  }
+`;
+
+const StarContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+const Star = styled.span`
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: ${props => props.active ? "#ffb800" : "#d4d5d9"};
+  text-shadow: ${props => props.active ? "0 0 8px rgba(255, 184, 0, 0.4)" : "none"};
+
+  &:hover {
+    transform: scale(1.3);
+    animation: ${bounce} 0.5s;
+  }
+`;
+
+const Button = styled.button`
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const SubmitButton = styled(Button)`
+  background-color: #60b246;
+  color: #fff;
+
+  &:hover {
+    background-color: #4d9a34;
+    box-shadow: 0 4px 12px rgba(96, 178, 70, 0.3);
+  }
+
+  &::after {
+    content: "→";
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(5px);
+  }
+`;
+
+const EditReviewButton = styled(Button)`
+  background-color: #fc8019;
+  color: #fff;
+
+  &:hover {
+    background-color: #e67317;
+    box-shadow: 0 4px 12px rgba(252, 128, 25, 0.3);
+  }
+`;
+
+const DeleteReviewButton = styled(Button)`
+  background-color: #ff4f64;
+  color: #fff;
+
+  &:hover {
+    background-color: #e43f52;
+    box-shadow: 0 4px 12px rgba(255, 79, 100, 0.3);
+  }
+`;
+
+const CancelButton = styled(Button)`
+  background-color: #ff4f64;
+  color: #fff;
+
+  &:hover {
+    background-color: #e43f52;
+    box-shadow: 0 4px 12px rgba(255, 79, 100, 0.3);
+  }
+`;
+
+const ViewButton = styled(Button)`
+  background-color: #282c3f;
+  color: #fff;
+
+  &:hover {
+    background-color: #1a1c29;
+    box-shadow: 0 4px 12px rgba(40, 44, 63, 0.3);
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 0.8rem;
+`;
+
+const ButtonContainer1 = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  gap: 0.8rem;
+`;
+
+const ReviewText = styled.p`
+  font-size: 0.95rem;
+  color: #282c3f;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  padding: 0.8rem;
+  background-color: white;
+  border-radius: 6px;
+  border-left: 3px solid #60b246;
+`;
+
+const RatingText = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  color: #282c3f;
+  font-weight: 500;
+  padding: 0.5rem 0.8rem;
+  background-color: white;
+  border-radius: 6px;
+  width: fit-content;
+`;
+
+const NoOrders = styled.p`
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7e808c;
+  margin-top: 3rem;
+  animation: ${fadeIn} 0.6s ease-out;
+`;
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -24,7 +395,7 @@ const MyOrders = () => {
         const data = await response.json();
         setOrders(data);
 
-        // ✅ Fetch feedbacks after fetching orders
+        // Fetch feedbacks after fetching orders
         await fetchFeedbacks(email, data);
       } catch (error) {
         console.error(error.message);
@@ -36,7 +407,6 @@ const MyOrders = () => {
     fetchOrders();
   }, []);
 
-  // ✅ Fetch feedbacks for all orders
   const fetchFeedbacks = async (email, orders) => {
     try {
       const feedbackMap = {};
@@ -64,7 +434,6 @@ const MyOrders = () => {
     }
   };
 
-  // ✅ Submit or Update Review
   const handleReviewSubmit = async (itemId, itemName, orderId) => {
     const review =
       reviews[itemId] || feedbacks[`${itemName}_${orderId}`]?.review || "";
@@ -108,7 +477,7 @@ const MyOrders = () => {
           : `Thank you for your feedback on ${itemName}! 🎉`,
       });
 
-      // ✅ Refresh feedbacks after submission
+      // Refresh feedbacks after submission
       await fetchFeedbacks(localStorage.getItem("email"), orders);
       setEditMode({ ...editMode, [itemId]: false });
     } catch (error) {
@@ -116,7 +485,6 @@ const MyOrders = () => {
     }
   };
 
-  // ✅ Cancel Order Function
   const handleCancelOrder = async (orderId) => {
     const email = localStorage.getItem("email");
 
@@ -167,7 +535,6 @@ const MyOrders = () => {
     }
   };
 
-  // ✅ Delete Review Function
   const handleDeleteReview = async (itemName, orderId) => {
     try {
       const email = localStorage.getItem("email");
@@ -201,7 +568,7 @@ const MyOrders = () => {
           "success"
         );
 
-        // ✅ Refresh feedbacks after deletion
+        // Refresh feedbacks after deletion
         const updatedFeedbacks = { ...feedbacks };
         delete updatedFeedbacks[`${itemName}_${orderId}`];
         setFeedbacks(updatedFeedbacks);
@@ -214,7 +581,6 @@ const MyOrders = () => {
     }
   };
 
-  // 🌟 Handle Star Rating
   const handleRatingClick = (itemId, star) => {
     setRatings({
       ...ratings,
@@ -222,7 +588,6 @@ const MyOrders = () => {
     });
   };
 
-  // 🎉 SweetAlert for Viewing Details
   const toggleOrderDetails = (order) => {
     Swal.fire({
       title: "Order Details 📦",
@@ -241,10 +606,10 @@ const MyOrders = () => {
           <p><strong>Address:</strong> ${
             order.customerDetails.houseNo
           }, ${order.customerDetails.street}, ${
-            order.customerDetails.mandal
-          }, ${order.customerDetails.district}, ${
-            order.customerDetails.pincode
-          }</p>
+        order.customerDetails.mandal
+      }, ${order.customerDetails.district}, ${
+        order.customerDetails.pincode
+      }</p>
           <p><strong>Payment Mode:</strong> ${order.paymentMode}</p>
           <hr />
           <strong>Items:</strong>
@@ -267,223 +632,52 @@ const MyOrders = () => {
     });
   };
 
-  // 🎨 Updated Styles
-  const styles = {
-    container: {
-      padding: "20px",
-      fontFamily: "'Poppins', sans-serif",
-      backgroundColor: "#f4f4f9",
-      minHeight: "800vh",
-    },
-    header: {
-      fontSize: "28px",
-      fontWeight: "bold",
-      marginBottom: "20px",
-      textAlign: "center",
-      color: "#333",
-    },
-    orderList: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "20px",
-      padding: 0,
-      margin: "0 auto",
-      maxWidth: "800px",
-    },
-    orderItem: {
-      position: "relative",
-      display: "flex",
-      flexDirection: "column",
-      border: "1px solid #ccc",
-      borderRadius: "10px",
-      padding: "20px",
-      backgroundColor: "#fff",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-    },
-    orderDate: {
-      position: "absolute",
-      top: "10px",
-      right: "10px",
-      fontSize: "14px",
-      color: "#777",
-    },
-    itemContainer: {
-      display: "flex",
-      flexDirection: "column",
-      gap: "10px",
-      padding: "10px 0",
-      width: "100%",
-    },
-    itemImage: {
-      width: "60px",
-      height: "60px",
-      borderRadius: "5px",
-      objectFit: "cover",
-    },
-    itemInfo: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    statusBadge: {
-      padding: "8px 12px",
-      borderRadius: "15px",
-      fontSize: "14px",
-      fontWeight: "bold",
-      color: "#fff",
-      marginBottom: "10px",
-      width: "100px",
-      textAlign: "center",
-    },
-    pending: { backgroundColor: "#ffc107" },
-    delivered: { backgroundColor: "#28a745" },
-    cancelled: { backgroundColor: "#dc3545" },
-    confirmed: { backgroundColor: "#17a2b8" },
-    btnContainer: {
-      display: "flex",
-      justifyContent: "flex-end",
-      marginTop: "10px",
-      gap: "10px",
-    },
-    btnContainer1: {
-      display: "flex",
-      marginTop: "10px",
-      gap: "10px",
-    },
-    cancelBtn: {
-      backgroundColor: "#dc3545",
-      color: "#fff",
-      padding: "8px 12px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-      fontSize: "14px",
-    },
-    viewBtn: {
-      backgroundColor: "#007bff",
-      color: "#fff",
-      padding: "8px 12px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-      fontSize: "14px",
-    },
-    reviewInput: {
-      width: "100%",
-      padding: "10px",
-      marginBottom: "10px",
-      borderRadius: "5px",
-      border: "1px solid #ccc",
-    },
-    starContainer: {
-      display: "flex",
-      gap: "5px",
-      marginBottom: "10px",
-    },
-    star: {
-      fontSize: "20px",
-      cursor: "pointer",
-    },
-    submitBtn: {
-      backgroundColor: "#28a745",
-      color: "#fff",
-      padding: "8px 12px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-      fontSize: "14px",
-    },
-    
-    // Edit Review Button Style
-    editReviewBtn: {
-      backgroundColor: "#ffc107", // Yellow color for Edit
-      color: "#fff",
-      padding: "8px 12px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-      fontSize: "14px",
-      transition: "background-color 0.3s ease",
-    },
-    editReviewBtnHover: {
-      backgroundColor: "#e0a800", // Darker yellow on hover
-    },
-  
-    // Delete Review Button Style
-    deleteReviewBtn: {
-      backgroundColor: "#dc3545", // Red color for Delete
-      color: "#fff",
-      padding: "8px 12px",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-      fontSize: "14px",
-      transition: "background-color 0.3s ease",
-    
-    },
-    deleteReviewBtnHover: {
-      backgroundColor: "#c82333", // Darker red on hover
-    },
-  };
-  
-  
-
   return (
-    <div style={styles.container}>
+    <Container>
       <Navbar />
-      <h1 style={styles.header}>My Orders</h1>
+      <Header>
+        My Orders
+      </Header>
       {loading ? (
-        <p>Loading orders...</p>
+        <RoyalFeastLoader />
       ) : orders.length > 0 ? (
-        <ul style={styles.orderList}>
-          {orders.map((order) => (
-            <li key={order._id} style={styles.orderItem}>
-              <span style={styles.orderDate}>
+        <OrderList>
+          {orders.map((order, index) => (
+            <OrderItem key={order._id} status={order.status} index={index}>
+              <OrderDate>
                 {new Date(order.orderDate).toLocaleDateString()}
-              </span>
-              <span
-                style={{
-                  ...styles.statusBadge,
-                  ...(order.status === "Pending"
-                    ? styles.pending
-                    : order.status === "Delivered"
-                    ? styles.delivered
-                    : order.status === "Cancelled"
-                    ? styles.cancelled
-                    : styles.confirmed),
-                }}
-              >
+              </OrderDate>
+              <StatusBadge status={order.status}>
                 {order.status}
-              </span>
+              </StatusBadge>
 
               {order.items.map((item) => {
                 const feedbackKey = `${item.name}_${order._id}`;
-                const existingReview =
-                  feedbacks[feedbackKey]?.review || "";
-                const existingRating =
-                  feedbacks[feedbackKey]?.rating || 0;
+                const existingReview = feedbacks[feedbackKey]?.review || "";
+                const existingRating = feedbacks[feedbackKey]?.rating || 0;
 
                 return (
-                  <div key={item._id} style={styles.itemContainer}>
-                    <img
+                  <ItemContainer key={item._id}>
+                    <ItemImage
                       src={item.image || "/placeholder.png"}
                       alt={item.name}
-                      style={styles.itemImage}
                     />
-                    <div style={styles.itemInfo}>
-                      <strong>{item.name}</strong>
-                      <p>
-                        ₹{item.price} x {item.quantity} = ₹
-                        {item.price * item.quantity}
-                      </p>
-                    </div>
+                    <ItemInfo>
+                      <ItemName>{item.name}</ItemName>
+                      <ItemPrice>
+                        ₹{item.price} × {item.quantity} = ₹{item.price * item.quantity}
+                      </ItemPrice>
+                    </ItemInfo>
 
-                    {/* 🎉 Review Section for Delivered Orders */}
+                    {/* Review Section for Delivered Orders */}
                     {order.status === "Delivered" && (
-                      <div style={{ marginTop: "10px" }}>
+                      <ReviewSection>
                         {editMode[item._id] ? (
                           <>
-                            <textarea
-                              style={styles.reviewInput}
+                            <ReviewTitle>
+                              {existingReview ? "Edit Your Review" : "Add Your Review"}
+                            </ReviewTitle>
+                            <ReviewInput
                               value={reviews[item._id] || existingReview}
                               onChange={(e) =>
                                 setReviews({
@@ -491,89 +685,60 @@ const MyOrders = () => {
                                   [item._id]: e.target.value,
                                 })
                               }
-                              placeholder={`Write a review for ${item.name}`}
+                              placeholder={`Share your experience with ${item.name}...`}
                             />
-                            <div style={styles.starContainer}>
+                            <StarContainer>
                               {[1, 2, 3, 4, 5].map((star) => (
-                                <span
+                                <Star
                                   key={star}
-                                  style={{
-                                    ...styles.star,
-                                    color:
-                                      star <=
-                                      (ratings[item._id] || existingRating)
-                                        ? "#ff9800"
-                                        : "#ccc",
-                                  }}
-                                  onClick={() =>
-                                    handleRatingClick(item._id, star)
-                                  }
+                                  active={star <= (ratings[item._id] || existingRating)}
+                                  onClick={() => handleRatingClick(item._id, star)}
                                 >
                                   ★
-                                </span>
+                                </Star>
                               ))}
-                            </div>
-                            <button
-                              style={styles.submitBtn}
+                            </StarContainer>
+                            <SubmitButton
                               onClick={() =>
-                                handleReviewSubmit(
-                                  item._id,
-                                  item.name,
-                                  order._id
-                                )
+                                handleReviewSubmit(item._id, item.name, order._id)
                               }
                             >
-                              {existingReview
-                                ? "Update Review"
-                                : "Submit Review"}
-                            </button>
+                              {existingReview ? "Update Review" : "Submit Review"}
+                            </SubmitButton>
                           </>
                         ) : (
                           <>
                             {existingReview ? (
                               <>
-                                <p>
-                                  <strong>Review:</strong> {existingReview}
-                                </p>
-                                <p>
-                                  <strong>Rating:</strong>{" "}
-                                  {"⭐".repeat(existingRating) +
+                                <ReviewTitle>Your Review</ReviewTitle>
+                                <ReviewText>{existingReview}</ReviewText>
+                                <RatingText>
+                                  Rating:{" "}
+                                  {"★".repeat(existingRating) +
                                     "☆".repeat(5 - existingRating)}
-                                </p>
-                                <div style={styles.btnContainer1}>
-                                <button
-                                  style={{
-                                    ...styles.submitBtn,
-                                    backgroundColor: "#ffc107",
-                                  }}
-                                  onClick={() =>
-                                    setEditMode({
-                                      ...editMode,
-                                      [item._id]: true,
-                                    })
-                                  }
-                                >
-                                  Edit Review ✏️
-                                </button>
-                                <button
-                                  style={{
-                                    ...styles.submitBtn,
-                                    backgroundColor: "#dc3545",
-                                  }}
-                                  onClick={() =>
-                                    handleDeleteReview(
-                                      item.name,
-                                      order._id
-                                    )
-                                  }
-                                >
-                                  Delete Review 🗑️
-                                </button>
-                              </div>
+                                </RatingText>
+                                <ButtonContainer1>
+                                  <EditReviewButton
+                                    onClick={() =>
+                                      setEditMode({
+                                        ...editMode,
+                                        [item._id]: true,
+                                      })
+                                    }
+                                  >
+                                    Edit Review
+                                  </EditReviewButton>
+                                  <DeleteReviewButton
+                                    onClick={() =>
+                                      handleDeleteReview(item.name, order._id)
+                                    }
+                                  >
+                                    Delete Review
+                                  </DeleteReviewButton>
+                                </ButtonContainer1>
                               </>
                             ) : (
-                              <button
-                                style={styles.submitBtn}
+                              <EditReviewButton
                                 onClick={() =>
                                   setEditMode({
                                     ...editMode,
@@ -581,40 +746,38 @@ const MyOrders = () => {
                                   })
                                 }
                               >
-                                Add Review ✨
-                              </button>
+                                Add Review
+                              </EditReviewButton>
                             )}
                           </>
                         )}
-                      </div>
+                      </ReviewSection>
                     )}
-                  </div>
+                  </ItemContainer>
                 );
               })}
 
-              <div style={styles.btnContainer}>
+              <ButtonContainer>
                 {order.status === "Pending" && (
-                  <button
-                    style={styles.cancelBtn}
+                  <CancelButton
                     onClick={() => handleCancelOrder(order._id)}
                   >
-                    Cancel Order ❌
-                  </button>
+                    Cancel Order
+                  </CancelButton>
                 )}
-                <button
-                  style={styles.viewBtn}
+                <ViewButton
                   onClick={() => toggleOrderDetails(order)}
                 >
-                  View Details 🔍
-                </button>
-              </div>
-            </li>
+                  View Details
+                </ViewButton>
+              </ButtonContainer>
+            </OrderItem>
           ))}
-        </ul>
+        </OrderList>
       ) : (
-        <p>No orders found.</p>
+        <NoOrders>You haven't placed any orders yet.</NoOrders>
       )}
-    </div>
+    </Container>
   );
 };
 
