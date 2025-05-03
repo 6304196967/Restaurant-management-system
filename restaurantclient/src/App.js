@@ -5,7 +5,7 @@ import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import ForgotPassword from "./pages/forgotpass";
 import ConfirmPassword from "./pages/ConfirmPassword"; 
-
+import Errorpage from "./pages/errorpage";
 //Admin imports
 import AdminHome from "./pages/admin/admin_home";
 import Menu from "./pages/admin/menu";
@@ -13,6 +13,7 @@ import Menuu from "./pages/admin/menuu";
 import Orders from "./pages/admin/orders"; 
 import Feedback from "./pages/admin/feedbacks"; 
 import Aprofile from "./pages/admin/adminprofile";
+import AReservation from "./pages/admin/adminreservation"
 
 
 //Customer imports
@@ -30,6 +31,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="*" element={<Errorpage />} />
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />      
         <Route path="/signin" element={<Signin />} />
@@ -44,6 +46,8 @@ function App() {
         <Route path="/admin/orders" element={<Orders />} />
         <Route path="/admin/profile" element={<Aprofile />} />
         <Route path="/admin/feedbacks" element={<Feedback />} />
+        <Route path="/admin/adminreservation" element={<AReservation />} />
+
 
         <Route path="/customer" element={<CustomerHome />} />
         <Route path="/customer/home" element={<CustomerHome />} />
@@ -54,6 +58,7 @@ function App() {
         <Route path="/customer/profile" element={<Profile />} />
         <Route path="/customer/Reservation" element={<Reservation />} />
         <Route path="/customer/about" element={<Aboutpage/>}/>
+
       </Routes>
     </Router>
   );

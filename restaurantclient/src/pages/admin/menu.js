@@ -137,13 +137,13 @@ const Mccategories = () => {
       {/* Hero Section */}
       <Box className="hero1">
         <video src={videoBg} autoPlay loop muted className="hero-video1"></video>
-        <Box className="hero-text1">Welcome to Admin Panel! 🛠️</Box>
+        <Box className="hero-text1">Welcome to Admin Panel!</Box>
       </Box>
 
       {/* Categories Section */}
       <Box className="category-container">
         <Typography variant="h5" className="section-title">
-          Manage Categories 📝
+          Manage Categories 
         </Typography>
 
         {loading ? (

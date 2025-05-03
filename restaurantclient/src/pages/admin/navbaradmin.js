@@ -25,7 +25,7 @@ import {
   Settings,
   AccountCircle
 } from "@mui/icons-material";
-import "../../styles/navbar.css";
+import "../../styles/navbar.css"; // Adjust the path as necessary
 
 function Navbar({ cartItemCount = 0 }) {
   const [profilePic, setProfilePic] = useState("");
@@ -83,7 +83,9 @@ function Navbar({ cartItemCount = 0 }) {
     { path: "/admin/Mcategories", label: "Menu", icon: <Restaurant /> },
     { path: "/admin/orders", label: "Orders", icon: <Receipt /> },
     {path:"/admin/feedbacks", label: "Feedbacks", icon: <Info />},
-    { path: "/admin/reservation", label: "Reservation", icon: <CalendarMonth /> },
+
+    { path: "/admin/adminreservation", label: "Reservation", icon: <CalendarMonth /> },
+
   ];
 
   return (
