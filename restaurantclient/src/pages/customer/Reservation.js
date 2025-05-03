@@ -61,7 +61,7 @@ const ReservationExperience = () => {
         // Get user email from localStorage or wherever you store user info
         const userEmail = localStorage.getItem('email') || 'test@example.com';
         
-        const response = await fetch('http://localhost:3000/api/reserve/reservations/', {
+        const response = await fetch('https://restaurant-management-backend-1.onrender.com/api/reserve/reservations/', {
           method: 'GET',
           headers: { 
             'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ const ReservationExperience = () => {
         specialRequests: reservation.specialRequests
       };
 
-      const response = await fetch('http://localhost:3000/api/reserve/reservation', {
+      const response = await fetch('https://restaurant-management-backend-1.onrender.com/api/reserve/reservation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reservationData)
@@ -186,7 +186,7 @@ const ReservationExperience = () => {
   const fetchReservations = async () => {
     try {
       const userEmail = localStorage.getItem('email') || 'test@example.com';
-      const response = await fetch('http://localhost:3000/api/reserve/reservations/', {
+      const response = await fetch('https://restaurant-management-backend-1.onrender.com/api/reserve/reservations/', {
         method: 'GET',
         headers: { 
           'Content-Type': 'application/json',
@@ -204,7 +204,7 @@ const ReservationExperience = () => {
 
   const handleCancel = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/reserve/reservations/${id}`, {
+      const response = await fetch(`https://restaurant-management-backend-1.onrender.com/api/reserve/reservations/${id}`, {
         method: 'DELETE'
       });
       if (response.ok) {
