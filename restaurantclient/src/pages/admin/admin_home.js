@@ -14,8 +14,6 @@ import {
   Divider,
   useTheme
 } from '@mui/material';
-import theme from './theme';
-import CircularProgress from '@mui/material/CircularProgress';
 import PeopleIcon from '@mui/icons-material/People';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -442,6 +440,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <CssBaseline />
       <Container maxWidth="xl" sx={{ pt: 4, pb: 4 }}>
         {/* Header with Month Selector */}
@@ -455,11 +454,14 @@ function App() {
         }}>
           <Typography variant="h4" component="h1" sx={{ 
             fontWeight: 700,
+        
             color: theme.palette.primary.main,
             background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}>
+            <br/>
+            <br />
             Restaurant Dashboard
           </Typography>
           
@@ -467,8 +469,10 @@ function App() {
             p: 1.5, 
             borderRadius: 4,
             minWidth: 260,
+            paddingTop:10,
             background: theme.palette.background.paper
           }}>
+            
             <Select
               value={selectedMonth}
               onChange={e => setSelectedMonth(e.target.value)}
