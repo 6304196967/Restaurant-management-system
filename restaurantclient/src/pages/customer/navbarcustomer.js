@@ -48,9 +48,10 @@ function Navbar({ cartItemCount = 0 }) {
     { path: "/customer/home", label: "Home", icon: <Home /> },
     { path: "/customer/Mcategories", label: "Menu", icon: <Restaurant /> },
     { path: "/customer/cart", label: "Cart", icon: <ShoppingCart /> },
-    { path: "/customer/about", label: "About", icon: <Info /> },
+    
     { path: "/customer/myorders", label: "Orders", icon: <Receipt /> },
     { path: "/customer/reservation", label: "Reservation", icon: <CalendarMonth /> },
+    { path: "/customer/about", label: "About", icon: <Info /> },
   ];
 
   useEffect(() => {
@@ -201,12 +202,7 @@ function Navbar({ cartItemCount = 0 }) {
                 <MenuItem onClick={() => window.location.href = "/Restaurant-management-system/#/customer/profile"}>
                   <Avatar src={profilePic} /> Profile
                 </MenuItem>
-                <MenuItem onClick={() => window.location.href = "/Restaurant-management-system/#/customer/settings"}>
-                  <ListItemIcon>
-                    <Settings fontSize="small" />
-                  </ListItemIcon>
-                  Settings
-                </MenuItem>
+               
                 <Divider />
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
