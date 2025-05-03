@@ -84,10 +84,11 @@ const AboutPage = () => {
   return (
     <Box sx={{ backgroundColor: orangePalette.background }}>
       <Navbar />
-      <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Container maxWidth="lg"  sx={{ py: 6 }}>
         {/* Hero Section with Parallax Effect */}
         <Box 
           sx={{
+            marginTop: 10,
             position: 'relative',
             overflow: 'hidden',
             borderRadius: 3,
@@ -114,7 +115,8 @@ const AboutPage = () => {
               variant="h1" 
               component={motion.h1}
               gutterBottom 
-              sx={{ 
+              sx={{
+                textAlign: 'center',
                 fontWeight: 900, 
                 letterSpacing: 2,
                 mb: 2,

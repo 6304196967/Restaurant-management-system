@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
 
 .reservation-container {
+    
     min-height: 100vh;
     background-size: cover;
     background-position: center;

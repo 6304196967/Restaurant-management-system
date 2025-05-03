@@ -622,6 +622,7 @@ const handleBuyNow = async () => {
 
       <style jsx>{`
         .cart-container {
+          margin-top:80px;
           min-height: 100vh;
           background-color: #ffdccc;
           padding-bottom: 50px;
