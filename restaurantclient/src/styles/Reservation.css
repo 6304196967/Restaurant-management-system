@@ -363,11 +363,83 @@
     max-height: 0;
     overflow: hidden;
   }
+  .status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    margin-bottom: 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .status-badge.pending {
+    background-color: #ffc107; /* yellow */
+    color: black;
+  }
+  
+  .status-badge.cancelled {
+    background-color: #dc3545; /* red */
+  }
+  
+  .status-badge.completed {
+    background-color: #28a745; /* green */
+  }
+  
+  .status-badge.confirmed {
+    background-color: #6f42c1; /* violet – nice neutral strong color */
+  }
   
   .table-card:hover .table-description,
   .table-card.selected .table-description {
     opacity: 1;
     max-height: 100px;
+  }
+  .reservation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 1rem 0;
+  }
+  
+  /* Positioning for the status badge */
+  .status-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: #FF7533;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 1;
+  }
+  .btn-back1 {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    display: inline-block;
+  }
+  
+  .btn-back1:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
+  }
+  
+  /* Ensure the card has relative positioning for absolute badge */
+  .reservation-card {
+    position: relative;
   }
   
   .selection-indicator {
