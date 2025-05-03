@@ -262,32 +262,37 @@ const ReservationExperience = () => {
       <div className="reservation-container" style={{ backgroundImage: `url(${interiorImg})` }}>
         <Navbar />
         <div className="existing-reservations">
-          <h2>Your Reservations</h2>
-          <div className="reservation-list">
-  {existingReservations.map((res, index) => (
-    <div key={index} className="reservation-card enhanced-card">
-      <div className="card-header">
-        <h3>{res.tableType} Table</h3>
+  <h2>Your Reservations</h2>
+  <div className="reservation-grid">
+    {existingReservations.map((res, index) => (
+      <div key={index} className="reservation-card enhanced-card">
+        {/* Badge at top-right */}
+        <span className={`status-badge ${res.status?.toLowerCase() || 'confirmed'}`}>
+          {res.status}
+        </span>
+
+        <div className="card-header">
+          <h3>{res.tableType} Table</h3>
+        </div>
+        <div className="card-body">
+          <p><FiCalendar className="icon" /> {formatDate(res.date)}</p>
+          <p><FiClock className="icon" /> {formatTime(res.time)}</p>
+          <p><FiUsers className="icon" /> {res.guests} guest{res.guests > 1 ? 's' : ''}</p>
+          {res.specialRequests && (
+            <p><FiMail className="icon" /> <strong>Request:</strong> {res.specialRequests}</p>
+          )}
+        </div>
+        <div className="card-footer">
+          <button 
+            className="btn-cancel hover-scale"
+            onClick={() => handleCancel(res._id)}
+          >
+            Cancel
+          </button>
+        </div>
       </div>
-      <div className="card-body">
-        <p><FiCalendar className="icon" /> {formatDate(res.date)}</p>
-        <p><FiClock className="icon" /> {formatTime(res.time)}</p>
-        <p><FiUsers className="icon" /> {res.guests} guest{res.guests > 1 ? 's' : ''}</p>
-        {res.specialRequests && (
-          <p><FiMail className="icon" /> <strong>Request:</strong> {res.specialRequests}</p>
-        )}
-      </div>
-      <div className="card-footer">
-        <button 
-          className="btn-cancel hover-scale"
-          onClick={() => handleCancel(res._id)}
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  ))}
-</div>
+    ))}
+  </div>
 
           <div className="reservation-actions">
             <button className="btn-primary" onClick={startNewReservation}>
@@ -303,75 +308,76 @@ const ReservationExperience = () => {
   if (step === 'confirmed') {
     return (
       <div className="reservation-container" style={{ backgroundImage: `url(${interiorImg})` }}>
-        <Navbar />
-        <div className="confirmation-content">
-          <div className="confirmation-header">
-            <div className="confirmation-icon">
-              <FiCheck />
-            </div>
-            <h2 className="reservation-confirmed">Reservation Confirmed!</h2>
-            <p className="confirmation-subtext">We've sent the details to your email</p>
-          </div>
-          
-          <div className="confirmation-details-card">
-            <h3>Reservation Details</h3>
-            <div className="detail-row">
-              <span className="detail-label"><FiUser /> Name:</span>
-              <span className="detail-value">{reservation.name}</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label"><FiCalendar /> Date:</span>
-              <span className="detail-value">{formatDate(reservation.date)}</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label"><FiClock /> Time:</span>
-              <span className="detail-value">{reservation.time}</span>
-            </div>
-            <div className="detail-row">
-              <span className="detail-label"><FiUsers /> Table:</span>
-              <span className="detail-value">{reservation.tableType} (for {reservation.guests} guests)</span>
-            </div>
-            {reservation.phone && (
-              <div className="detail-row">
-                <span className="detail-label"><FiPhone /> Phone:</span>
-                <span className="detail-value">{reservation.phone}</span>
-              </div>
-            )}
-            {reservation.specialRequests && (
-              <div className="detail-row">
-                <span className="detail-label"><FiMail /> Requests:</span>
-                <span className="detail-value">{reservation.specialRequests}</span>
-              </div>
-            )}
-          </div>
-          
-          <div className="confirmation-actions">
-            <button 
-              className="btn-secondary" 
-              onClick={handleBackToReservations}
-            >
-              Back to Reservations
-            </button>
-            <button 
-              className="btn-primary" 
-              onClick={() => {
-                setReservation({
-                  date: null,
-                  time: null,
-                  guests: 2,
-                  name: '',
-                  email: '',
-                  phone: '',
-                  specialRequests: '',
-                  tableType: null
-                });
-                setStep('date');
-              }}
-            >
-              Book Another Table
-            </button>
-          </div>
+      <Navbar />
+      <div className="confirmation-content">
+        <div className="confirmation-header">
+        <div className="confirmation-icon">
+          <FiCheck />
         </div>
+        <h2 className="reservation-confirmed">Reservation Confirmed!</h2>
+        <p className="confirmation-subtext">We've sent the details to your email</p>
+        </div>
+        
+        <div className="confirmation-details-card">
+        <h3>Reservation Details</h3>
+        <div className="detail-row">
+          <span className="detail-label"><FiUser /> Name:</span>
+          <span className="detail-value">{reservation.name}</span>
+        </div>
+        <div className="detail-row">
+          <span className="detail-label"><FiCalendar /> Date:</span>
+          <span className="detail-value">{formatDate(reservation.date)}</span>
+        </div>
+        <div className="detail-row">
+          <span className="detail-label"><FiClock /> Time:</span>
+          <span className="detail-value">{reservation.time}</span>
+        </div>
+        <div className="detail-row">
+          <span className="detail-label"><FiUsers /> Table:</span>
+          <span className="detail-value">{reservation.tableType} (for {reservation.guests} guests)</span>
+        </div>
+        {reservation.phone && (
+          <div className="detail-row">
+          <span className="detail-label"><FiPhone /> Phone:</span>
+          <span className="detail-value">{reservation.phone}</span>
+          </div>
+        )}
+        {reservation.specialRequests && (
+          <div className="detail-row">
+          <span className="detail-label"><FiMail /> Requests:</span>
+          <span className="detail-value">{reservation.specialRequests}</span>
+          </div>
+        )}
+        </div>
+        
+        <div className="confirmation-actions">
+        <button 
+          className="btn-primary" 
+          onClick={handleBackToReservations}
+          style={{ marginRight: '10px' }} // Add gap between buttons
+        >
+          Back to Reservations
+        </button>
+        <button 
+          className="btn-primary" 
+          onClick={() => {
+          setReservation({
+            date: null,
+            time: null,
+            guests: 2,
+            name: '',
+            email: '',
+            phone: '',
+            specialRequests: '',
+            tableType: null
+          });
+          setStep('date');
+          }}
+        >
+          Book Another Table
+        </button>
+        </div>
+      </div>
       </div>
     );
   }
