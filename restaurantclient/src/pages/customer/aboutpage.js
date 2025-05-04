@@ -84,7 +84,7 @@ const AboutPage = () => {
   return (
     <Box sx={{ backgroundColor: orangePalette.background }}>
       <Navbar />
-      <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Container maxWidth="lg"  sx={{ py: 6 }}>
         {/* Hero Section with Parallax Effect */}
         <Box 
           sx={{
@@ -550,196 +550,196 @@ const AboutPage = () => {
         </Box>
 
         {/* Developer Team Section - All 5 in one row */}
-        <Box mb={12}>
-          <Typography 
-            variant="h3"
-            sx={{ 
-              fontWeight: 800, 
-              mb: 8,
-              textAlign: 'center',
-              color: orangePalette.dark,
-              position: 'relative'
-            }}
-            component={motion.div}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <Box 
-              component="span"
+       {/* Developer Team Section - All 5 in one row */}
+<Box mb={12}>
+  <Typography 
+    variant="h3"
+    sx={{ 
+      fontWeight: 800, 
+      mb: 8,
+      textAlign: 'center',
+      color: orangePalette.dark,
+      position: 'relative'
+    }}
+    component={motion.div}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.8 }}
+  >
+    <Box 
+      component="span"
+      sx={{
+        position: 'relative',
+        '&:before, &:after': {
+          content: '""',
+          position: 'absolute',
+          top: '50%',
+          width: 50,
+          height: 2,
+          backgroundColor: orangePalette.main,
+          borderRadius: 3
+        },
+        '&:before': {
+          left: -60
+        },
+        '&:after': {
+          right: -60
+        },
+        [theme.breakpoints.down('sm')]: {
+          '&:before, &:after': {
+            width: 25
+          },
+          '&:before': {
+            left: -40
+          },
+          '&:after': {
+            right: -40
+          }
+        }
+      }}
+    >
+      Our Team
+    </Box>
+  </Typography>
+  
+  <Grid 
+    container 
+    spacing={4} 
+    justifyContent="center"
+    sx={{
+      [theme.breakpoints.down('lg')]: {
+        flexWrap: 'nowrap',
+        overflowX: 'auto',
+        py: 2,
+        px: 1,
+        mx: -2,
+        '& > .MuiGrid-item': {
+          minWidth: 280
+        }
+      }
+    }}
+  >
+    {developers.map((dev, index) => (
+      <Grid 
+        item 
+        xs={12} 
+        sm={6} 
+        md={4} 
+        lg={2.4}  // 12/5 = 2.4
+        key={index}
+        sx={{
+          [theme.breakpoints.down('lg')]: {
+            flexShrink: 0
+          }
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ 
+            duration: 0.6, 
+            delay: index * 0.15,
+            type: "spring",
+            stiffness: 100
+          }}
+          whileHover={{ 
+            y: -10,
+            transition: { type: "spring", stiffness: 400 }
+          }}
+        >
+          <Card sx={{ 
+            textAlign: 'center', 
+            borderRadius: 3,
+            p: 3,
+            height: '100%',
+            position: 'relative',
+            overflow: 'hidden',
+            boxShadow: theme.shadows[4],
+            transition: 'all 0.3s ease',
+            backgroundColor: 'white',
+            '&:hover': {
+              boxShadow: theme.shadows[12],
+              transform: 'translateY(-5px)'
+            }
+          }}>
+            <Box
               sx={{
-                position: 'relative',
-                '&:before, &:after': {
-                  content: '""',
-                  position: 'absolute',
-                  top: '50%',
-                  width: 50,
-                  height: 2,
-                  backgroundColor: orangePalette.main,
-                  borderRadius: 3
-                },
-                '&:before': {
-                  left: -60
-                },
-                '&:after': {
-                  right: -60
-                },
-                [theme.breakpoints.down('sm')]: {
-                  '&:before, &:after': {
-                    width: 25
-                  },
-                  '&:before': {
-                    left: -40
-                  },
-                  '&:after': {
-                    right: -40
-                  }
-                }
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 5,
+                background: `linear-gradient(90deg, ${orangePalette.light}, ${orangePalette.dark})`
               }}
-            >
-              Our Team
-            </Box>
-          </Typography>
-          
-          <Grid 
-            container 
-            spacing={4} 
-            justifyContent="center"
-            sx={{
-              [theme.breakpoints.down('lg')]: {
-                flexWrap: 'nowrap',
-                overflowX: 'auto',
-                py: 2,
-                px: 1,
-                mx: -2,
-                '& > .MuiGrid-item': {
-                  minWidth: 280
-                }
-              }
-            }}
-          >
-            {developers.map((dev, index) => (
-              <Grid 
-                item 
-                xs={12} 
-                sm={6} 
-                md={4} 
-                lg={true}
-                sx={{ flex: '0 0 20%' }}
-                key={index}
-                sx={{
-                  [theme.breakpoints.down('lg')]: {
-                    flexShrink: 0
-                  }
+            />
+            <CardContent sx={{ p: 2, pt: 4 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Avatar
+                  sx={{ 
+                    width: 120, 
+                    height: 120, 
+                    mx: 'auto', 
+                    mb: 3,
+                    border: `3px solid ${orangePalette.light}`,
+                    boxShadow: `0 4px 20px ${orangePalette.light}80`,
+                    backgroundColor: orangePalette.main,
+                    fontSize: '3rem',
+                    fontWeight: 'bold'
+                  }}
+                  component={motion.div}
+                  whileHover={{ rotate: 5 }}
+                >
+                  {dev.name.split(' ').map(n => n[0]).join('')}
+                </Avatar>
+              </motion.div>
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  fontWeight: 700,
+                  mb: 1,
+                  color: orangePalette.dark
                 }}
               >
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.15,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ 
-                    y: -10,
-                    transition: { type: "spring", stiffness: 400 }
-                  }}
-                >
-                  <Card sx={{ 
-                    textAlign: 'center', 
-                    borderRadius: 3,
-                    p: 3,
-                    height: '100%',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    boxShadow: theme.shadows[4],
-                    transition: 'all 0.3s ease',
-                    backgroundColor: 'white',
-                    '&:hover': {
-                      boxShadow: theme.shadows[12],
-                      transform: 'translateY(-5px)'
-                    }
-                  }}>
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: 5,
-                        background: `linear-gradient(90deg, ${orangePalette.light}, ${orangePalette.dark})`
-                      }}
-                    />
-                    <CardContent sx={{ p: 2, pt: 4 }}>
-                      <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Avatar
-                          sx={{ 
-                            width: 120, 
-                            height: 120, 
-                            mx: 'auto', 
-                            mb: 3,
-                            bgcolor: 'white',
-                            border: `3px solid ${orangePalette.light}`,
-                            boxShadow: `0 4px 20px ${orangePalette.light}80`,
-                            color: orangePalette.dark,
-                            fontSize: '3rem',
-                            fontWeight: 'bold'
-                          }}
-                        >
-                          {dev.name.charAt(0)}
-                        </Avatar>
-                      </motion.div>
-                      <Typography 
-                        variant="h5" 
-                        sx={{ 
-                          fontWeight: 700,
-                          mb: 1,
-                          color: orangePalette.dark
-                        }}
-                      >
-                        {dev.name}
-                      </Typography>
-                      <Typography 
-                        variant="subtitle1" 
-                        sx={{ 
-                          fontWeight: 600,
-                          mb: 2,
-                          color: orangePalette.main
-                        }}
-                      >
-                        {dev.role}
-                      </Typography>
-                      <Divider sx={{ 
-                        my: 2, 
-                        borderColor: orangePalette.light,
-                        borderWidth: 1
-                      }} />
-                      <Typography 
-                        variant="body2" 
-                        color="text.secondary"
-                        sx={{ 
-                          fontStyle: 'italic',
-                          position: 'relative',
-                          px: 1
-                        }}
-                      >
-                        "{dev.bio}"
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
+                {dev.name}
+              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                sx={{ 
+                  fontWeight: 600,
+                  mb: 2,
+                  color: orangePalette.main
+                }}
+              >
+                {dev.role}
+              </Typography>
+              <Divider sx={{ 
+                my: 2, 
+                borderColor: orangePalette.light,
+                borderWidth: 1
+              }} />
+              <Typography 
+                variant="body2" 
+                color="text.secondary"
+                sx={{ 
+                  fontStyle: 'italic',
+                  position: 'relative',
+                  px: 1
+                }}
+              >
+                "{dev.bio}"
+              </Typography>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </Grid>
+    ))}
+  </Grid>
+</Box>
         {/* Testimonials Section */}
         <Box mb={12}>
           <Typography 
@@ -791,18 +791,14 @@ const AboutPage = () => {
                     <CardContent sx={{ p: 0, pt: 2 }}>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
                         <Avatar 
+                          src={testimonial.avatar} 
                           sx={{ 
                             width: 60, 
                             height: 60, 
                             mr: 2,
-                            bgcolor: 'white',
-                            border: `2px solid ${orangePalette.light}`,
-                            color: orangePalette.dark,
-                            fontWeight: 'bold'
-                          }}
-                        >
-                          {testimonial.name.charAt(0)}
-                        </Avatar>
+                            border: `2px solid ${orangePalette.light}`
+                          }} 
+                        />
                         <Box>
                           <Typography variant="h6" sx={{ fontWeight: 700 }}>
                             {testimonial.name}
@@ -1008,47 +1004,54 @@ const developers = [
   {
     name: 'Sainath Reddy',
     role: 'Backend Developer/LEAD',
-    bio: 'Architected the entire system with a focus on performance, usability and organized the team.'
+    photo: 'https://randomuser.me/api/portraits/men/32.jpg',
+    bio: 'Architected the entire system with a focus on performance,usability and Organised the team.'
   },
   {
     name: 'Harika',
     role: 'UI Designer',
-    bio: 'Created visually appealing and user-friendly website interfaces and well coded for user experience.'
+    photo: 'https://randomuser.me/api/portraits/women/65.jpg',
+    bio: 'Created visually appealing and user-friendly website interfaces and well coded for user experince.'
   },
   {
     name: 'Vishnu Sravan',
     role: 'Frontend Developer',
+    photo: 'https://randomuser.me/api/portraits/men/83.jpg',
     bio: 'Built the robust infrastructure that powers our platform and elegant interface.'
+  },
+  {
+    name:"Sankeerthana",
+    role: "Project Manager",
+    photo: "https://randomuser.me/api/portraits/women/44.jpg",
+    bio: "Managed the planning, execution and delivery of projects by ensuring timelines"
   },
   {
     name: "Gousiya",
     role: "Database Manager",
+    photo: "https://randomuser.me/api/portraits/women/44.jpg",
     bio: "Maintained the structure, organization, and security of data in the database."
-  },
-  {
-    name: "Sankeerthana",
-    role: "Project Manager",
-    bio: "Managed the planning, execution and delivery of projects by ensuring timelines."
   }
-  
 ];
 
 const testimonials = [
   {
     name: "Sanjay Swamy",
     position: "Owner, Spice Route",
+    avatar: "https://randomuser.me/api/portraits/men/22.jpg",
     quote: "Royal Feast was really Top-Notch. Collaborating with them was the best decision ever!",
     rating: 5
   },
   {
     name: "Priya Desai",
     position: "Manager, Urban Bistro",
-    quote: "Very pleased by your food, Our Company's day starts with your breakfast",
+    avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+    quote: "Very pleased by your food,Our Company's day starts with your breakfast",
     rating: 4
   },
   {
     name: "Vikram Singh",
     position: "CEO, FoodChain Group",
+    avatar: "https://randomuser.me/api/portraits/men/45.jpg",
     quote: "We've rolled out Royal Feast across all 12 of our locations. The consistency it provides is unmatched.",
     rating: 5
   }
