@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Lilita+One&family=Londrina+Outline&display=swap');
 .homepage-container{
-  
+  margin: -15px;
   padding: 0;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(270deg, #fff7ed, #fff3e0);
@@ -23,6 +23,7 @@ body { overflow-x: hidden; }
 
 
 .hero1 {
+   
     position: relative;
     width: 100%;
     height: 500px; /* Full viewport height for a better effect */
@@ -33,6 +34,7 @@ body { overflow-x: hidden; }
   }
   
   .hero-video1 {
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;

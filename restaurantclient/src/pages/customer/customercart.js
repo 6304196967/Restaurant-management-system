@@ -122,67 +122,67 @@ const CustomerCart = () => {
   // ✅ Enhanced Handle Buy Now with SweetAlert
 const handleBuyNow = async () => {
   const { value: formValues } = await Swal.fire({
-    title: '<span style="color: #2c3e50; font-size: 1.5rem">Shipping Details</span> 📦',
+    title: '<span style="color: #fc8019; font-size: 1.5rem; font-weight: 600; margin-top:10px;">Shipping Details</span> 📦',
     html: `
-      <div style="text-align: left; max-height: 40vh; overflow-y: auto; padding-right: 10px;">
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">First Name*</label>
-          <input id="swal-firstName" class="swal2-input enhanced-input" placeholder="John" required>
+      <div style="text-align: left; max-height: 45vh; padding-right: 8px; margin-top: 10px;">
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">First Name*</label>
+          <input id="swal-firstName" class="swal2-input" placeholder="John" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Last Name*</label>
-          <input id="swal-lastName" class="swal2-input enhanced-input" placeholder="Doe" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Last Name*</label>
+          <input id="swal-lastName" class="swal2-input" placeholder="Doe" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Phone Number*</label>
-          <input id="swal-phoneNumber" class="swal2-input enhanced-input" placeholder="9876543210" type="tel" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Phone Number*</label>
+          <input id="swal-phoneNumber" class="swal2-input" placeholder="9876543210" type="tel" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Alternate Phone</label>
-          <input id="swal-altPhoneNumber" class="swal2-input enhanced-input" placeholder="(Optional)" type="tel">
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Alternate Phone</label>
+          <input id="swal-altPhoneNumber" class="swal2-input" placeholder="(Optional)" type="tel" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;">
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">House/Flat No.*</label>
-          <input id="swal-houseNo" class="swal2-input enhanced-input" placeholder="123" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">House/Flat No.*</label>
+          <input id="swal-houseNo" class="swal2-input" placeholder="123" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Street/Locality*</label>
-          <input id="swal-street" class="swal2-input enhanced-input" placeholder="Main Street" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Street/Locality*</label>
+          <input id="swal-street" class="swal2-input" placeholder="Main Street" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Landmark</label>
-          <input id="swal-landmark" class="swal2-input enhanced-input" placeholder="(Optional)">
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Landmark</label>
+          <input id="swal-landmark" class="swal2-input" placeholder="(Optional)" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;">
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">District*</label>
-          <input id="swal-district" class="swal2-input enhanced-input" placeholder="Central District" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">District*</label>
+          <input id="swal-district" class="swal2-input" placeholder="Central District" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Mandal*</label>
-          <input id="swal-mandal" class="swal2-input enhanced-input" placeholder="Downtown" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Mandal*</label>
+          <input id="swal-mandal" class="swal2-input" placeholder="Downtown" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Pincode*</label>
-          <input id="swal-pincode" class="swal2-input enhanced-input" placeholder="500001" type="number" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Pincode*</label>
+          <input id="swal-pincode" class="swal2-input" placeholder="500001" type="number" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">State*</label>
-          <input id="swal-state" class="swal2-input enhanced-input" placeholder="Telangana" required>
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">State*</label>
+          <input id="swal-state" class="swal2-input" placeholder="Telangana" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 94%;" required>
         </div>
-        <div style="margin-bottom: 10px;">
-          <label style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 500;">Payment Method*</label>
-          <select id="swal-paymentMode" class="swal2-input enhanced-input" style="padding: 10px 14px;">
+        <div style="margin-bottom: 12px;">
+          <label style="display: block; margin-bottom: 5px; color: #282c3f; font-weight: 500; font-size: 13px;">Payment Method*</label>
+          <select id="swal-paymentMode" class="swal2-input" style="border: 1px solid #d4d5d9; border-radius: 4px; padding: 10px 12px; font-size: 14px; width: 100%; color: #282c3f; appearance: none; background-image: url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e\"); background-repeat: no-repeat; background-position: right 10px center; background-size: 1em;">
             <option value="Cash">Cash on Delivery</option>
             <option value="Online" disabled>Online Payment (Coming Soon)</option>
           </select>
         </div>
       </div>
     `,
-    width: '400px',
+    width: '380px',
+    padding: '16px 20px 20px',
     background: '#ffffff',
     backdrop: `
-      rgba(0,0,123,0.4)
-      url("/images/nyan-cat.gif")
+      rgba(0,0,0,0.3)
       left top
       no-repeat
     `,
@@ -190,8 +190,9 @@ const handleBuyNow = async () => {
     showCancelButton: true,
     confirmButtonText: 'Place Order',
     cancelButtonText: 'Cancel',
-    confirmButtonColor: '#4CAF50',
-    cancelButtonColor: '#f44336',
+    confirmButtonColor: '#fc8019',
+    cancelButtonColor: '#e0e0e0',
+    cancelButtonTextColor: '#535665',
     showLoaderOnConfirm: true,
     preConfirm: () => {
       const firstName = document.getElementById('swal-firstName').value;
@@ -204,20 +205,17 @@ const handleBuyNow = async () => {
       const pincode = document.getElementById('swal-pincode').value;
       const state = document.getElementById('swal-state').value;
 
-      // Validate required fields
       if (!firstName || !lastName || !phoneNumber || !houseNo || !street || 
           !district || !mandal || !pincode || !state) {
         Swal.showValidationMessage('Please fill in all required fields');
         return false;
       }
 
-      // Validate phone number format
       if (!/^\d{10}$/.test(phoneNumber)) {
         Swal.showValidationMessage('Please enter a valid 10-digit phone number');
         return false;
       }
 
-      // Validate pincode format
       if (!/^\d{6}$/.test(pincode)) {
         Swal.showValidationMessage('Please enter a valid 6-digit pincode');
         return false;
@@ -240,19 +238,81 @@ const handleBuyNow = async () => {
     },
     allowOutsideClick: () => !Swal.isLoading(),
     customClass: {
-      container: 'enhanced-swal-container',
-      popup: 'enhanced-swal-popup',
-      header: 'enhanced-swal-header',
-      title: 'enhanced-swal-title',
-      closeButton: 'enhanced-swal-close',
-      content: 'enhanced-swal-content',
-      input: 'enhanced-swal-input',
-      validationMessage: 'enhanced-swal-validation',
-      actions: 'enhanced-swal-actions',
-      confirmButton: 'enhanced-swal-confirm',
-      cancelButton: 'enhanced-swal-cancel',
+      container: 'swiggy-swal-container',
+      popup: 'swiggy-swal-popup',
+      header: 'swiggy-swal-header',
+      title: 'swiggy-swal-title',
+      closeButton: 'swiggy-swal-close',
+      content: 'swiggy-swal-content',
+      input: 'swiggy-swal-input',
+      validationMessage: 'swiggy-swal-validation',
+      actions: 'swiggy-swal-actions',
+      confirmButton: 'swiggy-swal-confirm',
+      cancelButton: 'swiggy-swal-cancel',
     }
-  });
+});
+
+// Add this CSS to your stylesheet
+const style = document.createElement('style');
+style.textContent = `
+  
+  .swiggy-swal-popup {
+    margin-top:90px !important;
+    width: 500px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+  .swiggy-swal-title {
+    color: #fc8019 !important;
+    font-family: 'Poppins', sans-serif !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    margin-bottom: 12px !important;
+  }
+  .swiggy-swal-confirm {
+    background-color: #fc8019 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    box-shadow: none !important;
+  }
+  .swiggy-swal-confirm:hover {
+    background-color: #e67317 !important;
+  }
+  .swiggy-swal-cancel {
+    background-color:rgb(255, 84, 84) !important;
+    color:#fff !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    margin-right: 8px !important;
+  }
+  .swiggy-swal-cancel:hover {
+    background-color: #d0d0d0 !important;
+    color: #282c3f !important;
+  }
+  .swiggy-swal-actions {
+    margin-top: 16px !important;
+    gap: 8px !important;
+  }
+  .swiggy-swal-validation {
+    color: #ff4d4f !important;
+    font-size: 13px !important;
+    margin-top: 8px !important;
+  }
+  .swal2-input:focus {
+    border-color: #fc8019 !important;
+    box-shadow: 0 0 0 2px rgba(252, 128, 25, 0.2) !important;
+  }
+  .swiggy-swal-content {
+    padding: 0 4px !important;
+  }
+`;
+document.head.appendChild(style);
 
   if (formValues) {
     await placeOrder(formValues);

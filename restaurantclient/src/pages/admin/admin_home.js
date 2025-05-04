@@ -452,18 +452,22 @@ function App() {
           flexWrap: 'wrap',
           gap: 2
         }}>
-          <Typography variant="h4" component="h1" sx={{ 
-            fontWeight: 700,
-        
-            color: theme.palette.primary.main,
-            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            <br/>
-            <br />
-            Restaurant Dashboard
-          </Typography>
+          <Typography
+  variant="h4"
+  component="h1"
+  sx={{
+    fontWeight: 700,
+    background: 'linear-gradient(135deg, #FC8019 0%, #FFAD6B 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    display: 'inline-block' // Ensures gradient applies correctly
+  }}
+>
+  <br />
+  <br />
+  Restaurant Dashboard
+</Typography>
+
           
           <Paper elevation={3} sx={{ 
             p: 1.5, 
@@ -502,19 +506,20 @@ function App() {
         <Grid container spacing={3} sx={{ mb: 4 }}>
           {dashboardData.kpis.map((kpi, idx) => (
             <Grid item xs={12} sm={6} md={3} key={idx}>
-              <Card sx={{ 
-                p: 3, 
-                height: '100%',
-                borderRadius: 4,
-                boxShadow: 3,
-                background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-                color: 'white',
-                transition: 'transform 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 6
-                }
-              }}>
+            <Card sx={{ 
+  p: 3, 
+  height: '100%',
+  borderRadius: 4,
+  boxShadow: 3,
+  background: `linear-gradient(135deg,#f77d26 0%, #FC8019 100%)`,
+  color: 'white',
+  transition: 'transform 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'translateY(-5px)',
+    boxShadow: 6
+  }
+}}>
+
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Box>
                     <Typography variant="subtitle2" sx={{ opacity: 0.8 }}>
