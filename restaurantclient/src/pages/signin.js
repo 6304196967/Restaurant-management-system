@@ -95,7 +95,8 @@ function LoginComponent() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title">Welcome Back!</h2>
+        <h2 className="login-title">ROYAL FEAST</h2>
+        <h3 className="login-title1">SIGN IN</h3>
 
         <div className="login-input-container">
           <label className="login-label" htmlFor="email">Email:</label>

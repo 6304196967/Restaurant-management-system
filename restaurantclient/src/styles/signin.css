@@ -33,8 +33,56 @@
 }
 
 .login-title {
-  font-size: 36px;
-  margin-bottom: 20px;
+  margin: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2.125rem; /* ~34px */
+  line-height: 1.235;
+  background: linear-gradient(45deg, rgb(255, 142, 83) 30%, rgb(254, 107, 139) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  padding-bottom: 15px;
+  position: relative;
+}
+.login-title1 {
+  margin: 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2.125rem; /* ~34px */
+  line-height: 1.235;
+  background: linear-gradient(45deg, rgb(255, 142, 83) 30%, rgb(254, 107, 139) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  padding-bottom: 15px;
+  position: relative;
+}
+/* Optional underline to match the gradient */
+.login-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(45deg, rgb(255, 142, 83) 30%, rgb(254, 107, 139) 90%);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-title {
+    font-size: 1.75rem; /* ~28px */
+    padding-bottom: 10px;
+  }
+  .login-title::after {
+    width: 40px;
+    height: 2px;
+  }
 }
 
 .login-input-container {

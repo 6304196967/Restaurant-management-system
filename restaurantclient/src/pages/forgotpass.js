@@ -66,7 +66,9 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password-container">
       <div className="forgot-password-card">
-        <h2 className="forgot-password-title">Reset Password</h2>
+      <h2 className="login-title">ROYAL FEAST</h2>
+
+        <h2 className="login-title1">Reset Password</h2>
         <p className="forgot-password-description">
           Enter your email to receive a reset link.
         </p>
