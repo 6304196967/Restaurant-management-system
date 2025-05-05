@@ -116,7 +116,7 @@ function Signup() {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder="Enter your password"
+              placeholder="Enter your password(A capital letter, a number, and a special character,size of 10 digits)"
               required
             />
           </div>
