@@ -109,14 +109,14 @@ function Signup() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Password:(All password rules,size of 10 digits)</label>
             <input
               type="password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              placeholder="Enter your password(A capital letter, a number, and a special character,size of 10 digits)"
+              placeholder="Enter your password"
               required
             />
           </div>
