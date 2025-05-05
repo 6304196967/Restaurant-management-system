@@ -549,9 +549,7 @@ const AboutPage = () => {
           </Grid>
         </Box>
 
-        {/* Developer Team Section - All 5 in one row */}
-       {/* Developer Team Section - All 5 in one row */}
-<Box mb={12}>
+        <Box mb={12}>
   <Typography 
     variant="h3"
     sx={{ 
@@ -602,35 +600,49 @@ const AboutPage = () => {
       Our Team
     </Box>
   </Typography>
-  
-  <Grid 
-    container 
-    spacing={4} 
-    justifyContent="center"
+
+  {/* Improved Grid Container */}
+  <Box
     sx={{
-      [theme.breakpoints.down('lg')]: {
-        flexWrap: 'nowrap',
-        overflowX: 'auto',
-        py: 2,
-        px: 1,
-        mx: -2,
-        '& > .MuiGrid-item': {
-          minWidth: 280
-        }
+      display: 'flex',
+      overflowX: 'auto',
+      py: 2,
+      px: 1,
+      mx: -2,
+      scrollSnapType: 'x mandatory',
+      '&::-webkit-scrollbar': {
+        height: 6,
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: orangePalette.main,
+        borderRadius: 3,
+      },
+      [theme.breakpoints.up('md')]: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gap: 4,
+        overflowX: 'visible',
+        mx: 0,
+      },
+      [theme.breakpoints.between('sm', 'md')]: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: 4,
+        overflowX: 'visible',
+        mx: 0,
       }
     }}
   >
     {developers.map((dev, index) => (
-      <Grid 
-        item 
-        xs={12} 
-        sm={6} 
-        md={4} 
-        lg={2.4}  // 12/5 = 2.4
+      <Box
         key={index}
         sx={{
-          [theme.breakpoints.down('lg')]: {
-            flexShrink: 0
+          minWidth: 280,
+          scrollSnapAlign: 'start',
+          px: 2,
+          [theme.breakpoints.up('md')]: {
+            minWidth: 'auto',
+            px: 0,
           }
         }}
       >
@@ -736,11 +748,10 @@ const AboutPage = () => {
             </CardContent>
           </Card>
         </motion.div>
-      </Grid>
+      </Box>
     ))}
-  </Grid>
-</Box>
-        {/* Testimonials Section */}
+  </Box>
+</Box>{/* Testimonials Section */}
         <Box mb={12}>
           <Typography 
             variant="h3" 
