@@ -19,18 +19,16 @@ const Footer = () => {
               A culinary destination where passion meets perfection, offering an unforgettable dining experience.
             </p>
             <div className="social-links">
-            <a href="#" aria-label="Facebook">
+            <a href="https://www.facebook.com/p/Royal-Feast-61555093180072/" target="_blank" aria-label="Facebook">
               <FontAwesomeIcon icon={['fab', 'facebook-f']} />
             </a>
-            <a href="#" aria-label="Instagram">
+            <a href="https://www.instagram.com/royalfeastrestaurant/" target="_blank" aria-label="Instagram">
               <FontAwesomeIcon icon={['fab', 'instagram']} />
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="https://x.com/IndianRestCong" target="_blank" aria-label="Twitter">
               <FontAwesomeIcon icon={['fab', 'twitter']} />
             </a>
-            <a href="#" aria-label="Yelp">
-              <FontAwesomeIcon icon={['fab', 'yelp']} />
-            </a>
+            
             </div>
           </div>
           
@@ -41,8 +39,7 @@ const Footer = () => {
               <li><Link to="/customer/Mcategories">Menu</Link></li>
               <li><Link to="/customer/reservation">Reservations</Link></li>
               <li><Link to="/customer/about">About Us</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/gallery">Gallery</Link></li>
+              
             </ul>
           </div>
           

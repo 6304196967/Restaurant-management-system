@@ -9,6 +9,11 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+import {
+  
+  ShoppingCart,
+  
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import videoBg from "../../assets/food-video.webm";
@@ -215,7 +220,7 @@ const Mccategories = () => {
                     sx={{ m: 1 }}
                     onClick={() => handleAddToCart(dish)} // ✅ Add to cart with Swal
                   >
-                    Add to Cart 🛒
+                    Add to Cart <ShoppingCart />
                   </Button>
                 </Card>
               </Grid>

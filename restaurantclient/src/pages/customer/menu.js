@@ -7,12 +7,20 @@ import LoadingSpinner from "./RoyalFeastLoader.jsx";
 import {
   Grid,
   Card,
+  
   CardMedia,
   CardContent,
   Typography,
   Button,
   Rating,
 } from "@mui/material";
+import {
+  
+  ShoppingCart,
+  
+} from "@mui/icons-material";
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import CommentIcon from '@mui/icons-material/Comment';
 
 export default function MenuItems() {
   const [menuItems, setMenuItems] = useState([]);
@@ -217,7 +225,7 @@ export default function MenuItems() {
                 className="order-button"
                 onClick={() => handleAddToCart(dish)}
               >
-                Add to Cart 🛒
+                Add to Cart <ShoppingCart />
               </Button>
               <Button
                 className="order-button"
@@ -228,7 +236,7 @@ export default function MenuItems() {
                 }}
                 onClick={() => handleViewReviews(dish.name)}
               >
-                Reviews 💬
+                Reviews <CommentIcon />
               </Button>
             </Card>
           </Grid>
